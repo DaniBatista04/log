@@ -1,0 +1,14 @@
+# dependências
+node_modules/
+
+# build do Next
+.next/
+out/
+
+# ambiente
+.env*
+!.env.example
+
+# sistema / editor
+.DS_Store
+*.log

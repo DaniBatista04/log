@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f5f5f4;
+  --line: #e7e5e4;
+  --ink: #1c1917;
+  --ink-2: #57534e;
+  --ink-3: #a8a29e;
+  --cliente: #15803d;
+  --cliente-soft: #dcfce7;
+  --interno: #4f46e5;
+  --interno-soft: #e0e7ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0c0a09;
+    --surface: #1c1917;
+    --surface-2: #292524;
+    --line: #333029;
+    --ink: #fafaf9;
+    --ink-2: #b8b2ac;
+    --ink-3: #78716c;
+    --cliente: #4ade80;
+    --cliente-soft: #14321f;
+    --interno: #a5b4fc;
+    --interno-soft: #1e1b4b;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-cliente: var(--cliente);
+  --color-cliente-soft: var(--cliente-soft);
+  --color-interno: var(--interno);
+  --color-interno-soft: var(--interno-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
