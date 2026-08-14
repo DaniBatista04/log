@@ -14,9 +14,12 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 
 - [n8n] ✅ O comercial agora envia os materiais das telas por uma página só. O sistema ajusta o arquivo (tamanho, peso e som), dá o nome no padrão que as telas exigem, guarda na pasta certa do Teams e responde por email dizendo como ficou. Antes era um arquivo por vez, tudo na mão.
 
+- [telas] ✅ O site que monta o conteúdo de notícias e clima das telas saiu do meu computador e foi para o ar, com endereço próprio. Antes ele só rodava na minha máquina, então dependia de eu estar com o computador ligado.
+- [telas] ⏳ Fazendo o site buscar notícias e clima sozinho todo dia. Hoje alguém precisa pedir a atualização na mão; a ideia é que as telas recebam o conteúdo do dia sem ninguém lembrar disso.
+
 **Pendências que atravessam pra semana 2:**
 
-- (preencher na sexta)
+- Terminar a atualização automática diária de notícias e clima das telas.
 
 **Aprendizados / contexto que não pode se perder:**
 
