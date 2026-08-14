@@ -9,12 +9,12 @@ Sistema para não perder o histórico do que é feito e alimentar o post/email s
 | `CHANGELOG.md` | Tudo que muda no **Mural**. Fonte única da aba Atualizações e do email. |
 | `WEEKLY-LOG.md` | Demandas **fora do Mural** (automações, Teams, n8n, apoio a outras áreas). |
 | `templates/email-semanal.md` | Modelo do email interno + checklist de tom. |
-| `web/` | Front que lê os dois markdowns e mostra tudo na tela. |
+| `app/`, `components/`, `lib/` | Front que lê os dois markdowns e mostra tudo na tela. |
 
 ## Rodando o front
 
 ```bash
-cd web
+npm install   # só na primeira vez
 npm run dev
 ```
 
@@ -26,6 +26,9 @@ Três telas:
 
 Não tem banco: o front lê os `.md` da raiz a cada request. Editou o markdown, atualizou a tela.
 Para apontar para outra pasta, use a variável `LOG_DIR`.
+
+No deploy da Vercel os markdowns entram no bundle pelo `outputFileTracingIncludes` do
+`next.config.ts` — se você criar uma rota nova que lê algum arquivo, precisa incluí-la lá.
 
 ## Rotina
 

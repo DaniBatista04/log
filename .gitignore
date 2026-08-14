@@ -1,14 +1,25 @@
 # dependências
 node_modules/
+.pnp
+.pnp.*
 
 # build do Next
 .next/
 out/
+build/
 
 # ambiente
 .env*
 !.env.example
 
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
 # sistema / editor
 .DS_Store
+*.pem
 *.log

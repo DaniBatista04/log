@@ -2,12 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 /**
- * O front não tem banco: ele lê os markdowns da raiz do repo.
- * Os arquivos continuam sendo a fonte única — editar o .md atualiza a tela.
+ * O front não tem banco: ele lê os markdowns da raiz do repo, que é também a
+ * raiz do projeto Next. Os arquivos continuam sendo a fonte única — editar o
+ * .md atualiza a tela.
  */
 const LOG_DIR = process.env.LOG_DIR
   ? path.resolve(process.env.LOG_DIR)
-  : path.resolve(process.cwd(), "..");
+  : process.cwd();
 
 export type Audience = "cliente" | "interno";
 
