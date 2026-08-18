@@ -43,5 +43,7 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [whatsapp] ⏳ Colocando agentes de IA para atender no nosso número de WhatsApp. Hoje a pessoa
   espera alguém livre para responder; a ideia é que o atendimento comece na hora e só chegue em
   alguém quando realmente precisar.
-- [telas] ⏳ Continua da semana 1: fazer o site buscar notícias e clima sozinho todo dia, para as
-  telas receberem o conteúdo sem ninguém pedir na mão.
+- [telas] ✅ Continua da semana 1, agora pronto: notícias e clima seguem sozinhos todo dia para o
+  sistema que alimenta as telas (KUMA). Ninguém mais precisa lembrar de pedir a atualização. De
+  dentro da KUMA para frente o processo segue manual, mas a parte que precisava de alguém todos os
+  dias saiu do caminho.
