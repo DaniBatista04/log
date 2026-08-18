@@ -44,6 +44,7 @@ eles vão para o email do time, que também não é técnico.
 
 - 🟢 **Aviso de quando o comunicado vai ao ar** — o Mural mostra a previsão da janela em que o comunicado será enviado, então quem publica já sabe quando ele aparece, sem precisar perguntar.
 - 🟢 **O Mural ajusta a imagem e o vídeo sozinho** — ao publicar, o próprio Mural deixa o arquivo no tamanho e no peso que as telas pedem. Antes era preciso preparar o arquivo em outro programa antes de subir; agora dá para publicar direto, sem sair do Mural.
+- 🟢 **O comunicado em andamento não se perde mais** — se a pessoa sair do editor sem salvar, o Mural guarda o que já estava escrito como rascunho. Antes, sair no meio significava começar tudo de novo.
 
 ### Corrigido
 
