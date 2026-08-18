@@ -35,3 +35,17 @@ eles vão para o email do time, que também não é técnico.
 ### Performance
 
 - 🟢 **Lista de comunicados abre mais rápido** — mesmo em condomínios com muito comunicado publicado, a lista abre sem travar.
+
+---
+
+## [Semana 2] — 17 a 21 de agosto de 2026
+
+### Adicionado
+
+- 🟢 **Aviso de quando o comunicado vai ao ar** — o Mural mostra a previsão da janela em que o comunicado será enviado, então quem publica já sabe quando ele aparece, sem precisar perguntar.
+- 🟢 **O Mural ajusta a imagem e o vídeo sozinho** — ao publicar, o próprio Mural deixa o arquivo no tamanho e no peso que as telas pedem. Antes era preciso preparar o arquivo em outro programa antes de subir; agora dá para publicar direto, sem sair do Mural.
+
+### Corrigido
+
+- 🟢 **Imagem ampliada na tela de 25** — quando o comunicado não ocupava todo o espaço, ele era esticado e ficava com a imagem ruim. Agora aparece no tamanho certo, sem perder qualidade.
+- 🟢 **Aviso de carregamento nos comunicados aprovados** — o aviso de carregamento aparecia em todos os comunicados da lista de uma vez, dando a impressão de que tudo estava sendo processado. Agora ele aparece só no comunicado em questão.

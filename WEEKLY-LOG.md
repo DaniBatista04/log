@@ -33,3 +33,15 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   ser o vídeo 1 do 32" (`20260812-25-1-10` ↔ `20260812-32-1-10`). É assim que a KUMA casa os
   materiais equivalentes entre os dois tamanhos de tela. Errar a ordem quebra a correspondência,
   e é justamente o erro que ninguém percebe na hora do upload — foi o que motivou o front.
+
+---
+
+## Semana 2 — 17 a 21 de agosto de 2026
+
+- [ambiente] ✅ Máquina nova configurada e pronta para trabalhar: acessos, programas e projetos
+  todos no lugar. Fecha a troca de computador — não fica mais nada dependendo da máquina antiga.
+- [whatsapp] ⏳ Colocando agentes de IA para atender no nosso número de WhatsApp. Hoje a pessoa
+  espera alguém livre para responder; a ideia é que o atendimento comece na hora e só chegue em
+  alguém quando realmente precisar.
+- [telas] ⏳ Continua da semana 1: fazer o site buscar notícias e clima sozinho todo dia, para as
+  telas receberem o conteúdo sem ninguém pedir na mão.
