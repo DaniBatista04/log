@@ -45,6 +45,7 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Aviso de quando o comunicado vai ao ar** — o Mural mostra a previsão da janela em que o comunicado será enviado, então quem publica já sabe quando ele aparece, sem precisar perguntar.
 - 🟢 **O Mural ajusta a imagem e o vídeo sozinho** — ao publicar, o próprio Mural deixa o arquivo no tamanho e no peso que as telas pedem. Antes era preciso preparar o arquivo em outro programa antes de subir; agora dá para publicar direto, sem sair do Mural.
 - 🟢 **O comunicado em andamento não se perde mais** — se a pessoa sair do editor sem salvar, o Mural guarda o que já estava escrito como rascunho. Antes, sair no meio significava começar tudo de novo.
+- 🟢 **Modelos prontos da Focus Media** — o síndico escolhe um modelo feito pela nossa equipe e troca só os textos, nos campos que já vêm marcados. Como o modelo já sai aprovado por nós, o comunicado não fica esperando nossa revisão: segue direto para a janela de publicação mais próxima.
 
 ### Corrigido
 
