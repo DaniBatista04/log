@@ -48,7 +48,12 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Modelos prontos da Focus Media** — o síndico escolhe um modelo feito pela nossa equipe e troca só os textos, nos campos que já vêm marcados. Como o modelo já sai aprovado por nós, o comunicado não fica esperando nossa revisão: segue direto para a janela de publicação mais próxima.
 - 🟢 **Fundo desfocado atrás da imagem, se a pessoa quiser** — quando a imagem do comunicado não ocupa a tela toda, quem publica pode preencher o espaço que sobra com uma versão desfocada da própria imagem, e o comunicado fica com cara de tela cheia. É opcional: quem não escolher isso continua vendo o comunicado do jeito de antes.
 
+### Melhorado
+
+- ⚙️ **Volta para a fila de revisão ao terminar** — quem revisa é levado de volta para a fila assim que conclui um comunicado, em vez de cair na tela inicial e ter que procurar o próximo. Revisar vários seguidos ficou mais rápido.
+
 ### Corrigido
 
+- ⚙️ **Busca de condomínio no filtro de comunicados** — o campo apagava o que estava sendo digitado, então era preciso começar de novo a cada tentativa. Agora dá para digitar direto, e as opções que aparecem ficaram mais organizadas e fáceis de ler.
 - 🟢 **Imagem ampliada na tela de 25** — quando o comunicado não ocupava todo o espaço, ele era esticado e ficava com a imagem ruim. Agora aparece no tamanho certo, sem perder qualidade.
 - 🟢 **Aviso de carregamento nos comunicados aprovados** — o aviso de carregamento aparecia em todos os comunicados da lista de uma vez, dando a impressão de que tudo estava sendo processado. Agora ele aparece só no comunicado em questão.
