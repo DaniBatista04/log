@@ -47,3 +47,6 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   sistema que alimenta as telas (KUMA). Ninguém mais precisa lembrar de pedir a atualização. De
   dentro da KUMA para frente o processo segue manual, mas a parte que precisava de alguém todos os
   dias saiu do caminho.
+- [comercial] ✅ Simulador de tela em tamanho real pelo celular: dá para ver a tela no lugar onde
+  ela seria instalada, do tamanho de verdade, apontando a câmera para a parede. Antes a conversa
+  dependia de a pessoa imaginar o tamanho ou de medir no local.
