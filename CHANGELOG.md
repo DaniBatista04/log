@@ -59,3 +59,4 @@ eles vão para o email do time, que também não é técnico.
 - ⚙️ **Busca de condomínio no filtro de comunicados** — o campo apagava o que estava sendo digitado, então era preciso começar de novo a cada tentativa. Agora dá para digitar direto, e as opções que aparecem ficaram mais organizadas e fáceis de ler.
 - 🟢 **Imagem ampliada na tela de 25** — quando o comunicado não ocupava todo o espaço, ele era esticado e ficava com a imagem ruim. Agora aparece no tamanho certo, sem perder qualidade.
 - 🟢 **Aviso de carregamento nos comunicados aprovados** — o aviso de carregamento aparecia em todos os comunicados da lista de uma vez, dando a impressão de que tudo estava sendo processado. Agora ele aparece só no comunicado em questão.
+- 🟢 **Sugestão de texto sempre em português** — quando o Mural ajuda a escrever o comunicado, o texto às vezes vinha em inglês e era preciso refazer. Agora vem sempre em português.
