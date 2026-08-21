@@ -48,6 +48,7 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Modelos prontos da Focus Media** — o síndico escolhe um modelo feito pela nossa equipe e troca só os textos, nos campos que já vêm marcados. Como o modelo já sai aprovado por nós, o comunicado não fica esperando nossa revisão: segue direto para a janela de publicação mais próxima.
 - 🟢 **Fundo desfocado atrás da imagem, se a pessoa quiser** — quando a imagem do comunicado não ocupa a tela toda, quem publica pode preencher o espaço que sobra com uma versão desfocada da própria imagem, e o comunicado fica com cara de tela cheia. É opcional: quem não escolher isso continua vendo o comunicado do jeito de antes.
 - ⚙️ **Fila de revisão em sequência** — os comunicados que esperam revisão aparecem em fila, um depois do outro, e a fila divide os comunicados entre todos os revisores que estiverem trabalhando nela naquele momento. Assim duas pessoas não revisam o mesmo comunicado e ninguém precisa combinar quem pega o quê.
+- ⚙️ **Aba de relatórios para a nossa equipe** — num lugar só dá para ver como o Mural está sendo usado (quem publica, com que frequência, quais condomínios estão parados), como a fila de revisão está andando (quanto tempo os comunicados esperam e quanto cada revisor concluiu) e onde os comunicados apareceram nas telas. Antes cada uma dessas respostas dependia de alguém levantar na mão, condomínio por condomínio.
 
 ### Melhorado
 
