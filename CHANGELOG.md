@@ -74,4 +74,19 @@ eles vão para o email do time, que também não é técnico.
 
 ### Melhorado
 
-- 🟢 **Sair do modelo pronto e escrever do zero** — depois de escolher um modelo da Focus Media, dá para apagá-lo com um botão e continuar no mesmo lugar para montar um comunicado livre, do jeito que a pessoa quiser. Antes, quem começava por um modelo ficava preso a ele.
+- 🟢 **Sair do modelo pronto e escrever do zero** — depois de escolher um modelo da Focus Media, dá para removê-lo por um botão no próprio aviso que explica a trava, confirmar e continuar no mesmo lugar montando um comunicado livre. A arte sai de todos os tamanhos de tela de uma vez, nunca só de um. Antes, quem começava por um modelo ficava preso a ele: a arte não se mexia, as ferramentas de edição não apareciam e não havia caminho de volta.
+- 🟢 **Modelos prontos mais fáceis de achar** — o quadro de cada modelo agora fica em pé, com a arte cerca de quatro vezes maior, o nome sobre ela e o selo laranja de "sem revisão"; o cabeçalho mostra quantos modelos existem. Antes o quadro era deitado e pequeno, e mostrava só uma tira do meio da arte — quem procurava dizia não encontrar os modelos.
+- ⚙️ **Abrir chamado em outra aba** — os botões de ver e editar chamado agora podem ser abertos em uma nova aba, inclusive na lista do gestor. O clique comum continua abrindo na mesma aba, como antes.
+
+### Corrigido
+
+- 🟢 **Botão de enviar o comunicado diz o que falta** — o botão ficava apagado quando faltava alguma coisa e o clique não fazia nada, então parecia travado. Agora o clique avisa o que está pendente e leva direto ao ponto: abre a escolha dos prédios ou pula para a aba que ficou vazia. Havia 120 comunicados parados assim.
+- 🟢 **Reaproveitar comunicado de modelo pronto** — ao reaproveitar em "Minhas criações" um comunicado feito com modelo da Focus Media, a arte voltava a aceitar mudança, o que não era a proposta do modelo. Agora continua fixa, como no primeiro uso.
+- ⚙️ **O arquivo publicado com modelo pronto agora é conferido** — a conferência olhava só o desenho do comunicado e não o arquivo que ia junto, então quem tivesse conta de gestor e conhecimento técnico conseguia passar pela conferência e publicar um arquivo de fora, sem revisão. Agora o Mural recusa qualquer arquivo que não tenha sido gerado por ele e qualquer tamanho de tela que não esteja previsto — e, na dúvida, recusa em vez de aceitar. Nenhum caso aconteceu.
+- ⚙️ **Fila de contas duplicadas do Brato** — prédio que já tinha dono definido continuava aparecendo como possível duplicata, porque o nome cortado casava com o prédio errado. A fila caiu de 23 para 5 prédios, e os 5 que sobraram estão prontos para resolver na mão.
+
+### Interno
+
+- ⚙️ **Conferência dos modelos prontos rodando contra produção** — uma verificação nova passa pelos comunicados publicados com modelo e confirma que todos batem com o modelo aprovado: os 96 comunicados existentes foram aceitos, e os casos adulterados de teste foram recusados.
+- ⚙️ **Guia interno do Mural reorganizado** — o guia principal passou de 1.446 para 129 linhas, com só o que não pode ser esquecido; o detalhe foi para arquivos separados por assunto (banco e produção, enquadramento de arte, performance das listagens, revisão e publicação, email e gestores, pendências). Nenhuma regra foi descartada, e saiu uma imagem de 609 kB que ninguém usava.
+- ⚙️ **Hipótese descartada: comunicado que perderia a arte ao escolher o condomínio depois do modelo** — não acontece: nenhuma ocorrência em 3.166 comunicados desde 1º de agosto. O "fica travado e não avança" relatado pelo síndico do Marajoara Sol era o botão de enviar, já corrigido.
