@@ -67,3 +67,11 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **O Mural ficou mais leve e abre mais rápido** — as telas do Mural carregam mais rápido em geral, inclusive no celular e em internet mais fraca.
 - 🟢 **Lista de comunicados responde melhor** — abrir a lista e rolar por ela ficou mais rápido, mesmo com muito comunicado publicado.
 - 🟢 **Editor do comunicado mais leve** — escrever, trocar a imagem e salvar responde mais rápido, com menos espera enquanto o comunicado é montado.
+
+---
+
+## [Semana 3] — 24 a 28 de agosto de 2026
+
+### Melhorado
+
+- 🟢 **Sair do modelo pronto e escrever do zero** — depois de escolher um modelo da Focus Media, dá para apagá-lo com um botão e continuar no mesmo lugar para montar um comunicado livre, do jeito que a pessoa quiser. Antes, quem começava por um modelo ficava preso a ele.
