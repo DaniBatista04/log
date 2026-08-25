@@ -72,6 +72,10 @@ eles vão para o email do time, que também não é técnico.
 
 ## [Semana 3] — 24 a 28 de agosto de 2026
 
+### Adicionado
+
+- 🟢 **Excluir rascunho** — dá para apagar um comunicado que ficou pela metade e não vai ser usado, então a lista de rascunhos mostra só o que ainda interessa. Antes o rascunho ficava lá para sempre.
+
 ### Melhorado
 
 - 🟢 **Sair do modelo pronto e escrever do zero** — depois de escolher um modelo da Focus Media, dá para removê-lo por um botão no próprio aviso que explica a trava, confirmar e continuar no mesmo lugar montando um comunicado livre. A arte sai de todos os tamanhos de tela de uma vez, nunca só de um. Antes, quem começava por um modelo ficava preso a ele: a arte não se mexia, as ferramentas de edição não apareciam e não havia caminho de volta.
