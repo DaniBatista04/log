@@ -57,3 +57,6 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 
 - [financeiro] ✅ Automação feita para o Vitor, do financeiro. *(falta descrever o que ela faz e o
   que era feito na mão antes — completar antes de montar o email de segunda.)*
+
+- [telas] ✅ As notícias do dia agora entram como um plano só na mídia vertical, em vez de um plano
+  separado para cada notícia. *(falta dizer o que isso destravou — completar antes do email.)*
