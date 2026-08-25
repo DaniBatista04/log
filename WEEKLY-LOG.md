@@ -60,3 +60,6 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 
 - [telas] ✅ As notícias do dia agora entram como um plano só na mídia vertical, em vez de um plano
   separado para cada notícia. *(falta dizer o que isso destravou — completar antes do email.)*
+
+- [smb-ooh] ⏳ Começou a parte que as pessoas vão ver e usar do projeto de SMB OOH. *(falta dizer
+  para quem é e o que vai dar para fazer ali — completar antes do email.)*
