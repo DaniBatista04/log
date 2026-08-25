@@ -50,3 +50,10 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [comercial] ✅ Simulador de tela em tamanho real pelo celular: dá para ver a tela no lugar onde
   ela seria instalada, do tamanho de verdade, apontando a câmera para a parede. Antes a conversa
   dependia de a pessoa imaginar o tamanho ou de medir no local.
+
+---
+
+## Semana 3 — 24 a 28 de agosto de 2026
+
+- [financeiro] ✅ Automação feita para o Vitor, do financeiro. *(falta descrever o que ela faz e o
+  que era feito na mão antes — completar antes de montar o email de segunda.)*
