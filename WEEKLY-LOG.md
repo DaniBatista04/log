@@ -63,3 +63,8 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 
 - [smb-ooh] ⏳ Começou a parte que as pessoas vão ver e usar do projeto de SMB OOH. *(falta dizer
   para quem é e o que vai dar para fazer ali — completar antes do email.)*
+
+- [whatsapp] ✅ Primeira versão pronta dos agentes de IA atendendo no nosso número de WhatsApp
+  (continua da semana 2): quem chama já é atendido na hora, sem esperar alguém ficar livre.
+  *(falta dizer o que o agente resolve sozinho, quando ele passa para uma pessoa e se já está
+  atendendo de verdade ou ainda em teste — completar antes do email.)*
