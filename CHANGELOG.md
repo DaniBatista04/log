@@ -85,6 +85,7 @@ eles vão para o email do time, que também não é técnico.
 - ⚙️ **Abrir chamado em outra aba** — os botões de ver e editar chamado agora podem ser abertos em uma nova aba, inclusive na lista do gestor. O clique comum continua abrindo na mesma aba, como antes.
 - ⚙️ **Nome, email e telefone preenchidos sozinhos no chamado** — ao escolher o prédio, os dados de contato já vêm preenchidos com o que está cadastrado nele. Antes era preciso digitar tudo de novo em cada chamado.
 - ⚙️ **Prédio com endereço na hora de escolher** — a lista de prédios mostra o endereço junto do nome, então dá para separar dois prédios de nome parecido e não abrir o chamado no lugar errado.
+- ⚙️ **Responsável já definido na abertura do chamado** — o chamado nasce com o responsável marcado, então ele não fica sem dono esperando alguém distribuir.
 
 ### Corrigido
 
