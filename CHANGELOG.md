@@ -75,12 +75,16 @@ eles vão para o email do time, que também não é técnico.
 ### Adicionado
 
 - 🟢 **Excluir rascunho** — dá para apagar um comunicado que ficou pela metade e não vai ser usado, então a lista de rascunhos mostra só o que ainda interessa. Antes o rascunho ficava lá para sempre.
+- ⚙️ **Chamado de som e de publicidade** — a lista de motivos do chamado agora tem som e publicidade, então esses pedidos entram pelo caminho certo em vez de virar "outros" ou chegar por fora.
+- ⚙️ **Departamento escolhido na abertura do chamado** — quem tem conta de administrador já diz, ao abrir o chamado, qual departamento cuida do assunto, então ele vai direto para as pessoas certas em vez de esperar alguém encaminhar depois.
 
 ### Melhorado
 
 - 🟢 **Sair do modelo pronto e escrever do zero** — depois de escolher um modelo da Focus Media, dá para removê-lo por um botão no próprio aviso que explica a trava, confirmar e continuar no mesmo lugar montando um comunicado livre. A arte sai de todos os tamanhos de tela de uma vez, nunca só de um. Antes, quem começava por um modelo ficava preso a ele: a arte não se mexia, as ferramentas de edição não apareciam e não havia caminho de volta.
 - 🟢 **Modelos prontos mais fáceis de achar** — o quadro de cada modelo agora fica em pé, com a arte cerca de quatro vezes maior, o nome sobre ela e o selo laranja de "sem revisão"; o cabeçalho mostra quantos modelos existem. Antes o quadro era deitado e pequeno, e mostrava só uma tira do meio da arte — quem procurava dizia não encontrar os modelos.
 - ⚙️ **Abrir chamado em outra aba** — os botões de ver e editar chamado agora podem ser abertos em uma nova aba, inclusive na lista do gestor. O clique comum continua abrindo na mesma aba, como antes.
+- ⚙️ **Nome, email e telefone preenchidos sozinhos no chamado** — ao escolher o prédio, os dados de contato já vêm preenchidos com o que está cadastrado nele. Antes era preciso digitar tudo de novo em cada chamado.
+- ⚙️ **Prédio com endereço na hora de escolher** — a lista de prédios mostra o endereço junto do nome, então dá para separar dois prédios de nome parecido e não abrir o chamado no lugar errado.
 
 ### Corrigido
 
