@@ -68,3 +68,8 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   (continua da semana 2): quem chama já é atendido na hora, sem esperar alguém ficar livre.
   *(falta dizer o que o agente resolve sozinho, quando ele passa para uma pessoa e se já está
   atendendo de verdade ou ainda em teste — completar antes do email.)*
+
+- [comercial] ✅ O simulador de tela em tamanho real (continua da semana 2) agora funciona também
+  no iPhone. Antes só rodava em parte dos aparelhos, então o vendedor dependia de estar com o
+  celular certo na mão para mostrar a tela no lugar da instalação; agora a demonstração acontece
+  no aparelho de quem estiver na visita.
