@@ -78,6 +78,7 @@ eles vão para o email do time, que também não é técnico.
 - ⚙️ **Chamado de som e de publicidade** — a lista de motivos do chamado agora tem som e publicidade, então esses pedidos entram pelo caminho certo em vez de virar "outros" ou chegar por fora.
 - ⚙️ **Departamento escolhido na abertura do chamado** — quem tem conta de administrador já diz, ao abrir o chamado, qual departamento cuida do assunto, então ele vai direto para as pessoas certas em vez de esperar alguém encaminhar depois.
 - ⚙️ **Planilha com os chamados do departamento** — quem atende por um departamento consegue baixar os chamados dele em planilha, então dá para olhar tudo de uma vez, filtrar e montar o número do mês sem pedir para alguém levantar na mão.
+- 🟢 **Mais um modelo pronto da Focus Media** — entrou um novo modelo na biblioteca: o síndico troca só os textos e publica. Como o modelo já sai aprovado por nós, o comunicado não espera revisão e segue direto para a próxima janela de publicação.
 
 ### Melhorado
 
