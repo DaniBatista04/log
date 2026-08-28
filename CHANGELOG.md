@@ -77,6 +77,7 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Excluir rascunho** — dá para apagar um comunicado que ficou pela metade e não vai ser usado, então a lista de rascunhos mostra só o que ainda interessa. Antes o rascunho ficava lá para sempre.
 - ⚙️ **Chamado de som e de publicidade** — a lista de motivos do chamado agora tem som e publicidade, então esses pedidos entram pelo caminho certo em vez de virar "outros" ou chegar por fora.
 - ⚙️ **Departamento escolhido na abertura do chamado** — quem tem conta de administrador já diz, ao abrir o chamado, qual departamento cuida do assunto, então ele vai direto para as pessoas certas em vez de esperar alguém encaminhar depois.
+- ⚙️ **Planilha com os chamados do departamento** — quem atende por um departamento consegue baixar os chamados dele em planilha, então dá para olhar tudo de uma vez, filtrar e montar o número do mês sem pedir para alguém levantar na mão.
 
 ### Melhorado
 
@@ -87,6 +88,8 @@ eles vão para o email do time, que também não é técnico.
 - ⚙️ **Nome, email e telefone preenchidos sozinhos no chamado** — ao escolher o prédio, os dados de contato já vêm preenchidos com o que está cadastrado nele. Antes era preciso digitar tudo de novo em cada chamado.
 - ⚙️ **Prédio com endereço na hora de escolher** — a lista de prédios mostra o endereço junto do nome, então dá para separar dois prédios de nome parecido e não abrir o chamado no lugar errado.
 - ⚙️ **Responsável já definido na abertura do chamado** — o chamado nasce com o responsável marcado, então ele não fica sem dono esperando alguém distribuir.
+- ⚙️ **Mais de um motivo no mesmo chamado** — quando o pedido envolve mais de um assunto, dá para marcar todos os motivos de uma vez, em vez de abrir um chamado para cada um ou escolher só o principal e explicar o resto por escrito.
+- 🟢 **Ícones novos no lugar das figurinhas** — os desenhinhos que apareciam pelo Mural foram trocados por ícones desenhados no mesmo traço, então as telas ficaram com um visual mais limpo e mais nosso.
 
 ### Corrigido
 
