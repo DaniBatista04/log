@@ -109,6 +109,10 @@ eles vão para o email do time, que também não é técnico.
 
 ## [Semana 4] — 31 de agosto a 4 de setembro de 2026
 
+### Adicionado
+
+- ⚙️ **Limpar de uma vez as solicitações de remoção de comunicado** — dá para apagar todas as solicitações de remoção pendentes de uma só vez, em vez de ir uma por uma até a lista esvaziar.
+
 ### Melhorado
 
 - ⚙️ **Tela de chamados mais limpa** — a tela de chamados foi repaginada e ficou com um visual mais organizado, mais fácil de ler de relance. O que dá para fazer nela continua o mesmo: mudou só o jeito como as informações aparecem.
