@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AudienceBadge, CategoryLabel } from "@/components/badge";
-import { getChangelog, getTaskLog, groupByCategory } from "@/lib/log";
+import { WeekSwitcher } from "@/components/week-switcher";
+import { getChangelog, getTaskLog, groupByCategory, weekOptions } from "@/lib/log";
 
 export const dynamic = "force-dynamic";
 
@@ -25,15 +26,16 @@ export default async function Painel({ searchParams }: PageProps<"/">) {
     );
   }
 
-  const wanted = typeof params.semana === "string" ? params.semana : null;
-  const week = weeks.find((w) => w.id === wanted) ?? weeks[0];
-  const tasks = taskWeeks.find((t) => t.id === week.id) ?? null;
-
   const filter =
     typeof params.publico === "string" &&
     FILTERS.some((f) => f.key === params.publico)
       ? params.publico
       : "todos";
+
+  const wanted = typeof params.semana === "string" ? params.semana : null;
+  const week = weeks.find((w) => w.id === wanted) ?? weeks[0];
+  const tasks = taskWeeks.find((t) => t.id === week.id) ?? null;
+  const isCurrent = week.id === weeks[0].id;
 
   const clientCount = week.entries.filter(
     (e) => e.audience === "cliente",
@@ -50,26 +52,26 @@ export default async function Painel({ searchParams }: PageProps<"/">) {
     <div className="space-y-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{week.id}</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-semibold tracking-tight">{week.id}</h1>
+            {isCurrent && (
+              <span className="rounded-full bg-surface-2 px-2 py-0.5 text-[11px] font-medium text-ink-2">
+                mais recente
+              </span>
+            )}
+          </div>
           <p className="mt-1 text-sm text-ink-2">{week.range}</p>
         </div>
-        {weeks.length > 1 && (
-          <div className="flex flex-wrap gap-1">
-            {weeks.map((w) => (
-              <Link
-                key={w.id}
-                href={`/?semana=${encodeURIComponent(w.id)}`}
-                className={`rounded-md border px-2.5 py-1 text-xs transition-colors ${
-                  w.id === week.id
-                    ? "border-line bg-surface-2 font-medium text-ink"
-                    : "border-transparent text-ink-2 hover:text-ink"
-                }`}
-              >
-                {w.id}
-              </Link>
-            ))}
-          </div>
-        )}
+        <WeekSwitcher
+          currentId={week.id}
+          options={weekOptions(
+            weeks,
+            (id) =>
+              `/?semana=${encodeURIComponent(id)}${
+                filter === "todos" ? "" : `&publico=${filter}`
+              }`,
+          )}
+        />
       </div>
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -141,21 +143,32 @@ export default async function Painel({ searchParams }: PageProps<"/">) {
             {tasks.tasks.map((task) => (
               <li
                 key={task.text}
-                className="flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-xl border border-line bg-surface px-4 py-3 text-sm"
+                className="rounded-xl border border-line bg-surface px-4 py-3 text-sm"
               >
-                {task.area && (
-                  <span className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-xs text-ink-2">
-                    {task.area}
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  {task.area && (
+                    <span className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-xs text-ink-2">
+                      {task.area}
+                    </span>
+                  )}
+                  {!task.placeholder && (
+                    <span className="text-xs text-ink-3">
+                      {task.status === "entregue" ? "Entregue" : "Em andamento"}
+                    </span>
+                  )}
+                  <span
+                    className={
+                      task.placeholder ? "text-ink-3" : "leading-relaxed"
+                    }
+                  >
+                    {task.text}
                   </span>
+                </div>
+                {task.note && (
+                  <p className="mt-2 border-l-2 border-line pl-2.5 text-xs leading-relaxed text-ink-3">
+                    Falta escrever: {task.note}
+                  </p>
                 )}
-                {!task.placeholder && (
-                  <span className="text-xs text-ink-3">
-                    {task.status === "entregue" ? "Entregue" : "Em andamento"}
-                  </span>
-                )}
-                <span className={task.placeholder ? "text-ink-3" : ""}>
-                  {task.text}
-                </span>
               </li>
             ))}
           </ul>

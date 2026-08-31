@@ -1,5 +1,12 @@
 import { CopyButton } from "@/components/copy-button";
-import { getChangelog, getTaskLog, sortByCategory } from "@/lib/log";
+import { WeekSwitcher } from "@/components/week-switcher";
+import {
+  getChangelog,
+  getTaskLog,
+  isReady,
+  sortByCategory,
+  weekOptions,
+} from "@/lib/log";
 
 export const dynamic = "force-dynamic";
 
@@ -12,19 +19,23 @@ const CHECKLIST = [
   "Fechou com abertura para feedback",
 ];
 
+const MAX_LINHAS = 8;
+
 function line(title: string, impact: string) {
   return impact ? `- ${title} — ${impact}` : `- ${title}`;
 }
 
-export default function Email() {
-  const week = getChangelog()[0];
-  const tasks = week
-    ? getTaskLog().find((t) => t.id === week.id)?.tasks ?? []
-    : [];
+export default async function Email({ searchParams }: PageProps<"/email">) {
+  const params = await searchParams;
+  const weeks = getChangelog();
 
-  if (!week) {
+  if (weeks.length === 0) {
     return <p className="text-ink-2">Sem semanas registradas no changelog.</p>;
   }
+
+  const wanted = typeof params.semana === "string" ? params.semana : null;
+  const week = weeks.find((w) => w.id === wanted) ?? weeks[0];
+  const tasks = getTaskLog().find((t) => t.id === week.id)?.tasks ?? [];
 
   const cliente = sortByCategory(
     week.entries.filter((e) => e.audience === "cliente"),
@@ -32,12 +43,11 @@ export default function Email() {
   const interno = sortByCategory(
     week.entries.filter((e) => e.audience === "interno"),
   );
-  const feitas = tasks.filter(
-    (t) => !t.placeholder && t.status === "entregue",
-  );
-  const andamento = tasks.filter(
-    (t) => !t.placeholder && t.status === "andamento",
-  );
+  const prontas = tasks.filter(isReady);
+  const feitas = prontas.filter((t) => t.status === "entregue");
+  const andamento = prontas.filter((t) => t.status === "andamento");
+  /** Ficaram de fora do rascunho porque ainda falta escrever o impacto. */
+  const incompletas = tasks.filter((t) => !t.placeholder && t.note !== null);
 
   const blocks: string[] = [
     `Assunto: Mural — o que mudou na semana (${week.range})`,
@@ -62,11 +72,7 @@ export default function Email() {
     );
   }
   if (feitas.length) {
-    blocks.push(
-      "",
-      "Fora do Mural",
-      ...feitas.map((t) => `- ${t.text}`),
-    );
+    blocks.push("", "Fora do Mural", ...feitas.map((t) => `- ${t.text}`));
   }
   if (andamento.length) {
     blocks.push(
@@ -85,6 +91,8 @@ export default function Email() {
   );
 
   const draft = blocks.join("\n");
+  const linhas =
+    cliente.length + interno.length + feitas.length + andamento.length;
 
   return (
     <div className="space-y-8">
@@ -94,16 +102,65 @@ export default function Email() {
             Email da semana
           </h1>
           <p className="mt-1 text-sm text-ink-2">
-            Rascunho gerado a partir de {week.id} — revise o tom antes de
-            enviar.
+            Rascunho gerado a partir de {week.id} ({week.range}) — revise o tom
+            antes de enviar.
           </p>
         </div>
-        <CopyButton text={draft} />
+        <div className="flex flex-wrap items-center gap-2">
+          <WeekSwitcher
+            currentId={week.id}
+            options={weekOptions(
+              weeks,
+              (id) => `/email?semana=${encodeURIComponent(id)}`,
+            )}
+          />
+          <CopyButton text={draft} />
+        </div>
       </div>
 
-      <pre className="overflow-x-auto whitespace-pre-wrap rounded-xl border border-line bg-surface p-6 font-sans text-sm leading-relaxed">
-        {draft}
-      </pre>
+      {incompletas.length > 0 && (
+        <section className="rounded-xl border border-line bg-surface-2 p-4">
+          <h2 className="text-sm font-medium">
+            {incompletas.length === 1
+              ? "1 demanda ficou fora do rascunho"
+              : `${incompletas.length} demandas ficaram fora do rascunho`}
+          </h2>
+          <p className="mt-1 text-xs leading-relaxed text-ink-2">
+            Falta escrever o impacto no{" "}
+            <code className="font-mono">WEEKLY-LOG.md</code>. Enquanto a nota
+            estiver lá, o item não entra no email.
+          </p>
+          <ul className="mt-3 space-y-2.5">
+            {incompletas.map((task) => (
+              <li key={task.text} className="flex gap-2 text-sm">
+                {task.area && (
+                  <span className="mt-0.5 shrink-0 rounded bg-surface px-1.5 py-0.5 font-mono text-xs text-ink-2">
+                    {task.area}
+                  </span>
+                )}
+                <span className="min-w-0 flex-1">
+                  <span className="leading-relaxed">{task.text}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-ink-3">
+                    {task.note}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div>
+        <pre className="overflow-x-auto whitespace-pre-wrap rounded-xl border border-line bg-surface p-6 font-sans text-sm leading-relaxed">
+          {draft}
+        </pre>
+        <p className="mt-2 text-xs text-ink-3">
+          {linhas} {linhas === 1 ? "linha" : "linhas"} de conteúdo
+          {linhas > MAX_LINHAS
+            ? ` — acima das ~${MAX_LINHAS} do checklist, corte o que não teve impacto visível.`
+            : "."}
+        </p>
+      </div>
 
       <section>
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-3">
