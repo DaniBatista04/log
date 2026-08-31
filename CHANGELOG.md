@@ -112,3 +112,8 @@ eles vão para o email do time, que também não é técnico.
 ### Melhorado
 
 - ⚙️ **Tela de chamados mais limpa** — a tela de chamados foi repaginada e ficou com um visual mais organizado, mais fácil de ler de relance. O que dá para fazer nela continua o mesmo: mudou só o jeito como as informações aparecem.
+- 🟢 **Mural mais confortável de usar no celular** — as telas do Mural foram ajustadas para o tamanho do aparelho, então publicar e acompanhar os comunicados pelo celular ficou mais fácil do que antes.
+
+### Corrigido
+
+- 🟢 **Vídeo escondido atrás do fundo desfocado** — quando o comunicado era um vídeo, o fundo desfocado ficava por cima e o vídeo sumia atrás dele. Agora o vídeo aparece na frente, como deveria.
