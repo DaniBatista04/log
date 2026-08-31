@@ -259,16 +259,22 @@ export function groupByCategory(entries: Entry[]): [string, Entry[]][] {
   return [...map.entries()];
 }
 
-/** `24 a 28 de agosto de 2026` → `{ day: "24–28", month: "ago", year: "2026" }` */
+/**
+ * `24 a 28 de agosto de 2026` e também a semana que vira o mês,
+ * `31 de agosto a 4 de setembro de 2026` — nela o segundo mês e o ano vêm no fim.
+ */
 const PARSED_RANGE_RE =
-  /^(\d{1,2})(?:\s*(?:a|até|[—–-])\s*(\d{1,2}))?\s+de\s+([A-Za-zÀ-ÿ]+)(?:\s+de\s+(\d{4}))?/i;
+  /^(\d{1,2})(?:\s*(?:a|até|[—–-])\s*(\d{1,2}))?\s+de\s+([A-Za-zÀ-ÿ]+)(?:\s*(?:a|até|[—–-])\s*(\d{1,2})\s+de\s+([A-Za-zÀ-ÿ]+))?(?:\s+de\s+(\d{4}))?/i;
 
-/** Rótulo curto para o seletor de semana: `24–28 ago`. */
+const abbr = (month: string) => month.slice(0, 3).toLowerCase();
+
+/** Rótulo curto para o seletor de semana: `24–28 ago`, ou `31 ago–4 set`. */
 export function shortRange(range: string): string {
   const m = range.match(PARSED_RANGE_RE);
   if (!m) return range;
+  if (m[4]) return `${m[1]} ${abbr(m[3])}–${m[4]} ${abbr(m[5])}`;
   const days = m[2] ? `${m[1]}–${m[2]}` : m[1];
-  return `${days} ${m[3].slice(0, 3).toLowerCase()}`;
+  return `${days} ${abbr(m[3])}`;
 }
 
 /**
@@ -279,7 +285,7 @@ export function monthLabel(range: string): string {
   const m = range.match(PARSED_RANGE_RE);
   if (!m) return range;
   const month = m[3].charAt(0).toUpperCase() + m[3].slice(1).toLowerCase();
-  return m[4] ? `${month} de ${m[4]}` : month;
+  return m[6] ? `${month} de ${m[6]}` : month;
 }
 
 /**

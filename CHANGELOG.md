@@ -104,3 +104,11 @@ eles vão para o email do time, que também não é técnico.
 - ⚙️ **Conferência dos modelos prontos rodando contra produção** — uma verificação nova passa pelos comunicados publicados com modelo e confirma que todos batem com o modelo aprovado: os 96 comunicados existentes foram aceitos, e os casos adulterados de teste foram recusados.
 - ⚙️ **Guia interno do Mural reorganizado** — o guia principal passou de 1.446 para 129 linhas, com só o que não pode ser esquecido; o detalhe foi para arquivos separados por assunto (banco e produção, enquadramento de arte, performance das listagens, revisão e publicação, email e gestores, pendências). Nenhuma regra foi descartada, e saiu uma imagem de 609 kB que ninguém usava.
 - ⚙️ **Hipótese descartada: comunicado que perderia a arte ao escolher o condomínio depois do modelo** — não acontece: nenhuma ocorrência em 3.166 comunicados desde 1º de agosto. O "fica travado e não avança" relatado pelo síndico do Marajoara Sol era o botão de enviar, já corrigido.
+
+---
+
+## [Semana 4] — 31 de agosto a 4 de setembro de 2026
+
+### Melhorado
+
+- ⚙️ **Tela de chamados mais limpa** — a tela de chamados foi repaginada e ficou com um visual mais organizado, mais fácil de ler de relance. O que dá para fazer nela continua o mesmo: mudou só o jeito como as informações aparecem.
