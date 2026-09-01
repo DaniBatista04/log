@@ -112,6 +112,7 @@ eles vão para o email do time, que também não é técnico.
 ### Adicionado
 
 - ⚙️ **Limpar de uma vez as solicitações de remoção de comunicado** — dá para apagar todas as solicitações de remoção pendentes de uma só vez, em vez de ir uma por uma até a lista esvaziar.
+- ⚙️ **Áudio anexado ao chamado** — dá para anexar áudios ao chamado, então quem abre pode mandar o barulho da tela ou a explicação falada em vez de tentar descrever por escrito.
 
 ### Melhorado
 
