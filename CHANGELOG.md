@@ -120,6 +120,7 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Mural mais confortável de usar no celular** — as telas do Mural foram ajustadas para o tamanho do aparelho, então publicar e acompanhar os comunicados pelo celular ficou mais fácil do que antes.
 - 🟢 **Condomínio já vem marcado para quem cuida de um só** — quem responde por um único condomínio agora o encontra já selecionado ao montar o comunicado, em vez de ter que escolhê-lo na lista toda vez. Quem cuida de mais de um continua escolhendo, como antes.
 - ⚙️ **Tipo de imóvel e tipo de acordo preenchidos sozinhos** — o cadastro do prédio passa a receber também o tipo de imóvel e o tipo de acordo do sistema do comercial, junto com endereço e CEP. Só completa o que está em branco, nunca troca o que alguém já preencheu, e quando o dado vem em um formato que não reconhecemos fica vazio em vez de chutar. As diferenças entre o que foi preenchido na mão e o que veio do comercial ficam listadas para conferência, sem alterar nada.
+- 🟢 **Área de montagem do comunicado mais bonita, e zoom acertado** — o espaço onde a arte do comunicado é montada ganhou um visual mais limpo, e o aproximar e afastar da arte ficou mais previsível: a imagem responde do jeito que se espera na hora de encaixar o texto e conferir o resultado.
 
 ### Corrigido
 
