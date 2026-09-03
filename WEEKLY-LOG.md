@@ -73,3 +73,13 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   no iPhone. Antes só rodava em parte dos aparelhos, então o vendedor dependia de estar com o
   celular certo na mão para mostrar a tela no lugar da instalação; agora a demonstração acontece
   no aparelho de quem estiver na visita.
+
+---
+
+## Semana 4 — 31 de agosto a 4 de setembro de 2026
+
+- [assinaturas] ✅ O site que monta a assinatura de email da empresa voltou a funcionar, refeito
+  do zero. Ele estava fora do ar, então quem entrava na empresa ou trocava de cargo ficava sem
+  assinatura padrão ou copiava a de um colega e ajustava na mão. Agora a pessoa preenche os dados
+  dela e leva a assinatura pronta, no padrão certo. *(falta dizer onde ele fica e o que mudou em
+  relação ao antigo — completar antes do email de segunda.)*
