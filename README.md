@@ -30,6 +30,31 @@ Para apontar para outra pasta, use a variável `LOG_DIR`.
 No deploy da Vercel os markdowns entram no bundle pelo `outputFileTracingIncludes` do
 `next.config.ts` — se você criar uma rota nova que lê algum arquivo, precisa incluí-la lá.
 
+## Prod
+
+<https://log-delta-rouge.vercel.app> — a Vercel publica a partir do `main`, então o que está
+commitado é o que está no ar.
+
+Se o link não abrir na rede do escritório, o problema provavelmente não é o deploy. O resolver do
+provedor devolve `NXDOMAIN` para a zona `vercel.app` — conferido nos dois roteadores
+(`192.168.1.1` e `192.168.2.1`), enquanto `1.1.1.1`, `8.8.8.8` e o 4G resolvem o mesmo host sem
+problema. O tráfego para os IPs da Vercel passa normalmente: batendo direto no IP com o Host
+certo, o site responde 200. É só o nome que é barrado, e vale para qualquer projeto em
+`vercel.app`.
+
+Como confirmar em vez de adivinhar:
+
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' \
+  --resolve log-delta-rouge.vercel.app:443:64.29.17.2 \
+  https://log-delta-rouge.vercel.app/
+```
+
+Se isso devolve 200 e o navegador não abre, é DNS. A saída é apontar o DNS do Windows para
+`1.1.1.1` (o WSL herda sozinho, o `10.255.255.254` é só um proxy do resolver do Windows). Se um
+dia mais alguém precisar do link, aí sim vale ligar um domínio próprio ao projeto, porque o
+filtro é na zona e um domínio nosso passa por cima.
+
 ## Rotina
 
 **Todo dia (2 min):** aconteceu algo? Uma linha no arquivo certo. Cru, sem capricho.
