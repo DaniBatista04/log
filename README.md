@@ -35,25 +35,46 @@ No deploy da Vercel os markdowns entram no bundle pelo `outputFileTracingInclude
 <https://log-delta-rouge.vercel.app> — a Vercel publica a partir do `main`, então o que está
 commitado é o que está no ar.
 
-Se o link não abrir na rede do escritório, o problema provavelmente não é o deploy. O resolver do
-provedor devolve `NXDOMAIN` para a zona `vercel.app` — conferido nos dois roteadores
-(`192.168.1.1` e `192.168.2.1`), enquanto `1.1.1.1`, `8.8.8.8` e o 4G resolvem o mesmo host sem
-problema. O tráfego para os IPs da Vercel passa normalmente: batendo direto no IP com o Host
-certo, o site responde 200. É só o nome que é barrado, e vale para qualquer projeto em
-`vercel.app`.
+Se o link não abrir na rede do escritório, o problema não é o deploy: o **UDM bloqueia a zona
+`vercel.app`**. O tráfego para os IPs da Vercel passa normalmente — batendo direto no IP com o
+Host certo, o site responde 200. É só o nome que é barrado, e vale para qualquer projeto em
+`vercel.app` (o `pages.dev` também está na lista; `netlify.app` e `workers.dev` não).
+
+O bloqueio é local do UDM, não do provedor. O que prova isso é a flag `AA` da resposta: para um
+domínio que realmente não existe, o UDM devolve `NXDOMAIN` com o SOA da zona na seção de
+autoridade e **sem** `AA`, como todo resolver que encaminha; para `vercel.app` ele devolve
+`NXDOMAIN` autoritativo (`AA` marcado), sem SOA e sem nenhum registro. Resolver que só encaminha
+não marca `AA` — essa negativa é fabricada na caixa.
 
 Como confirmar em vez de adivinhar:
 
 ```bash
+# o site está de pé?
 curl -s -o /dev/null -w '%{http_code}\n' \
   --resolve log-delta-rouge.vercel.app:443:64.29.17.2 \
   https://log-delta-rouge.vercel.app/
+
+# quem está barrando o nome?
+python3 -c "
+import socket,struct
+def q(srv,n):
+    p=struct.pack('>HHHHHH',1,0x0100,1,0,0,0)
+    for x in n.split('.'): p+=bytes([len(x)])+x.encode()
+    p+=b'\x00'+struct.pack('>HH',1,1)
+    s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM); s.settimeout(5)
+    s.sendto(p,(srv,53)); d,_=s.recvfrom(4096); s.close()
+    fl=struct.unpack('>H',d[2:4])[0]
+    return f\"{srv:<16} rcode={fl&0xF} AA={bool(fl&0x0400)} an={struct.unpack('>H',d[6:8])[0]}\"
+for srv in ('192.168.2.1','8.8.8.8','1.1.1.1'):
+    print(q(srv,'log-delta-rouge.vercel.app'))
+"
 ```
 
-Se isso devolve 200 e o navegador não abre, é DNS. A saída é apontar o DNS do Windows para
-`1.1.1.1` (o WSL herda sozinho, o `10.255.255.254` é só um proxy do resolver do Windows). Se um
-dia mais alguém precisar do link, aí sim vale ligar um domínio próprio ao projeto, porque o
-filtro é na zona e um domínio nosso passa por cima.
+Se o `curl` devolve 200 e o navegador não abre, é DNS. Se o UDM responde `rcode=3 AA=True`
+enquanto os públicos respondem `rcode=0`, o bloqueio está no UniFi: liberar o domínio lá resolve
+para todo mundo na rede de uma vez, e é melhor que trocar o DNS máquina por máquina — quem
+aponta para `1.1.1.1` na mão perde o EDNS Client Subnet e passa a ter problema com CDN que faz
+GeoDNS.
 
 ## Rotina
 
