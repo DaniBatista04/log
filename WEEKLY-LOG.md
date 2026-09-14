@@ -123,6 +123,35 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   restrita a admin, com conferência do arquivo antes de subir e sem duplicar quem já existe),
   mas foi para a gaveta e não está no ar — decisão de não liberar por enquanto. O código está
   guardado e volta com um comando.
+- [crm] ✅ Na Prospecção, cada gestor passou a ver só a sua equipe. "Ser gestor" e "ver tudo"
+  eram a mesma coisa, então quem era gestor de um time enxergava os números e a base de
+  qualquer outro. Agora o alcance vem do mesmo organograma do Pipeline BD — gestor vê os BDs
+  dele, gerente sênior vê os gestores e os BDs deles, admin vê tudo — e vale também para o que
+  cada um pode mexer, não só para o que enxerga. A base de contatos frios e o monte de
+  congelados continuam sendo de todos de propósito: são a fila de resgate compartilhada.
+- [crm] ✅ Ainda na Prospecção, um pacote de coisas do uso diário: a base completa ganhou
+  filtro por dono, status, período, próxima ação e presença de contato, com colunas
+  ordenáveis; o filtro de pessoas deixou de ser liga/desliga e passou a alternar entre o time
+  inteiro, só a pessoa e ninguém, porque os dois recortes são usados o tempo todo; e as listas
+  grandes ganharam paginação de verdade no lugar de um corte silencioso em 500 linhas. A aba
+  aberta passou a ficar no endereço da página, então voltar no navegador e atualizar deixaram
+  de perder o lugar.
+- [crm] ✅ Contato que já é negócio de outra pessoa parou de virar card repetido. Registrar
+  alguém que já está em fase avançada com outro BD não grava mais nada — quem tentou vê que o
+  lead já está adiantado, e o dono do card recebe um aviso discreto, no máximo um por card por
+  dia. No começo do funil o registro apenas completa os campos em branco do card que já
+  existe, em vez de criar um segundo. Junto, o dono do contato passou a corrigir o status na
+  mão, sem precisar inventar uma tentativa nova só para arrumar a classificação.
+- [crm] ✅ Destravado o aditivo que não avançava para a assinatura. Uma BD relatou, pelo
+  Jurídico, que o botão ficava cinza sem dizer por quê — e era defeito mesmo: o gestor nunca
+  conseguia marcar "Assinado" num registro da equipe dele, apesar de a regra permitir. Junto,
+  cada etapa do aditivo passou a dizer de quem ela é ("Responsável: Jurídico", "Responsável:
+  Você" ou o nome do dono), e quem vai confirmar a assinatura é avisado de que marcar
+  "Assinado" já aplica as telas e os valores novos ao edifício.
+- [crm] ✅ O CRM passou a entregar ao Mural quem é o fornecedor que instala e atende cada
+  edifício — empresa, contato, telefone e CNPJ. O dado só existe aqui, escolhido na ficha do
+  edifício, e é o que faz o Mural mostrar o fornecedor no chamado e na planilha da operação
+  sem precisar de um segundo cadastro do outro lado.
 
 - [telas] ✅ Clima e notícias das telas passaram a atender duas praças: São Paulo e Rio de
   Janeiro. A notícia é nacional e vai num pedido só; o clima tem arte por cidade, então é um
@@ -141,6 +170,14 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   quantas. Antes só existia o número agregado, então qualquer reclamação de prédio específico
   terminava em palpite. É ela que mostrou que a divergência entre prédios não nasce no pedido:
   nasce depois dele, na liberação do portal e na sincronização de cada aparelho.
+- [telas] ✅ O alarme que avisa se o clima das 23h não foi preparado parou de depender de uma
+  cota emprestada. Ele perguntava ao GitHub sem se identificar, e quem não se identifica
+  divide um limite por endereço de internet com todos os vizinhos de servidor — em 11/09 foi
+  recusado tendo feito duas perguntas na noite inteira, porque o limite já tinha sido gasto
+  por terceiros. É o pior tipo de falha: não aparece em teste, aparece às 0h10, e o que quebra
+  é justamente o alarme, não o clima. Agora a pergunta passa pelo nosso próprio sistema, que
+  já se identifica para disparar o robô do clima — sem guardar uma segunda senha no n8n, que é
+  onde a credencial errada já foi amarrada uma vez.
 
 - [nfc] ✅ Serviço novo, do zero: as telas de elevador ganham etiqueta NFC e QR, e quem
   encosta o celular é levado ao destino do anúncio que está passando — com o clique contado
@@ -166,8 +203,36 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [comercial] ⏳ O modo foto do simulador (tirar a foto da parede com a tela no lugar) ficou
   para a versão 2.0 — registrado onde parou, para não se perder.
 
+- [contratos] ✅ Revisada, antes de entregar, a auditoria das 700 linhas do controle de
+  repasse: os valores dos contratos foram lidos de novo do zero, por um caminho independente,
+  e conferidos com o controle campo a campo. Cinco valores estavam lidos errado e três
+  condomínios apontados como "CNPJ divergente" não tinham divergência nenhuma. Os números do
+  resumo foram refeitos com as correções.
+- [contratos] ✅ Lido o lote novo de contratos — 2.702 documentos, todos legíveis — e cada um
+  ligado à sua linha do controle pelo CNPJ do condomínio, já que os arquivos não têm nome que
+  identifique. O lote serve como segunda fonte, independente das pastas do disco, e fechou 10
+  das 22 pendências que tinham ficado da rodada anterior.
+- [contratos] ✅ Entregue a revisão completa, separada pelo que precisa de decisão: 87
+  condomínios recebendo menos do que o contrato manda (R$ 33.776,28 por mês), 103 recebendo
+  mais (R$ 31.989,61 por mês), 19 linhas pagando sem contrato legível em nenhuma das fontes e
+  951 condomínios com contrato assinado e repasse previsto que não têm linha nenhuma no
+  controle — R$ 208.603,33 por mês, quase todos assinados em julho e agosto, que é exatamente
+  onde o controle para. Das 699 linhas conferidas, 473 batem com o contrato e 190 divergem;
+  175 dessas divergências foram confirmadas pelas duas fontes, e são as mais seguras para
+  agir.
+- [contratos] ✅ O achado mais direto: quatro aditivos assinados que o controle nunca aplicou —
+  Chácara das Flores (paga R$ 50, devidos R$ 500), Edifício Dacon (R$ 800 / R$ 1.200), Plano &
+  Vila Guilherme (R$ 100 / R$ 300) e Empresarial Cantareira (R$ 600 / R$ 700). São R$ 1.150
+  por mês deixando de ser pagos, com o documento na mão.
+- [contratos] ⏳ Em andamento: a conferência dos 710 pontos em que a primeira leitura e a
+  releitura discordaram, cada um decidido com o trecho do contrato que sustenta a resposta. É
+  o que separa erro de leitura de divergência real antes de qualquer cobrança.
+
 **Pendências que atravessam pra semana 6:**
 
+- Levar ao financeiro e ao comercial as decisões que saíram da revisão dos contratos: o que
+  fazer com quem recebe a menos, com quem recebe a mais, e se os 951 condomínios com contrato
+  assinado e sem linha no controle já estão ativos.
 - Testar o Totem 55" em aparelho, na realidade aumentada, apontando para o chão (Android e
   iPhone) — é o único passo que não dá para conferir daqui.
 - Decidir, com a operação, como encurtar as dez horas e meia entre o clima ficar pronto e
