@@ -251,3 +251,154 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   Comparar um dia no ar com um dia encerrado sem saber disso é comparar duas medidas
   diferentes — na primeira leitura pareceu que nenhum condomínio tinha recebido o card da
   véspera.
+
+---
+
+## Semana 6 — 14 a 18 de setembro de 2026
+
+*(registrado até quarta, 16 de setembro; a semana ainda está aberta.)*
+
+- [scan] ✅ Serviço novo, do zero, no ar em `focusmedia.com.br/scan`: quem está em campo aponta a
+  câmera do celular para o código atrás da tela e recebe a ficha daquele equipamento — número de
+  série, modelo e tamanho, em que situação ele está e desde quando, o percurso até a instalação
+  (configuração, entrega, motorista, empresa que instalou), o chip, as manutenções e a
+  movimentação. É uma página, não um aplicativo de loja: não se instala nada. Só consulta —
+  cadastrar, dar manutenção e vincular continua no CRM. Antes, descobrir de quem era uma tela no
+  hall de um prédio dependia de perguntar no grupo.
+- [scan] ✅ A ficha tem dois níveis, e quem decide é o banco de dados, não a página: sem entrar,
+  ela identifica o equipamento e diz que ele é nosso, com o contato de suporte, e não diz onde ele
+  está. Onde a tela está, quanto custou e por onde passou é informação interna, para quem já vê o
+  inventário no CRM.
+- [scan] ✅ A entrada virou um código de acesso, um campo só. Em campo ninguém digita e-mail e
+  senha de pé num hall, com uma mão no celular; o código é digitado uma vez por aparelho e a
+  sessão fica. Quem tem conta própria no CRM continua entrando por ela, num link discreto embaixo.
+- [scan] ✅ A página fala português, inglês e chinês, com a troca pelo globo no cabeçalho, e a
+  escolha fica guardada no aparelho.
+- [scan] ✅ A ficha sai do aparelho: um botão abre o compartilhamento do celular com a mesma ficha
+  que está na tela, no idioma em que ela está sendo lida — para mandar ao executivo do prédio, ao
+  grupo da operação ou ao laudo do fornecedor. No fim vai um link de volta ao app, para quem
+  recebe consultar a ficha viva. Sem o compartilhamento (computador, navegador antigo) ela cai
+  para a área de transferência e, por último, para um arquivo de texto.
+- [scan] ✅ O visual foi refeito em torno da etiqueta que o CRM já imprime para cada prédio: a
+  resposta da leitura é o gêmeo digital dela. Tela escura para a câmera não refletir na cara de
+  quem está no hall, o número de série grande — é o que se confere caractere a caractere contra a
+  etiqueta colada no equipamento — e a ação principal no rodapé, onde o polegar alcança.
+- [scan] ✅ Do lado do CRM, a ficha exigiu seis campos que não existiam em lugar nenhum (código
+  contábil, valor e moeda de importação, data da importação, data de configuração e motorista) e
+  um ciclo de vida próprio, em oito estados, que separa "onde a tela está" do status que a aba
+  Inventário já escrevia. Os quatro estados que o sistema não tem como deduzir — armazém de
+  terceiro, devolução ao fornecedor, sucateamento e sucata — continuam sendo decisão registrada
+  por uma pessoa, e nada os sobrescreve.
+
+- [crm] ✅ O jurídico passou a poder editar o contrato em Word antes de mandar assinar. O contrato
+  sempre saiu pronto do modelo, então contrato fora do padrão — uma cláusula negociada, uma
+  exigência daquele condomínio — não tinha caminho: ou ia como o modelo mandava, ou o jurídico
+  refazia por fora e o CRM perdia o rastro. Agora um botão gera o Word já preenchido com os dados
+  do negócio, sem avisar ninguém e sem abrir processo de assinatura; o arquivo editado volta para
+  o CRM, que guarda as versões e manda para assinatura a que for escolhida.
+- [crm] ✅ O CRM parou de anexar o contrato antes de ele estar assinado. O sistema de assinatura
+  avisa no instante em que a última assinatura fecha, e nesse instante ele ainda não montou o
+  documento assinado: o que vinha era a versão anterior — PDF legítimo, mesmo nome, tamanho
+  plausível e sem assinatura nenhuma. É o pior tipo de erro, porque ninguém confere um arquivo que
+  já está no lugar certo com o nome certo. Agora o CRM só anexa depois de confirmar que o
+  documento traz mesmo a assinatura; enquanto não trouxer, ele volta a buscar sozinho e substitui
+  o arquivo errado no mesmo lugar — o que conserta também os que já tinham sido anexados errados.
+- [crm] ✅ O contrato assinado deixou de ser anexado duas vezes. Quando dois avisos de assinatura
+  chegavam quase juntos — e eles chegam, com décimos de segundo de diferença —, os dois anexavam:
+  16 negócios estavam com o contrato em duplicidade. E contrato concluído sem link de download
+  fazia o negócio avançar de etapa com a etiqueta "Assinado" e nenhum arquivo, sem registrar o
+  motivo em lugar nenhum; agora todo desfecho que não seja "anexou" fica escrito no próprio
+  negócio, e não num registro técnico onde o time do contrato nunca vai procurar.
+- [crm] ✅ A lista de anexos passou a se atualizar sozinha. O contrato assinado não entra por
+  alguém clicar em "Enviar" — ele chega pelo aviso do sistema de assinatura, ou é trocado depois
+  pela varredura —, então quem estava com o negócio aberto continuava olhando o arquivo errado até
+  apertar F5. Junto, a varredura passou a dizer **por que** falhou na frente de quem apertou o
+  botão: "o sistema de assinatura recusou o download" e "falta a credencial" são providências
+  completamente diferentes, e antes as duas apareciam como uma falha sem motivo.
+- [crm] ✅ Os leads que já estavam no Pipeline BD passaram a aparecer na Prospecção. O módulo de
+  prospecção nasceu depois do pipeline, então o BD abria a carteira dele e não via justamente os
+  leads que mais trabalha. O espelhamento usa a mesma chave que evita contato repetido, guarda a
+  data do card (e não a de hoje, senão seriam centenas de prospecções cadastradas no mesmo dia) e
+  não conta duas vezes o esforço de quem já tinha registrado na mão.
+- [crm] ✅ O espelhamento ficou restrito a quem ainda não fechou. O primeiro recorte pegava os
+  7.464 cards vivos, dos quais 3.488 já eram negócio ganho — 5.880 contatos novos numa base que
+  tem 770, entupindo de cliente uma aba que existe para trabalhar quem ainda não é. Agora entram
+  só Contato Realizado e Proposta & Negociação: 3.975 cards, dos quais apenas 13 estão sem
+  telefone, e-mail ou CNPJ. Card já espelhado que depois avança não perde o contato — ele foi
+  prospectado de verdade, e o histórico tem que continuar contando.
+- [crm] ✅ Card de quem já saiu da empresa vai para a base de frios. Eram 94 cards com responsável
+  inativo, 63 de uma pessoa só; espelhados como estavam, nasceriam na carteira de quem não abre o
+  CRM e, pior, numa situação que o resgate automático ignora de propósito — ficariam invisíveis
+  para sempre. Agora nascem sem dono, aparecem na fila de resgate na hora e qualquer BD pega para
+  si. Distribuir no sorteio foi descartado: metade desses cards é o mesmo interlocutor (94 cards
+  para 44 telefones), e sorteá-los colocaria vários BDs ligando para a mesma pessoa, que é o
+  problema que esse módulo existe para evitar.
+- [crm] ✅ A tela do vínculo, que vazava para fora da janela e abria mostrando o fim da lista,
+  ficou legível: os números apareciam cortados (243 virava "2") e o cartão da direita sumia.
+- [crm] ⏳ Mudança de casa do CRM, que hoje roda na plataforma onde ele foi criado. Nesta semana
+  saiu o roteiro da virada — duas viradas na mesma janela, endereço e banco de dados, cada uma com
+  volta atrás própria, fatiadas em etapas que se conferem uma a uma e com um ponto claro até onde
+  ainda dá para desistir sem perder nada. O e-mail e o Teams já saíram do intermediário da
+  plataforma antiga e falam direto com os fornecedores, com credencial nossa: a do Teams era uma
+  conexão guardada lá dentro, que morreria junto com a assinatura e não teria como ser recuperada.
+- [crm] ✅ O ambiente de trabalho local virou um comando só. Quem clonava o repositório mexia no
+  banco de produção sem saber, porque o atalho que aponta para o banco de teste não vinha junto.
+- [crm] ✅ Corrigida a ordem das datas do percurso da tela, que saíam invertidas na ficha nova: a
+  entrega no prédio aparecia antes de a tela existir no cadastro. A ordem certa é a que a operação
+  segue — cadastra, entrega no prédio no dia seguinte, instala na data combinada com a empresa de
+  elevadores.
+
+- [comercial] ⏳ Prova de conceito da versão 2 do simulador de tela: em vez de entregar o modelo ao
+  visualizador de realidade aumentada do Android e ao do iPhone, a cena passa a ser desenhada
+  dentro da própria página. O motivo é a queixa de campo que nenhum dos dois deixa resolver —
+  entortar o painel na parede. Desenhando aqui dentro, entortar deixa de ser possível, não só
+  difícil: não existe caminho que aceite inclinação. Vêm junto os mesmos gestos nos dois aparelhos
+  e o fim do arquivo separado para iPhone, que passa a receber o mesmo do Android.
+- [comercial] ✅ Três rodadas de conserto em cima da prova de conceito, na semana: a câmera abria e
+  o modelo nunca aparecia; os modelos ficaram sem brilho; o totem saía do tamanho de um dedo e
+  depois absurdamente grande; e os painéis de parede se arrastavam junto com a câmera. A causa de
+  fundo das duas últimas era a mesma e só apareceu na terceira rodada — a página rodava numa
+  escala que não é em metros, então cada ajuste de mira trocava o sintoma sem corrigir nada. Ligada
+  a escala real, ela exige que a pessoa mova o aparelho para frente e para trás nos primeiros
+  segundos; por isso entrou um cartão que pede esse movimento, e nada é colocado na cena antes de
+  a medida estar travada — colocar antes é colocar errado, por definição.
+- [comercial] ⏳ A ressalva séria da versão 2 fica registrada: o motor não detecta parede. O chão é
+  medido de verdade, então o totem sai exato; os painéis 25" e 32", que são o carro-chefe, dependem
+  de uma parede deduzida — agora medida pelo pé dela, usando o chão. O diagnóstico na tela sempre
+  diz de onde veio a medida, para estimativa não passar por medição. A licença do motor tem uma
+  cláusula que precisa passar pelo jurídico antes de qualquer decisão de produto.
+
+- [contratos] ✅ Fechada a releitura completa dos contratos, que atravessou da semana passada: os
+  3.478 PDFs foram lidos do zero por um segundo caminho, independente do primeiro, e cada
+  divergência foi julgada abrindo o contrato. Resultado: 414 células corrigidas uma a uma, 8.064
+  corrigidas por regra (o mesmo erro repetido em muitos contratos) e 76 pontos que o documento não
+  permite decidir sozinho, listados para decisão de gente. Os erros sistemáticos que a primeira
+  leitura tinha deixado passar estão nomeados um a um — entre eles 2.150 linhas com o dia de
+  operação da opção errada, 1.992 com o índice de reajuste cortado e 525 sem a multa que o
+  contrato traz.
+- [contratos] ✅ Cruzada a base dos contratos com o CRM: cada um dos 2.226 condomínios foi
+  procurado pelo CNPJ e comparado em 20 campos. 770 batem, 780 batem mas faltam campos no CRM, 527
+  têm divergência de cadastro, 143 têm divergência de dinheiro e 6 não têm negócio no CRM. Do
+  outro lado, 370 negócios assinados ou instalados no CRM não têm contrato nenhum na base — são
+  eles que precisam ser localizados.
+- [contratos] ✅ Entregue a base v3, agora com o CRM como fonte da verdade: o valor do CRM
+  prevalece onde ele existe e o contrato só preenche o que está em branco. Foram 1.479 valores
+  substituídos e 2.371 campos vazios preenchidos, com uma aba listando cada troca e o porquê. A
+  coluna "o que fazer" separa o trabalho: 987 para cadastrar, 539 sem repasse em dinheiro, 473 sem
+  nada a fazer, 228 contratos a localizar, 115 a reduzir e o restante a aumentar ou conferir.
+
+**Aprendizados / contexto que não pode se perder:**
+
+- **Nenhum limite fixo de caracteres garante 10 segundos de fala.** O ritmo varia de 10,7 a 16,5
+  caracteres por segundo conforme pontuação e pausas — um texto de 120 caracteres já estourou e um
+  de 156 coube. Por isso o conserto foi acelerar levemente a fala, e não apertar o limite.
+- **A plataforma onde o CRM roda hoje aplica mudança de banco de dados, mas não publica sozinha as
+  funções de servidor.** Foi isso que deixou a consulta do /scan fora do ar mesmo com o código no
+  lugar certo, e é a explicação de toda mensagem de "ação desconhecida" que aparece no CRM: a
+  função publicada está mais velha que a página. Quando acontecer, é publicar as funções — não
+  investigar o registro.
+- **O motor de realidade aumentada da versão 2 não detecta parede.** Os dois interruptores de
+  detecção de superfície são fixos e não há como ligá-los. Chão é medida; parede é dedução.
+- **O aviso de "assinatura concluída" chega antes de o documento assinado existir.** Quem baixar
+  no mesmo instante leva a versão sem assinatura, que é indistinguível da boa pelo nome e pelo
+  tamanho. A diferença só aparece conferindo a assinatura dentro do arquivo.
