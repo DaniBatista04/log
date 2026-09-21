@@ -256,8 +256,6 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 
 ## Semana 6 — 14 a 18 de setembro de 2026
 
-*(registrado até quarta, 16 de setembro; a semana ainda está aberta.)*
-
 - [scan] ✅ Serviço novo, do zero, no ar em `focusmedia.com.br/scan`: quem está em campo aponta a
   câmera do celular para o código atrás da tela e recebe a ficha daquele equipamento — número de
   série, modelo e tamanho, em que situação ele está e desde quando, o percurso até a instalação
@@ -335,12 +333,110 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   problema que esse módulo existe para evitar.
 - [crm] ✅ A tela do vínculo, que vazava para fora da janela e abria mostrando o fim da lista,
   ficou legível: os números apareciam cortados (243 virava "2") e o cartão da direita sumia.
-- [crm] ⏳ Mudança de casa do CRM, que hoje roda na plataforma onde ele foi criado. Nesta semana
-  saiu o roteiro da virada — duas viradas na mesma janela, endereço e banco de dados, cada uma com
-  volta atrás própria, fatiadas em etapas que se conferem uma a uma e com um ponto claro até onde
-  ainda dá para desistir sem perder nada. O e-mail e o Teams já saíram do intermediário da
-  plataforma antiga e falam direto com os fornecedores, com credencial nossa: a do Teams era uma
-  conexão guardada lá dentro, que morreria junto com a assinatura e não teria como ser recuperada.
+- [crm] ✅ **O CRM mudou de casa na quinta, 17/09.** Ele rodava na plataforma onde foi criado, que
+  era ao mesmo tempo o endereço, o banco de dados e o painel de publicação. Foram duas viradas na
+  mesma janela, cada uma com volta atrás própria, fatiadas em etapas que se conferem uma a uma e
+  com um ponto claro até onde ainda dava para desistir sem perder nada. O banco saiu de Oregon para
+  São Paulo, e o e-mail e o Teams passaram a falar direto com os fornecedores, com credencial
+  nossa: a do Teams era uma conexão guardada lá dentro, que morreria junto com a assinatura e não
+  teria como ser recuperada. Terminada a virada, a plataforma antiga saiu também das instruções que
+  o sistema dá ao time, dos apontamentos de publicação — que ainda mandariam qualquer publicação
+  distraída para o projeto que não é mais a produção — e da descrição do site, que ainda se
+  apresentava como "Lovable Generated Project".
+- [crm] ✅ Anexos pararam de abrir logo depois da virada, e a causa vale como regra: a cópia do
+  banco não trouxe as permissões dos arquivos. O arquivo estava lá e o registro apontava para ele,
+  mas ninguém conseguia baixar. A ferramenta de cópia omite **em silêncio** as regras de acesso das
+  tabelas que não pertencem a quem faz a cópia, e termina como se tivesse dado tudo certo: as 156
+  regras da área principal vieram, as 4 dos arquivos não. Foi encontrado conferindo com uma sessão
+  de usuário de verdade — a chave de administrador ignora as regras, então respondia bem o tempo
+  todo e escondia o problema.
+- [crm] ✅ A consulta de Números da Sorte, que dava erro em toda busca por CPF depois da virada,
+  voltou: o banco de São Paulo tem uma trava contra apagar tabela inteira sem filtro que o de
+  Oregon não tinha. Junto, foi reposta a proteção da função, que a cópia também perdeu — com a
+  chave pública dava para emitir número da sorte para qualquer CPF, fora da auditoria. A
+  documentação entregue a quem integra foi reapontada para o endereço novo.
+- [crm] ✅ A tela de Comissões entrou em laço de recarga para um usuário na manhã de sexta — quatro
+  recargas em quatro segundos, e sair e entrar de novo não resolvia. A página pedia um pedaço de
+  código que não existe mais desde a publicação nova e recebia de volta a página inteira em vez de
+  um "não encontrei", então ela se recarregava para tentar de novo, para sempre. Junto entrou uma
+  limpeza, que roda uma vez por navegador, do que ficou guardado da época anterior em quem não
+  abriu o sistema depois da virada — sem deslogar ninguém.
+- [crm] ✅ O Pipeline não abria para os gestores: a tela ficava no esqueleto, e só para eles — 21
+  pessoas. A consulta demorava de 4 a 17 segundos e o banco corta em 8, então era intermitente.
+  A causa não era volume de dados: a regra de quem enxerga o quê era calculada uma vez por
+  negócio — 8.445 vezes para devolver 191 —, quando o conjunto de pessoas que um gestor enxerga
+  não muda de linha para linha. Calculado uma vez só, a consulta caiu de 3.887 para 14
+  milissegundos. Conferido antes de aplicar, com a regra nova e a antiga devolvendo exatamente o
+  mesmo conjunto para os 22 gestores.
+- [crm] ✅ Os fluxos que recebem os leads foram reapontados para o banco novo. Eles rodam fora do
+  repositório, e o que está guardado aqui é o que alguém importa quando precisa recriar um deles —
+  deixá-los apontando para o banco antigo significava que a próxima importação desfaria a correção
+  feita à mão, e o sintoma seria lead entrando num banco que ninguém lê, sem erro em lugar nenhum.
+
+- [crm] ✅ Comunicado interno por mensagem direta no Teams, com aba própria em Configurações. Até
+  agora o disparo só existia por dentro, chamado na mão. O envio tem duas etapas obrigatórias: a
+  prévia resolve a lista no servidor e mostra quem receberia, e só então o botão de enviar libera —
+  qualquer mexida na mensagem ou nos destinatários invalida a prévia. É proposital: comunicado
+  disparado não tem como ser recolhido, e escolher por cargo só revelaria o alcance depois do
+  envio. Só conta @focusmedia.com.br recebe, inclusive na escolha manual — quem cai fora aparece na
+  prévia como excluído, para a ausência não passar por engano de seleção —, e a permissão nasce
+  fora do perfil de administrador, concedida caso a caso pelo Super Admin.
+- [crm] ✅ O executivo deixou de aprovar a própria comissão. A comissão de agosto de um executivo
+  apareceu para a diretoria já com o selo "Aprovado" e o botão desabilitado: quem carimbou a
+  assinatura da diretoria foi o próprio dono dela, com dois cliques seguidos, e a etapa da
+  diretoria sumiu sem aviso. O caminho era curto demais para ser notado — a permissão vinha por
+  padrão no perfil de administrador e o botão aparecia mesmo quando o período em foco era o da
+  própria pessoa. Agora o sistema recusa o próprio período, a aprovação em lote pula o dono em vez
+  de travar o time inteiro por causa de uma linha, e o que já tinha passado voltou para a fila.
+- [crm] ✅ Aditivo assinado fora da janela de 30 dias passou a contar para a meta do BD sem ser
+  comissionado — regra de negócio definida em 18/09. A janela já existia, mas como filtro de
+  exclusão: o aditivo fora dela sumia da prévia inteira, não pagava e também não contava. Pior, o
+  prédio "pai" já desconta do próprio total as telas dos aditivos, então essas telas não apareciam
+  em lugar nenhum e o BD via o prédio encolher sem explicação. Como ninguém pode estranhar o zero,
+  o aviso aparece em três alturas: o resumo no topo da aba, a marca "Só meta" na linha, dizendo
+  quantos dias depois da instalação o aditivo foi assinado, e o mesmo aviso no PDF e no Excel que
+  vão assinados para a diretoria. O painel de meta foi refeito, com a barra separando as telas que
+  pagam das que só contam.
+- [crm] ✅ A lista de aditivos pendentes ganhou filtro por fase e por responsável, com contador:
+  antes vinha tudo junto, e não dava para saber quantos estão parados com o Jurídico e quantos
+  esperam o executivo. Os filtros saem do que cada pessoa realmente enxerga, então um BD, que só
+  recebe aditivo aguardando assinatura, não vê filtro nenhum.
+- [crm] ✅ A geração do Word do contrato foi para a rota nova do fornecedor de assinatura, a mesma
+  que o envio já usava, e parou de quebrar sozinha. Ela tinha começado a dar erro assim que o envio
+  deixou de mandar as testemunhas: a rota antiga exige no corpo toda variável que o modelo declara,
+  mesmo as que o documento não usa, então uma ponta quebrou e a outra seguiu funcionando. O que nos
+  tinha levado para a rota antiga era uma medição certa e mal interpretada — a lista de signatários
+  precisa existir vazia, não estar ausente. Agora as duas pontas mandam o mesmo conjunto de dados,
+  e mudar o envio não pode mais derrubar a geração.
+- [crm] ✅ Contrato com tela de projeto especial deixou de estourar erro cru ao gerar o Word e
+  passou a dizer o que fazer. O modelo do fornecedor só aceita 25" e 32"; tamanho fora disso (55",
+  70", totem) ele recusa. Não é regressão da virada: são 188 registros com tela especial e nenhum
+  jamais teve contrato enviado. Mapear 55 para 32 seria pior que recusar, porque o número entra no
+  corpo do contrato que o síndico assina — a mensagem aponta o caminho que existe hoje, que é subir
+  a versão editada e mandar para assinatura.
+- [crm] ✅ O CRM parou de gravar CPF que não é CPF. A tela mostrava os 11 primeiros dígitos bem
+  formatados enquanto guardava o texto inteiro: um cadastro ficou com 29 dígitos no banco enquanto
+  a tela mostrava um CPF certinho, e o número só apareceu na linha "Contato Oficial" de um
+  contrato. Agora o cadastro recusa em vez de cortar — cortar grava um CPF errado com cara de
+  certo, que é exatamente como isso passou despercebido — e a recusa mora também no servidor,
+  porque a tela não é a única porta. No contrato, CPF incompleto sai em branco para o jurídico
+  preencher à mão, em vez de um número inventado.
+- [crm] ✅ Toda função de servidor passou a carimbar a própria versão na resposta, e existe agora um
+  comando que compara o que está publicado com o que está no repositório. Um carimbo só não resolve
+  — a metade que importa é a da tela, que avisa em amarelo quando a página e a função publicada
+  discordam. A conferência já encontrou duas funções atrasadas em produção. Junto, a aprovação de
+  comissão passou a dizer **por que** o e-mail não saiu: anexo grande demais e função sem
+  republicar pedem providências opostas, e antes as duas apareciam como "Falha ao enviar o e-mail".
+
+- [nfc] ✅ A leitura da etiqueta por aproximação passou a creditar o comunicado que estava na tela
+  no instante da leitura, e não o que estiver no ar quando a pessoa tocar no aviso do celular. O
+  iPhone lê a etiqueta, mostra um aviso e só abre o link quando a pessoa toca nele; com espaço de
+  10 segundos por comunicado, essa espera atravessa a fronteira no caso comum — a pessoa vê o
+  comunicado 1, demora 8 segundos para tocar, e o crédito ia para o comunicado 2. O teste de campo
+  confirmou. Agora o instante da leitura viaja dentro do próprio endereço. Pelo QR o problema está
+  resolvido sem depender de equipamento nenhum; por aproximação, depende de etiqueta regravável.
+  Uma etiqueta que parasse de ser regravada creditaria o mesmo comunicado para sempre, então marca
+  velha demais é ignorada e o serviço volta a usar o relógio.
 - [crm] ✅ O ambiente de trabalho local virou um comando só. Quem clonava o repositório mexia no
   banco de produção sem saber, porque o atalho que aponta para o banco de teste não vinha junto.
 - [crm] ✅ Corrigida a ordem das datas do percurso da tela, que saíam invertidas na ficha nova: a
@@ -402,3 +498,10 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - **O aviso de "assinatura concluída" chega antes de o documento assinado existir.** Quem baixar
   no mesmo instante leva a versão sem assinatura, que é indistinguível da boa pelo nome e pelo
   tamanho. A diferença só aparece conferindo a assinatura dentro do arquivo.
+- **A cópia de um banco omite em silêncio as regras de acesso que não pertencem a quem copia.** O
+  processo termina limpo e o que falta só aparece quando alguém real tenta usar. Por isso a
+  conferência de uma migração tem que ser feita com sessão de usuário comum: a chave de
+  administrador ignora as regras e responde bem mesmo quando não há regra nenhuma.
+- **O banco de São Paulo tem travas que o de Oregon não tinha.** A que apareceu proíbe apagar
+  tabela inteira sem filtro. Código que funcionava há anos pode parar depois da mudança de casa
+  sem ninguém ter mexido nele.
