@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
    */
   outputFileTracingIncludes: {
     "/": ["./CHANGELOG.md", "./WEEKLY-LOG.md"],
+    "/projetos": ["./CHANGELOG.md", "./WEEKLY-LOG.md"],
+    "/projetos/\\[slug\\]": ["./CHANGELOG.md", "./WEEKLY-LOG.md"],
+    "/metricas": ["./CHANGELOG.md", "./WEEKLY-LOG.md"],
     "/email": ["./CHANGELOG.md", "./WEEKLY-LOG.md"],
     "/atualizacoes": ["./CHANGELOG.md"],
   },

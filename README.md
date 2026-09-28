@@ -18,11 +18,18 @@ npm install   # só na primeira vez
 npm run dev
 ```
 
-Três telas:
+Telas do menu:
 
-- **Painel** — a semana inteira, com filtro por público e as demandas fora do Mural.
-- **Aba Atualizações** — prévia exata do que o cliente vê (só os 🟢).
-- **Email da semana** — rascunho gerado a partir do changelog, com botão de copiar.
+- **Demandas** — kanban da semana (⏳ em andamento × ✅ entregue), filtro por projeto, as
+  pendências que atravessam a semana e um gerador da linha no formato do `WEEKLY-LOG.md`.
+- **Projetos** — cada `[área]` do WEEKLY-LOG vira um projeto, e o CHANGELOG inteiro vira o
+  projeto Mural. Cada um tem o próprio kanban em `/projetos/<área>`, com filtro por semana.
+- **Métricas** — demandas por semana e por projeto, contadas direto dos dois arquivos.
+
+Fora do menu, mas no ar: `/atualizacoes` (prévia exata do que o cliente vê, só os 🟢) e
+`/email` (rascunho do email semanal, com botão de copiar).
+
+O hub não grava nada: mudar uma demanda de coluna é trocar o `⏳` por `✅` no markdown.
 
 Não tem banco: o front lê os `.md` da raiz a cada request. Editou o markdown, atualizou a tela.
 Para apontar para outra pasta, use a variável `LOG_DIR`.
