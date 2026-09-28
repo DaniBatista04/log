@@ -505,3 +505,291 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - **O banco de São Paulo tem travas que o de Oregon não tinha.** A que apareceu proíbe apagar
   tabela inteira sem filtro. Código que funcionava há anos pode parar depois da mudança de casa
   sem ninguém ter mexido nele.
+
+---
+
+## Semana 7 — 21 a 25 de setembro de 2026
+
+- [crm] ✅ **O Console de Agendamentos veio para dentro do CRM.** A operação agendava a instalação
+  das telas num aplicativo à parte, que guardava tudo no navegador e não conversava com o CRM.
+  Agora é uma área do próprio CRM, com seis telas — planilha, capacidade das equipes,
+  acompanhamento do custo de elevador, insumos, relatório e configurações —, e o agendamento
+  aparece também na ficha do prédio. A base foi trazida casando cada prédio do Console com o
+  negócio do CRM: 1.906 de 1.972 (96,7%), 51 repetidos resolvidos e 15 sem par, quase todos
+  torres que o Console separa e o CRM guarda como um prédio só. Onde as duas bases discordavam,
+  valeu o Console, que é onde a equipe trabalha: 104 datas previstas e 127 agendadas corrigidas,
+  cada troca anotada no histórico do prédio com o valor anterior. Prédio do Console sem par não
+  virou negócio novo — encheria o Pipeline de prédio sem dono, que depois de contar em meta e
+  relatório não tem como desfazer.
+- [crm] ✅ Cada volta da equipe ao prédio passou a ter o próprio agendamento. Prédio instalado que
+  volta a ter obra — aditivo, retirada, troca — não tinha onde guardar a data nova, e marcar a
+  volta apagava a da instalação original: de 267 prédios de retorno, 264 mostravam como prevista
+  a data da primeira instalação, a mais velha de 119 dias. A data da instalação original ficou
+  intocada de propósito, porque ela é a data que conta em Comissões, dashboards e relatórios —
+  cerca de 25 lugares do CRM. Na primeira versão, digitar a data do retorno ainda mexia nela em 56
+  dos 57 prédios em Aditivo; isso foi fechado no mesmo dia, sem nenhuma data de card mudar.
+- [crm] ✅ A data do agendamento e a do card passaram a ser a mesma, nos dois sentidos — pedido da
+  operação ("se eu mudar em um lugar, tem que mudar no outro"). Junto vieram três defeitos que a
+  investigação achou: a data agendada da planilha nunca chegava à grade de capacidade, a data
+  prevista sumia da tela quando alguém preenchia outro campo primeiro, e o número de telas a
+  instalar nascia zerado ou ficava velho (31 obras abertas discordavam do prédio, 20 mostrando
+  zero).
+- [crm] ✅ A capacidade das equipes passou a mostrar a carga de verdade. Ela olhava só a data
+  agendada e escondia quase metade das obras — eram 292 agendadas e 268 só com data prevista —,
+  então uma equipe com vinte obras previstas na terça aparecia com a terça livre. Agora a obra
+  prevista ocupa o turno e barra quem tentar alocar em cima dela, com uma frase que diz qual obra
+  está no caminho. A obra já concluída deixou de ocupar (os turnos "estourados" caíram de 104 para
+  19, porque o resto era trabalho terminado); obra de 5 telas ou mais vira dia todo sozinha, com o
+  número ajustável nas configurações; obra de vários dias ocupa a equipe em cada um deles, com a
+  data de cada dia; e a grade passou a mostrar também os dias que já passaram, que apareciam
+  vazios (em 21/09 houve 23 obras confirmadas e a tela mostrava zero).
+- [crm] ✅ Um número certo que parecia errado: a capacidade mostrava 40 equipes ocupadas em 22/09
+  e o Pipeline de Operações, 32 prédios agendados. Os dois estavam certos — a diferença eram 9
+  equipes ocupadas só por data prevista, que o Pipeline ainda não conta como agendadas. O
+  cabeçalho passou a dizer isso ("40 de 58 equipes ocupadas · 9 só por previsão"), e a obra
+  agendada que ficou sem equipe ou sem turno, que sumia das contas, passou a ser listada à parte.
+- [crm] ✅ Sugestões de encaixe: na linha de uma obra sem data, um botão responde "onde esta obra
+  cabe?". A lista põe primeiro a equipe que já vai estar na mesma região naquele dia, depois a que
+  já sai para outra região, e por último a que está livre o dia inteiro — encaixar uma obra
+  pequena na tarde de quem já está no bairro custa uma parada, e num dia vazio custa a viagem.
+  Cada sugestão diz quantos dias adianta ou atrasa em relação ao prazo, com a cor da faixa, e há
+  um atalho "dentro do prazo". O cartão de cada dia passou a listar as equipes livres por nome e
+  turno. Prédio sem fornecedor vê a agenda de todos.
+- [crm] ✅ A planilha do agendamento ganhou os recortes que a operação pediu na semana: filtros com
+  várias marcas e busca dentro do menu (são centenas de bairros), o modo "esconder marcados" para
+  "todos menos Atlas, Otis e TKE", UF, período, equipes em ordem numérica (VTX-2 antes de VTX-10),
+  a coluna "Na fila desde" com selo de novo nos primeiros 7 dias, o tempo previsto de
+  acompanhamento na visão Agenda e a empresa de elevador em coluna própria. O recorte fica
+  guardado ao trocar de tela e vai junto no link mandado por mensagem, e marcar um filtro parou de
+  sacudir a tela.
+- [crm] ✅ A fila passou a ter só o que é fila, dividida em instalações novas e retornos (636 e 214
+  na terça). Saíram 321 prédios ainda pendentes que não chegaram ao agendamento. E 331 prédios,
+  com 1.219 telas, voltavam como retorno sem ter nada para fazer: estavam marcados como
+  instalados, mas ninguém tinha preenchido quantas telas foram confirmadas, e a conta tratava o
+  contrato inteiro como pendente. Eles saíram da fila para um recorte "Falta confirmar telas", sem
+  que nada afirme que estão completos. O rótulo "Aditivo" virou "Telas pendentes", porque de 535
+  linhas com esse rótulo só 30 tinham o aditivo registrado.
+- [crm] ✅ Custo e datas pararam de enganar. O custo digitado com ponto de milhar ("R$ 2.105,26")
+  não era gravado, e a tela continuava mostrando o valor, então o aviso de "falta o custo" parecia
+  o único errado quando era o único certo. Os custos passaram a aparecer com centavos, sem abreviar
+  em "k". A data aceita ano de até seis dígitos (30/10/20006 chegava ao banco) e agendamento no
+  passado passaram a ser recusados, e agendar leva a data prevista junto. A regra de não confirmar
+  sem custo entrou na segunda e saiu na quinta: há empresa de elevador que só manda o custo depois
+  da obra, e a trava deixava a obra sem confirmar por um dado que ainda não existe.
+- [crm] ✅ Marcar a ordem de serviço como solicitada ou aprovada passou a assinar com quem está
+  logado. O nome ficava em branco: das 1.972 linhas do Console, 1.231 tinham a marca e muitas sem
+  autor. Desmarcar só apaga o nome se ele for o seu — muitas vezes é a única pista de quem tratou.
+- [crm] ✅ Insumos cobrava o material oito vezes mais caro: R$ 1.200 por tela contra R$ 138 no
+  Console, porque cobrava cada metro de fita como um rolo inteiro. Com a embalagem de cada item, a
+  conta bate centavo por centavo com a do Console, e entraram quatro itens de limpeza e preparo que
+  faltavam. Insumos e o acompanhamento de elevador ganharam período — a pergunta de compra é "o que
+  vai ser usado este mês", e as abas só respondiam o total da fila — e passaram a contar as telas
+  instaladas obra por obra: 230 instalações com custo aprovado (R$ 434 mil, 1.230 telas) estavam
+  fora do acompanhamento de elevador. A aba de elevador ganhou também a lista de quem está sem
+  custo, separada por situação.
+- [crm] ✅ **O síndico recebe por e-mail a data da obra, e de novo quando ela muda.** Até aqui o
+  aviso era feito à mão. Agora, ao agendar, sai um e-mail para o contato principal, o gerente
+  predial e o zelador, com a lista da equipe autorizada do fornecedor anexada, cópia para a
+  implantação, e o aviso de que as telas chegam antes para a portaria receber. Mudou a data ou a
+  hora, vai um e-mail novo com a anterior; desmarcou, vai o de desmarcação; trocou a lista da
+  equipe, quem já foi avisado recebe a nova. Depois do primeiro teste de verdade, o e-mail passou a
+  dizer a hora combinada com a empresa de elevador em vez do horário padrão do turno — um quarto
+  das obras tem hora própria. E, a pedido da operação, dá para avisar pela data prevista com
+  "horário a confirmar", para as empresas que só marcam a hora na véspera. Tudo pode ser disparado
+  também da própria planilha.
+- [crm] ✅ A ficha do prédio separou o que o card andou do que a operação combinou. A importação
+  do Console sozinha era mais da metade de todo o histórico, e a movimentação do card ficava
+  enterrada debaixo de "data prevista" repetida dezenas de vezes. Agora são três listas: a
+  movimentação do card em Atividades, o histórico da operação em Dados de Operações e as edições
+  de cadastro onde sempre estiveram.
+- [crm] ✅ A empresa de elevador virou uma lista fechada: os cards tinham 453 grafias diferentes
+  para ela, e os 4.268 preenchidos foram convertidos para 283 nomes. Operações cadastra empresa
+  nova nas configurações do agendamento. As regiões também saíram do código e passaram a ser
+  editadas lá — abrir região nova virou rotina e não pode depender de pedido de ajuste.
+
+- [crm] ✅ **O endereço do prédio passou a vir do CEP.** No cadastro de prédio novo, o executivo
+  digita CEP, número e complemento, e rua, bairro, cidade e estado vêm dos Correios, sem
+  digitação — é assim que endereço errado para de entrar. Com saídas para não travar ninguém: se
+  a consulta estiver fora do ar, tudo volta a ser preenchível; CEP de cidade inteira libera rua e
+  bairro. Na ficha já salva, digitar o CEP ou tocar na lupa traz o endereço de novo, para corrigir
+  o que estava errado. E o card só passa para Confecção de Contrato com o CEP conferido.
+- [crm] ✅ Conferência da base inteira pelo CEP, em Configurações: cada endereço gravado é comparado
+  com o que os Correios dizem para aquele CEP, ignorando abreviação, acento e caixa ("AV DR
+  ARNALDO" não é divergência). A correção é linha a linha, nunca em lote cego — quando CEP e
+  endereço discordam, muitas vezes o errado é o CEP —, com filtro por etapa e por campo, e a
+  prévia mostra exatamente o que vai ser gravado. Na quinta a base foi limpa: 5.356 prédios com
+  espaço sobrando, grafias diferentes do mesmo bairro, acento e telefone padronizados, com cópia de
+  segurança antes.
+- [crm] ✅ O prédio assinado passou a ganhar coordenada sozinho, e aparece no mapa do Planejador. O
+  serviço que faz isso existia desde junho, mas ninguém o chamava: 1.829 prédios esperavam e
+  nenhum tinha sequer falhado. Uma aba nova lista os que ficaram sem coordenada e por quê — entre
+  eles os que têm pino plausível e errado, 24 unidades de um cliente cadastradas sem rua, que caem
+  no meio do bairro.
+
+- [crm] ✅ O contrato parou de sair com o prazo e as telas errados. O gerador arredondava o prazo
+  para a opção mais próxima que o modelo aceita — um contrato de 60 meses saiu dizendo 48, e são
+  110 negócios de 60 meses — e cortava a lista de pontos de instalação em seis, porque o quadro do
+  modelo tinha seis linhas: 15 contratos saíram assim, um deles com 6 pontos listados e o total de
+  21 telas logo abaixo. Agora o que o modelo não comporta é recusado com o motivo e o caminho, em
+  vez de aproximado.
+- [crm] ✅ O fornecedor de assinatura ampliou o modelo a nosso pedido: o quadro de monitores foi
+  para 70 linhas, entraram telas de 44", 55" e 70", e a multa por exclusividade virou campo
+  preenchido por contrato, por tela, já sugerindo os R$ 10.000,00 de hoje. O modelo novo foi
+  publicado entre 23 e 24/09 sem aviso, e a partir daí todo contrato novo voltava recusado; o CRM
+  foi ajustado no mesmo dia, com 55" liberada (44" e 70" esperam a conferência da linha de total).
+- [crm] ✅ Medido nos documentos reais: a linha "Total de Monitores Instalados" do contrato sai
+  corrompida pelo próprio modelo do fornecedor, de formas diferentes conforme a data — entre 1º e
+  22/09 foram 48 contratos para assinatura, 25 já assinados. O defeito se repete fora do CRM, com
+  dados montados à mão.
+- [crm] ✅ Uma quebra de linha nas observações fazia o modelo do fornecedor jogar fora a linha
+  "Observações" inteira, sem erro. Foi assim que dois condomínios foram para assinatura sem a
+  cláusula do repasse antecipado. Agora os parágrafos vão juntos numa linha só, e a tela avisa.
+- [crm] ✅ As testemunhas do contrato passaram a ser achadas pelo nome que todo mundo usa. A lista
+  só casava com o nome completo, que em 74 de 114 cadastros nem contém o nome de tela: digitando o
+  nome conhecido, a pessoa aparecia em 40 casos, agora nos 114. Junto saiu um risco calado: trocar
+  a testemunha mandava o pedido de assinatura para o e-mail da anterior. A lista também passou a
+  dizer quem ela esconde por falta de CPF, e o campo de CPF parou de aceitar dígito além do 11º.
+- [crm] ✅ A troca automática do contrato sem assinatura pelo assinado voltou a rodar: o
+  agendamento dela não veio na mudança de casa de 17/09, e 21 contratos assinados esperavam.
+
+- [crm] ✅ **Fechada uma leva de brechas de acesso que a mudança de casa tinha reaberto.** A cópia
+  do banco repôs as permissões em bloco, por cima das restrições feitas ao longo do tempo: 168
+  das 184 funções internas podiam ser chamadas sem login, inclusive as que guardam a credencial
+  do Teams e o segredo das rotinas automáticas. Fechado e conferido em produção. Na mesma rodada:
+  um aditivo em rascunho podia ser aplicado ao contrato por qualquer usuário logado; um admin
+  conseguia se promover a super admin; um BD que abria pela busca o prédio de outro BD lia os
+  anexos e o histórico dele; Operações conseguia alterar repasse, prazo, multa e dados bancários;
+  o link público do formulário de cadastro valia para sempre (agora 30 dias); e trocar a senha não
+  pedia a senha atual.
+- [crm] ✅ A grade de permissões passou a valer também para TI e Financeiro no Pipeline BD: uma
+  pessoa de TI com a edição liberada salvava a ficha e nada acontecia, sem erro.
+- [crm] ✅ Exame de saúde diário, às 8h, que avisa por e-mail quando uma rotina automática falhou
+  ou parou, quando a entrada de leads do WhatsApp fica muda por 24 horas em dia útil, quando uma
+  função do banco fica aberta sem login, ou quando o que está publicado ficou atrás do
+  repositório. Junto, a conferência a cada envio de código e o aviso de que o banco de produção
+  ficou atrás. A primeira rodada do exame já achou um prédio sendo reenviado ao Google a cada 10
+  minutos por causa de um caractere invisível no bairro.
+- [crm] ✅ A sincronização diária com o Mural não rodava desde a mudança de casa, e o painel dizia
+  "sucesso" todo dia — sucesso ali só quer dizer que o pedido foi feito. Quem sincronizava era o
+  botão da tela. Voltou, e na primeira rodada criou 4 vínculos novos.
+
+- [crm] ✅ A busca do topo ficou rápida e parou de trazer prédio sem relação: cada tecla varria a
+  base inteira e o resultado vinha sem ordem nenhuma, então o prédio de nome exato ficava fora
+  enquanto oito casamentos fracos de endereço ocupavam a lista. O CNPJ digitado com pontuação
+  também passou a ser achado.
+- [crm] ✅ Sete listas voltaram a vir completas: o banco devolve no máximo 1.000 linhas por pedido e
+  não avisa. Contratos Ativos mostrava 1.000 dos 2.016 ativados, com os totais errados; a base da
+  Prospecção, 1.000 de 6.298 contatos. A exportação do Pipeline saía com a coluna "Último
+  comentário" em branco sem aviso, pelo mesmo tipo de limite, e o erro das exportações passou a
+  dizer o motivo em vez de "Erro desconhecido".
+- [crm] ✅ Um pacote de velocidade: a tela de Relatórios baixava 30 MB a cada abertura e agora
+  baixa 5; os selos dos cards de um BD caíram de 6,4 s para 0,2 s; o histórico do prédio mais
+  movimentado deixou de ler as 77 mil linhas da tabela; e o mapa do Planejador parou de recriar
+  todos os pinos a cada tecla. O mapa ganhou duas formas de desenhar os 2.880 prédios, em pontos
+  ou agrupados, para comparar e ficar com uma.
+- [crm] ✅ Uma faixa avisa quando a aba ficou aberta na versão anterior do CRM. A operação deixa o
+  sistema aberto o dia inteiro, e na terça uma aba da véspera tentava gravar o agendamento do jeito
+  antigo e recebia um erro técnico que ninguém liga a "recarregue a página".
+
+- [crm] ✅ **O Financeiro ganhou o módulo Repasse**: para cada contrato assinado ou instalado, o
+  que ainda falta para conseguir pagar — valor, forma de pagamento, conta ou PIX, titular,
+  documento do titular, contrato assinado no CRM e CNPJ do condomínio —, com o motivo de cada
+  pendência e exportação em planilha. O módulo cruza cada contrato com o acervo da Eliex pelo
+  CNPJ e lê do texto da cláusula de pagamento o valor, o vencimento e o índice de reajuste: o
+  valor bate com o do CRM em 1.407 de 1.433 contratos (98%), e onde diverge a tela avisa.
+- [crm] ✅ A comissão do gerente sênior repetia os meses já fechados: setembro somava julho e agosto
+  e dava 3.518 telas e R$ 28.637,00, quando eram 896 telas e R$ 7.476,00. De setembro em diante
+  ela também separa o que o sênior assina do que o time assina, cada um com o seu valor por tela, e
+  a meta dele passa a ser a soma das metas dos BDs da estrutura. Os meses anteriores não mudam.
+- [crm] ✅ A proposta comercial em Excel passou a sair no formato do "Resumo Proposta" — uma linha
+  por praça e tipo de prédio, com os totais — e abre sem o aviso de arquivo corrompido. O mapa do
+  PDF mostrava só 250 dos prédios (numa proposta de 1.908, um oitavo); agora mostra todos, e a
+  última página ganhou o bloco de assinaturas "De acordo" para o cliente e para a Focus.
+- [crm] ✅ Um prédio pode ser marcado como não comercializável: instalado e no ar, mas fora da
+  venda. Ele sai do Planejador e das substituições, e as propostas já autorizadas passam a
+  oferecer a troca. Só admin mexe, e fica registrado quem tirou e quando.
+- [crm] ✅ Menores, pedidos no uso: a planilha da Logística diz quem é o fornecedor e o executivo de
+  cada prédio; a tela bipada no leitor de código de barras entra na hora, e o prédio ganhou a linha
+  do tempo das telas que passaram por ele; a lista de Restrição ganhou ação em lote para
+  adicionar e remover; telefone, CNPJ, agência e conta ganharam máscara na digitação; as
+  Notificações filtram por tipo; o pedido de desinstalação avisa só Operações; e o cancelamento do
+  aditivo, que abria abaixo da borda da tela em notebook, voltou a aparecer.
+- [crm] ✅ A ficha do edifício ganhou o bloco "Acesso ao MURAL", onde se incluem outras pessoas
+  além do síndico; o Mural cria a conta e manda o acesso a cada uma.
+- [crm] ⏳ Escritos 44 avisos das novidades de 19 a 25/09 para o pop-up de atualizações do CRM,
+  todos desligados: falta escolher quais vão ao ar. Daqui em diante, toda entrega visível já nasce
+  com o seu aviso, desligado.
+
+- [whatsapp] ✅ O atendimento do WhatsApp que a triagem transfere para Suporte ou Marketing passou a
+  avisar o time no Teams, por mensagem direta, com o contato, o resumo que a IA escreveu e o link
+  da conversa. Antes a conversa mudava de fila e ninguém ficava sabendo. Quem recebe é escolhido
+  no próprio fluxo, para trocar gente do time sem mexer no CRM.
+
+- [telas] ✅ As notícias do dia passaram a ser divididas em packs, um por faixa de horário, em vez
+  de quatro notícias revezando do começo ao fim do dia. A direção quer notícia nova de duas em duas
+  horas: um botão monta a grade assim, o dia comporta até doze packs, e cada troca pode ser
+  ajustada no minuto. A programação tem linha do tempo com o "agora", arrastar notícia entre packs,
+  agenda até seis dias à frente, tamanho de 1 a 4 notícias por pack e gravação sozinha, sem botão
+  de salvar. Pack sem notícia aprovada não deixa a tela vazia: fica o anterior.
+- [telas] ✅ Notícia já enviada pode ser tirada do pack, para abrir vaga a uma notícia urgente. E
+  cada notícia passou a dizer em que pé está — subindo, esperando aprovação no portal, aprovada e
+  entra às 16h, no ar —, com o resumo de quantas esperam aprovação em destaque. Antes o status era
+  texto corrido no rodapé.
+- [telas] ⏳ Montado um teste, em produção, para saber se a notícia consegue ir à tela sem o ciclo
+  manual de liberação e publicação no portal, que é o que hoje segura a troca. O teste é isolado,
+  num prédio escolhido, para não trocar as notícias da cidade inteira. Falta o resultado.
+- [telas] ✅ O vídeo do clima passou a sair com 10 segundos exatos; saía com 10,08.
+
+- [contratos] ✅ Comparado o que a Eliex entrega com a base de contratos: 2.421 documentos baixados
+  em 23/09 e ligados à base pelo CNPJ. Os dados de identificação vêm quase perfeitos (CNPJ, razão
+  social, endereço), e valor, vencimento, multas e prazo só vêm dentro do texto da cláusula — e,
+  quando vêm, batem. Não vêm de jeito nenhum: representante legal e CPF, dados bancários (só em 25
+  documentos), e-mail e telefone, e o PDF. E de 192 aditivos, só 1 está ligado ao contrato que ele
+  altera, então o "contrato consolidado com aditivos" não funciona na prática.
+- [contratos] ✅ Montado o pacote de casos para a Eliex corrigir: 18 condomínios em quatro grupos —
+  contrato sem nenhuma cláusula lida, Quadro Resumo não lido, aditivo solto e, para comparação,
+  casos lidos corretamente —, com cada campo, o valor que está no PDF, a página em que ele está e o
+  que a Eliex devolveu. Numa amostra de 150 contratos, 9 (6%) vieram sem nenhuma cláusula.
+
+- [smb-ooh] ✅ O protótipo ganhou "Minhas campanhas": o que o anunciante vê depois de comprar. O
+  pedido anda por pagamento, criativo, aprovação, no ar e concluída, e a campanha no ar mostra as
+  exibições entregues dia a dia contra o contratado, por prédio. Ainda é demonstração, rodando só
+  no navegador: os passos que no produto acontecem fora da tela (o banco confirmando o Pix, a
+  operação aprovando a arte, os dias passando) são botões de simulação, separados da interface
+  para não serem confundidos com ela.
+
+**Pendências que atravessam pra semana 8:**
+
+- Escolher quais dos 44 avisos de novidade do CRM vão para o pop-up.
+- Decidir entre pontos e agrupado no mapa do Planejador — fica um dos dois.
+- Levar ao fornecedor de assinatura a linha "Total de Monitores Instalados" corrompida, e decidir
+  o que fazer com os 25 contratos já assinados assim. Confirmar com ele o nome do campo da multa
+  de exclusividade e liberar 44" e 70" depois de conferir a linha de total.
+- Tratar os dois contratos que foram para assinatura sem a cláusula do repasse antecipado.
+- Colher o resultado do teste de notícia sem o ciclo manual do portal.
+- Mandar à Eliex o pacote de casos e acompanhar a correção.
+
+**Aprendizados / contexto que não pode se perder:**
+
+- **Varredura que corta no meio e anda sempre na mesma ordem deixa de fora sempre os mesmos.**
+  Apareceu duas vezes na semana, em lugares diferentes: a conferência dos prédios de acordo do
+  Mural (um terço nunca olhado) e a leitura do CRM pelo Mural (460 prédios nunca lidos, os mais
+  novos entre eles). Nos dois casos o conserto foi o mesmo: quem foi visto há mais tempo vai
+  primeiro.
+- **O banco devolve no máximo 1.000 linhas por pedido, e não avisa.** A lista simplesmente para
+  ali, com cara de completa. Foi a causa de sete listas incompletas e de parte da exportação em
+  branco. Toda lista que pode passar de mil precisa buscar em páginas.
+- **"Sucesso" numa rotina agendada quer dizer que o pedido saiu, não que deu certo.** A
+  sincronização com o Mural ficou oito dias recusada com o painel dizendo "sucesso" todo dia.
+- **A mudança de casa do banco repôs as permissões por cima das restrições.** Depois da lição da
+  semana 6 (a cópia perdeu as permissões dos arquivos), veio o contrário: aqui ela devolveu acesso
+  que tinha sido tirado. Migração de banco pede conferência de permissão nos dois sentidos — o que
+  faltou e o que sobrou.
+- **A data de instalação original é a data da comissão.** Ela aparece em cerca de 25 lugares do
+  CRM; nenhum agendamento de retorno pode encostar nela.
+- **O modelo do fornecedor de assinatura muda sem aviso, e erra sem erro.** O modelo novo foi
+  publicado sem comunicar, e uma quebra de linha nas observações some com a linha inteira
+  respondendo "tudo certo". Existe agora uma conferência que mede o modelo publicado e compara com
+  o que o CRM espera.
+- **A troca das notícias só chega à tela depois da publicação no portal.** A troca de pack não vai
+  sozinha para as telas; é por isso que existe o teste de ir à tela sem o ciclo manual.
