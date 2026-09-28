@@ -259,6 +259,146 @@ export function groupByCategory(entries: Entry[]): [string, Entry[]][] {
   return [...map.entries()];
 }
 
+// Tipos para projetos e demandas
+export type DemandStatus = "todo" | "doing" | "done";
+
+export type Demand = {
+  id: string;
+  title: string;
+  description?: string;
+  project: string;
+  status: DemandStatus;
+  priority: "low" | "medium" | "high";
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Project = {
+  id: string;
+  name: string;
+  description?: string;
+  color: string;
+  demands: Demand[];
+  createdAt: string;
+};
+
+// Mock data para desenvolvimento
+export const MOCK_PROJECTS: Project[] = [
+  {
+    id: "proj-1",
+    name: "Aplicação Web",
+    description: "Projeto principal de desenvolvimento web",
+    color: "bg-blue-500",
+    createdAt: new Date().toISOString(),
+    demands: [
+      {
+        id: "dem-1",
+        title: "Implementar autenticação",
+        description: "Setup de auth com Better Auth",
+        project: "proj-1",
+        status: "done",
+        priority: "high",
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: "dem-2",
+        title: "Dashboard de analytics",
+        description: "Criar painel de métricas",
+        project: "proj-1",
+        status: "doing",
+        priority: "high",
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "dem-3",
+        title: "Otimizar performance",
+        description: "Melhorar Core Web Vitals",
+        project: "proj-1",
+        status: "todo",
+        priority: "medium",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ],
+  },
+  {
+    id: "proj-2",
+    name: "API REST",
+    description: "Backend da aplicação",
+    color: "bg-purple-500",
+    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+    demands: [
+      {
+        id: "dem-4",
+        title: "Migrations do banco",
+        description: "Setup inicial das tabelas",
+        project: "proj-2",
+        status: "done",
+        priority: "high",
+        createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: "dem-5",
+        title: "Endpoints de usuários",
+        description: "CRUD completo de users",
+        project: "proj-2",
+        status: "doing",
+        priority: "high",
+        createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+    ],
+  },
+  {
+    id: "proj-3",
+    name: "Documentação",
+    description: "Docs e guias do projeto",
+    color: "bg-emerald-500",
+    createdAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(),
+    demands: [
+      {
+        id: "dem-6",
+        title: "Guia de Setup",
+        description: "Como configurar ambiente local",
+        project: "proj-3",
+        status: "done",
+        priority: "medium",
+        createdAt: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: "dem-7",
+        title: "API Reference",
+        description: "Documentar todos os endpoints",
+        project: "proj-3",
+        status: "todo",
+        priority: "low",
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ],
+  },
+];
+
+export function getProjects(): Project[] {
+  return MOCK_PROJECTS;
+}
+
+export function getDemandsByProject(projectId: string): Demand[] {
+  const project = MOCK_PROJECTS.find((p) => p.id === projectId);
+  return project?.demands ?? [];
+}
+
+export function getDemandsByStatus(
+  projectId: string,
+  status: DemandStatus
+): Demand[] {
+  return getDemandsByProject(projectId).filter((d) => d.status === status);
+}
+
 /**
  * `24 a 28 de agosto de 2026` e também a semana que vira o mês,
  * `31 de agosto a 4 de setembro de 2026` — nela o segundo mês e o ano vêm no fim.
