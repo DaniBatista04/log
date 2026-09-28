@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Log — Mural",
-  description: "Registro de atualizações do Mural e demandas da semana",
+  title: "Log / Hub de demandas",
+  description: "Hub de projetos, demandas, kanbans e métricas da semana",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
