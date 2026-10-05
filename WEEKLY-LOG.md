@@ -793,3 +793,180 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
   o que o CRM espera.
 - **A troca das notícias só chega à tela depois da publicação no portal.** A troca de pack não vai
   sozinha para as telas; é por isso que existe o teste de ir à tela sem o ciclo manual.
+
+---
+
+## Semana 8 — 28 de setembro a 2 de outubro de 2026
+
+- [crm] ✅ **O Repasse substituiu a planilha de controle do Financeiro.** Os pagamentos aos
+  condomínios eram controlados numa planilha com a célula pintada de verde à mão. Agora o módulo
+  tem três abas sobre a mesma base: "Pagar no mês" (as parcelas do mês e as vencidas sem baixa,
+  com os dados bancários prontos para copiar, baixa de várias de uma vez e planilha), "Mapa de
+  parcelas" (a grade condomínio × mês, pintada sozinha, mostrando quem deu cada baixa) e
+  "Cadastro" (o que falta para pagar, agora editável). O calendário segue as regras da planilha.
+- [crm] ✅ Ajustes do calendário pedidos pelo Financeiro: cada período passou a ser pago no mês
+  seguinte a ele, e não adiantado; pagamento parcial fica em aberto pelo que falta; parcela
+  avulsa, fora do calendário, pode ser lançada; parcela que não vai ser cobrada pode ser
+  dispensada, com o motivo; e dois filtros novos acham quem está sem dados bancários e sem forma
+  de pagamento.
+- [crm] ✅ **Os comprovantes do banco dão baixa sozinhos.** O Financeiro recebe do banco um PDF por
+  lote, uma página por comprovante, com repasse misturado a fornecedor, conta de consumo e
+  salário. Agora ele sobe os PDFs no Repasse e o sistema lê página por página, acha o condomínio
+  pelo CNPJ ou pela conta e dá a baixa quando não há dúvida — um registro, parcela em aberto com o
+  mesmo valor. O resto vai para "Precisam de você", com o motivo. Comprovante repetido é barrado,
+  cada baixa guarda o comprovante, e a leitura acontece no servidor, sem depender de alguém
+  deixar a tela aberta. Lê os modelos do HSBC e do Itaú (PIX e transferência). Testado com dois
+  lotes reais, 44 páginas.
+- [crm] ✅ **O Repasse lê o próprio contrato.** Do PDF anexado ao prédio e do texto que a Eliex
+  guarda, ele tira valor, titular, banco, conta, PIX, periodicidade, dia e forma de pagamento — e
+  o aditivo mais novo vale por cima do contrato. Preenche sozinho só o que está vazio. A aba nova
+  "Contrato × CRM" lista, campo a campo, onde o cadastro não bate com o contrato, com o PDF a um
+  clique, e o Financeiro escolhe "usar o do contrato" ou "o CRM está certo". O valor mensal passou
+  a ser editável pelo Financeiro.
+- [crm] ✅ A base de contratos foi conferida contra o Repasse: 188 campos vazios preenchidos em 78
+  registros, e 166 divergências numa planilha para o Financeiro decidir, sem mexer em nada. Nove
+  linhas da base que não eram confirmadas pelo CNPJ foram desfeitas (uma juntava dois Edifícios
+  Madrid diferentes e tinha gravado o valor e a conta de um no outro).
+- [crm] ✅ Lidos na Eliex os contratos dos registros que estavam sem valor de repasse: 242 eram
+  contrato sem repasse em dinheiro — a contrapartida ao condomínio é a exibição dos comunicados
+  dele nas telas — e foram marcados assim. O "valor não lido" do modelo novo de contrato era,
+  quase sempre, isso.
+- [crm] ✅ A conferência com o Console de Agendamentos tinha empurrado a data de instalação de 69
+  prédios para frente em 21/09 (um deles de 18/06 para 11/08), e o repasse, que conta a partir da
+  instalação, perdeu as primeiras parcelas. As datas de 39 prédios com repasse foram devolvidas,
+  e a conferência não mexe mais em prédio já instalado.
+
+- [crm] ✅ **Corrigidos 20 prédios ligados ao condomínio errado no Mural.** O CRM ligava o prédio
+  das telas ao condomínio pelo nome e pelo endereço, e as duas provas falhavam juntas: o nome
+  perde as palavras genéricas ("Condomínio do Edifício Marambaia" e "Residencial Marambaia" viram
+  a mesma coisa) e o endereço do Mural é cópia do próprio CRM, então um vínculo errado se
+  confirmava sozinho no dia seguinte. O Mural puxou o endereço e o síndico do condomínio errado,
+  e três síndicos chegaram a publicar nas telas de outro prédio. Cada vínculo voltou ao dono, e
+  agora só se liga sozinho o que o sistema das telas confirma — cidade, número de telas e dia da
+  instalação. Testado contra a base inteira: mantém os 1.727 vínculos certos, não repete nenhum
+  dos 22 errados e liga 15 prédios que antes ficavam sem.
+- [crm] ✅ O aditivo passou a partir do contrato e a guardar onde cada tela vai. Ele abria a partir
+  da lista de locais do prédio, que em 110 de 255 prédios com aditivo estava atrás do contrato —
+  num deles o aditivo saiu com duas telas a mais. Os 99 prédios com lista incompleta foram
+  completados sem mudar nenhum contrato.
+
+- [crm] ✅ **O BD pede cartão de visita ao Marketing pelo CRM.** Tela nova com o formulário já
+  preenchido com os dados da pessoa e a prévia do cartão. O pedido vira uma aprovação no Teams
+  para o Marketing e um e-mail com o cartão montado; quando o Marketing aprova ou recusa, quem
+  pediu é avisado no sininho e no Teams, com o comentário. Ajustado no mesmo dia com o Marketing:
+  a quantidade saiu do formulário (é decisão deles), ficou claro o que vai impresso e o que é só
+  recado, e a tela diz o prazo — pedido até o dia 20 chega no mês seguinte.
+
+- [crm] ✅ Com os prédios residenciais passando a receber só telas de 25" (o estoque de 32" está
+  baixo — 434 prédios trocados, com volta possível pelas Configurações), o tamanho deixou de dizer
+  se a tela vai no elevador ou no hall. Tudo que usava o tamanho como pista passou a usar o local
+  de cada tela: a Logística ganhou as colunas Elevador e Área comum, o Inventário e a etiqueta do
+  kit dizem onde cada tela vai, o tempo previsto da obra conta 20 minutos no elevador e 30 no hall
+  (367 de 706 obras abertas estavam com o tempo errado), e o material separado por tela também
+  (7.619 telas de 25" no hall estavam recebendo material de elevador). A Logística ganhou a aba
+  Insumos, com a mesma calculadora do Agendamento.
+- [crm] ✅ O custo do elevador já vem calculado pela tabela de cada empresa (ATLAS, TKE e OTIS),
+  editável nas Configurações, e a ficha do prédio mostra a conta.
+- [crm] ✅ Aviso ao síndico, três ajustes pedidos pela operação: trocar a empresa instaladora de
+  uma obra já avisada manda o aviso de "nova empresa responsável", com a lista de quem vai; a hora
+  agendada passa a mandar no e-mail (um prédio reagendado para as 19h recebeu "a partir das 9h"
+  porque o turno dizia "dia todo"); e preencher a data prevista pode avisar o síndico sozinho,
+  com um interruptor nas Configurações, desligado. O histórico de quem mexeu no agendamento
+  também passou a levar o nome certo (75 linhas antigas corrigidas).
+- [crm] ✅ Menores: o perfil de cada pessoa virou um selo colorido e legível, também no menu
+  lateral; a busca do topo mostra o nome inteiro do condomínio e destaca o que foi digitado; o
+  Relacionamento passou a ver o código das telas de cada prédio; e gerente, zelador,
+  administradora e taxa de condomínio deixaram de ser obrigatórios no cadastro do prédio.
+- [crm] ✅ Do time, na mesma semana: o CRM ganhou um padrão visual único em todas as telas; o
+  cadastro de cliente e agência se preenche sozinho pelo CNPJ, e só aceita empresa ativa na
+  Receita; usuário novo voltou a aparecer na Gestão de Usuários; a conferência de CEP passou a
+  rodar sozinha; o registro do prédio mostra as telas e os chips que estão nele; e a comissão
+  parou de perder tela em aditivo de troca de tamanho e de contar prédio arquivado depois de
+  assinado.
+
+- [smb-ooh] ✅ **O marketplace de mídia OOH virou projeto próprio.** Vitrine montada com os
+  prédios e as telas de verdade, preço que muda conforme a escolha, assistente que monta o plano
+  de mídia e o caminho da compra até o fim, ainda em modo demonstração. Do lado do CRM, saiu o
+  canal que entrega ao marketplace os prédios e as regras de preço, com chave de acesso.
+
+- [telas] ✅ Três falhas das notícias, achadas no uso e corrigidas no mesmo dia. Em 01/10, a
+  rotina que leva as notícias para análise deixou de enxergar os envios do dia (só olhava os 200
+  primeiros da pasta, os mais velhos) e respondeu "tudo certo" a manhã inteira; agora ela
+  dispara erro quando um envio fica para trás, e o painel mostra a notícia como "Atrasada", em
+  vermelho. No mesmo dia, dezesseis notícias aprovadas juntas fizeram duas execuções correrem ao
+  mesmo tempo e uma apagar o trabalho da outra — o Pack 2 foi ao ar com uma notícia em vez de
+  quatro; agora a programação se refaz a partir do que foi enviado. Em 02/10, três programações
+  abriram no mesmo dia; agora a do dia é reservada antes, e o painel mostra quando o portal está
+  travado esperando liberação.
+
+- [whatsapp] ✅ Quem chama no WhatsApp querendo anunciar, perguntar preço ou falar com o comercial
+  deixou de passar por perguntas: o bot responde na hora com o WhatsApp do time comercial. No ar
+  desde 02/10.
+- [whatsapp] ⏳ Pronta e desligada a opção "Acelera Síndico" no menu do bot: quem pergunta sobre o
+  Acelera Síndico ou os números da sorte vai direto para a Fernanda Serra, no Marketing, avisada
+  no Teams, e o contato ganha a etiqueta. Liga com um comando quando for decidido.
+
+- [scan] ✅ O Focus Scan voltou a responder. Depois da mudança de casa do CRM, ele continuava
+  consultando o endereço antigo, que saiu do ar.
+
+**Pendências que atravessam pra semana 9:**
+
+- Escolher quais avisos de novidade do CRM vão para o pop-up — os 44 de 19 a 25/09 e os que
+  nasceram desligados nesta semana.
+- Decidir entre pontos e agrupado no mapa do Planejador — fica um dos dois.
+- Levar ao fornecedor de assinatura a linha "Total de Monitores Instalados" corrompida, e decidir
+  o que fazer com os 25 contratos já assinados assim. Confirmar com ele o nome do campo da multa
+  de exclusividade e liberar 44" e 70" depois de conferir a linha de total.
+- Tratar os dois contratos que foram para assinatura sem a cláusula do repasse antecipado.
+- Colher o resultado do teste de notícia sem o ciclo manual do portal.
+- Mandar à Eliex o pacote de casos e acompanhar a correção.
+- Financeiro decidir as 166 divergências da base de contratos e conferir no contrato as 9 linhas
+  sem CNPJ confirmado.
+- Trazer para o Repasse as baixas antigas da planilha de controle — falta a versão atual dela.
+- Decidir quando ligar o "Acelera Síndico" no bot do WhatsApp.
+
+**Aprendizados / contexto que não pode se perder:**
+
+- **Prova que é cópia não prova nada.** O endereço do Mural vem do CRM, então usá-lo para
+  confirmar um vínculo do CRM é perguntar a resposta para quem a escreveu. A confirmação tem que
+  vir de uma fonte independente — no caso, o sistema das telas.
+- **Fila que anda um por vez transforma falha passageira em atraso de horas.** Onze comunicados
+  presos por quinze minutos viraram seis horas de espera porque a fila soltava um a cada meia
+  hora.
+- **Lista lida em ordem crescente com limite enxerga só os velhos.** É o mesmo problema das 1.000
+  linhas da semana 7, com outra cara: quando a pasta passou de 200 itens, a rotina das notícias
+  só via os envios já encerrados.
+- **Quando uma regra muda, tudo que usava aquilo como pista quebra junto.** A troca das telas de
+  32" por 25" mexeu no tempo de obra, no material separado e na Logística, que usavam o tamanho
+  para saber o local.
+
+---
+
+## Semana 9 — 5 a 9 de outubro de 2026
+
+- [crm] ✅ **A planilha de campanhas do Comercial veio para dentro do CRM** (Controle Comercial).
+  Substitui a planilha de controle e o painel que dependia dela, com dashboard, comparativo
+  mensal, clientes, financeiro e PIs, pendências e campanhas, seguindo as mesmas regras da
+  planilha. Cada executivo vê só a própria carteira, e um botão importa a planilha para a
+  transição.
+- [crm] ✅ O PI passou a ficar anexado na própria campanha, em vez de num link do SharePoint, e o
+  CRM lê do PDF quem é o cliente, quem é a agência e o número do pedido, ligando ao cadastro ou
+  criando com os dados da Receita. Dá para mandar os PIs das campanhas antigas de uma vez.
+- [crm] ✅ Com a campanha completa, o botão "Faturar" manda os dados e o PI ao Financeiro por
+  e-mail, com cópia para o Comercial, e marca a campanha como enviada — a regra que era feita à
+  mão na planilha.
+- [crm] ✅ O comparativo mensal sai como apresentação pronta, no modelo do Comercial: os mesmos 14
+  slides, com os números do mês contra o anterior e os títulos escritos a partir deles, para
+  revisar antes de baixar. As tabelas do Controle Comercial também passaram a caber na tela, sem
+  rolar para o lado.
+- [crm] ✅ O formulário de cadastro do prédio passou a pedir os dados bancários, todos
+  obrigatórios. Eles completam o Repasse só onde está vazio: como o link é público, quem o tem não
+  consegue trocar uma conta que o Financeiro já paga.
+- [crm] ✅ No Agendamento, preencher uma data agendada vazia abre data e hora juntas. Antes a hora
+  ficava 9h e, para acertar depois, era preciso reagendar com motivo.
+
+- [telas] ✅ A notícia da manhã voltou a sair. Em 05/10, como em 02/10, a publicação da manhã saiu
+  sem notícia: o portal travou entre a aprovação e o pedido de exibição. Agora o pedido nasce
+  antes da aprovação, dez minutos antes de a notícia ir para análise, e as aprovadas entram
+  juntas segundos depois. No mesmo dia, uma notícia do pack 4 foi ao ar no horário do pack 1;
+  agora só o pack da hora, ou um anterior, pode estar no ar.
