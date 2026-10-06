@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/", label: "Demandas" },
   { href: "/projetos", label: "Projetos" },
   { href: "/metricas", label: "Métricas" },
+  { href: "/arquivo", label: "Arquivo 3D" },
 ] as const;
 
 export function Nav() {

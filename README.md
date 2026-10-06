@@ -25,6 +25,11 @@ Telas do menu:
 - **Projetos** — cada `[área]` do WEEKLY-LOG vira um projeto, e o CHANGELOG inteiro vira o
   projeto Mural. Cada um tem o próprio kanban em `/projetos/<área>`, com filtro por semana.
 - **Métricas** — demandas por semana e por projeto, contadas direto dos dois arquivos.
+- **Arquivo 3D** — as demandas da semana num escritório em miniatura: cada projeto é uma estante,
+  cada demanda é uma pasta (âmbar em andamento, verde entregue, post-it rosa quando falta o
+  impacto) e o boneco anda até a pasta que você clicar para abri-la. WASD ou clique no chão para
+  andar, scroll para zoom, e o seletor "Ir até" leva direto a qualquer pasta. O quadro de cortiça
+  na parede guarda as pendências que atravessam a semana. Código em `components/arquivo/`.
 
 Fora do menu, mas no ar: `/atualizacoes` (prévia exata do que o cliente vê, só os 🟢) e
 `/email` (rascunho do email semanal, com botão de copiar).
