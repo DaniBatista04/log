@@ -1,143 +1,121 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef } from "react";
-import type { Group, Mesh } from "three";
+import { useFrame, useLoader } from "@react-three/fiber";
+import { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
+import { AnimationMixer, LoopOnce, type AnimationAction, type Group, type Mesh } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { FOLDER } from "./layout";
 import { STATUS_COLOR } from "./palette";
 
-export type AvatarPose = {
-  /** 0 parado … 1 andando: controla o balanço das pernas. */
-  walk: number;
-  phase: number;
-  /** Ângulo de cada braço em torno do ombro; negativo levanta para a frente. */
-  leftArm: number;
-  rightArm: number;
-  breath: number;
+/**
+ * Personagens do pacote Mini Characters, do Kenney (CC0), em
+ * `public/personagens`. Cada .glb já traz as animações; aqui só escolhemos
+ * qual tocar.
+ */
+export const CHARACTERS = [
+  "character-male-d",
+  "character-female-d",
+  "character-female-e",
+  "character-male-e",
+  "character-female-b",
+  "character-male-a",
+  "character-female-f",
+  "character-male-f",
+  "character-female-c",
+  "character-male-b",
+  "character-female-a",
+  "character-male-c",
+] as const;
+
+export const characterUrl = (index: number) =>
+  `/personagens/${CHARACTERS[index % CHARACTERS.length]}.glb`;
+
+export type AvatarAction = "idle" | "walk" | "reach-high" | "reach-low" | "hold";
+
+const CLIPS: Record<AvatarAction, string> = {
+  idle: "idle",
+  walk: "walk",
+  "reach-high": "interact-right",
+  "reach-low": "pick-up",
+  hold: "holding-both",
 };
+
+/** O modelo tem 0,67 de altura; dobrado, fica da altura da estante. */
+const SCALE = 2;
+const FADE = 0.2;
 
 export type AvatarHandle = {
   root: Group;
-  apply: (pose: AvatarPose) => void;
+  play: (action: AvatarAction) => void;
 };
 
-const SKIN = "#F2D4B7";
-const PANTS = "#3B4252";
-
-/**
- * Boneco só de primitivas: cápsula de corpo, esfera de cabeça, olhinhos.
- * Quem anima é o Player, que chama `apply` a cada quadro — o componente não
- * re-renderiza para se mexer.
- */
 export const Avatar = forwardRef<
   AvatarHandle,
-  { color: string; reading: { status: "entregue" | "andamento" } | null }
->(function Avatar({ color, reading }, ref) {
+  { url: string; walkSpeed: number; reading: { status: "entregue" | "andamento" } | null }
+>(function Avatar({ url, walkSpeed, reading }, ref) {
+  const gltf = useLoader(GLTFLoader, url);
   const root = useRef<Group>(null!);
-  const body = useRef<Group>(null!);
-  const leftLeg = useRef<Group>(null!);
-  const rightLeg = useRef<Group>(null!);
-  const leftArm = useRef<Group>(null!);
-  const rightArm = useRef<Group>(null!);
-  const torso = useRef<Mesh>(null!);
+  const current = useRef<AnimationAction | null>(null);
 
-  useImperativeHandle(ref, () => ({
-    get root() {
-      return root.current;
-    },
-    apply(pose) {
-      const swing = Math.sin(pose.phase) * 0.6 * pose.walk;
-      leftLeg.current.rotation.x = swing;
-      rightLeg.current.rotation.x = -swing;
-      body.current.position.y = Math.abs(Math.sin(pose.phase)) * 0.04 * pose.walk;
-      torso.current.scale.set(1, 1 + pose.breath * 0.02, 1);
-      leftArm.current.rotation.x = pose.leftArm - swing * 0.6;
-      rightArm.current.rotation.x = pose.rightArm + swing * 0.6;
-    },
-  }));
+  const { model, mixer, actions } = useMemo(() => {
+    const model = clone(gltf.scene);
+    model.traverse((object) => {
+      if ((object as Mesh).isMesh) object.castShadow = true;
+    });
+    const mixer = new AnimationMixer(model);
+    const actions = new Map<string, AnimationAction>();
+    for (const clip of gltf.animations) {
+      const action = mixer.clipAction(clip);
+      // Pegar a pasta acontece uma vez e fica na pose final até virar leitura.
+      if (clip.name === CLIPS["reach-high"] || clip.name === CLIPS["reach-low"]) {
+        action.setLoop(LoopOnce, 1);
+        action.clampWhenFinished = true;
+      }
+      if (clip.name === CLIPS.walk) action.setEffectiveTimeScale(walkSpeed);
+      actions.set(clip.name, action);
+    }
+    return { model, mixer, actions };
+  }, [gltf, walkSpeed]);
+
+  useFrame((_, dt) => mixer.update(dt));
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      get root() {
+        return root.current;
+      },
+      play(action) {
+        const next = actions.get(CLIPS[action]);
+        if (!next || next === current.current) return;
+        next.reset().fadeIn(current.current ? FADE : 0).play();
+        current.current?.fadeOut(FADE);
+        current.current = next;
+      },
+    }),
+    [actions],
+  );
 
   return (
     <group ref={root}>
       {/* Sombra de contato: dá chão ao boneco mesmo sem a sombra da luz. */}
       <mesh rotation-x={-Math.PI / 2} position-y={0.005}>
-        <circleGeometry args={[0.3, 24]} />
+        <circleGeometry args={[0.32, 24]} />
         <meshBasicMaterial color="#000" transparent opacity={0.12} />
       </mesh>
-
-      <group ref={leftLeg} position={[-0.1, 0.4, 0]}>
-        <Leg />
-      </group>
-      <group ref={rightLeg} position={[0.1, 0.4, 0]}>
-        <Leg />
-      </group>
-
-      <group ref={body}>
-        <mesh ref={torso} position-y={0.7} castShadow>
-          <capsuleGeometry args={[0.22, 0.3, 6, 20]} />
-          <meshStandardMaterial color={color} roughness={0.7} />
-        </mesh>
-
-        <group position-y={1.2}>
-          <mesh castShadow>
-            <sphereGeometry args={[0.21, 24, 16]} />
-            <meshStandardMaterial color={SKIN} roughness={0.75} />
-          </mesh>
-          {/* Cabelo: uma calota levemente achatada. */}
-          <mesh position={[0, 0.05, -0.02]} scale={[1.04, 0.85, 1.04]}>
-            <sphereGeometry args={[0.21, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2.2]} />
-            <meshStandardMaterial color="#4A3428" roughness={0.9} />
-          </mesh>
-          {[-0.075, 0.075].map((x) => (
-            <mesh key={x} position={[x, 0.01, 0.195]}>
-              <sphereGeometry args={[0.026, 10, 8]} />
-              <meshStandardMaterial color="#1F1A17" roughness={0.4} />
-            </mesh>
-          ))}
-        </group>
-
-        <group ref={leftArm} position={[-0.27, 0.92, 0]}>
-          <Arm color={color} />
-        </group>
-        <group ref={rightArm} position={[0.27, 0.92, 0]}>
-          <Arm color={color} />
-        </group>
-
-        {reading && <OpenFolder status={reading.status} />}
-      </group>
+      <primitive object={model} scale={SCALE} />
+      {reading && <OpenFolder status={reading.status} />}
     </group>
   );
 });
 
-function Leg() {
-  return (
-    <mesh position-y={-0.19} castShadow>
-      <capsuleGeometry args={[0.075, 0.22, 4, 12]} />
-      <meshStandardMaterial color={PANTS} roughness={0.8} />
-    </mesh>
-  );
-}
-
-/** Pendurado no ombro: o grupo de fora gira e o braço acompanha. */
-function Arm({ color }: { color: string }) {
-  return (
-    <>
-      <mesh position-y={-0.17} castShadow>
-        <capsuleGeometry args={[0.06, 0.26, 4, 10]} />
-        <meshStandardMaterial color={color} roughness={0.7} />
-      </mesh>
-      <mesh position-y={-0.36}>
-        <sphereGeometry args={[0.06, 12, 8]} />
-        <meshStandardMaterial color={SKIN} roughness={0.75} />
-      </mesh>
-    </>
-  );
-}
-
 /** A pasta aberta nas mãos, inclinada para quem está olhando de cima. */
 function OpenFolder({ status }: { status: "entregue" | "andamento" }) {
-  const w = FOLDER.depth;
-  const h = FOLDER.height;
+  const w = FOLDER.depth * 0.9;
+  const h = FOLDER.height * 0.9;
   return (
-    <group position={[0, 0.82, 0.36]} rotation-x={-0.9}>
+    <group position={[0, 0.5, 0.42]} rotation-x={-0.8}>
       {[-1, 1].map((side) => (
         <group key={side} rotation-y={side * -0.25}>
           <mesh position={[(side * w) / 2, 0, 0]} castShadow>

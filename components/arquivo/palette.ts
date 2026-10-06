@@ -10,7 +10,6 @@ export const PALETTE = {
   pot: "#C9785A",
   cork: "#C9A26B",
   rug: "#3E6FA8",
-  avatar: "#3E6FA8",
 } as const;
 
 /** Mesmo par de cores do kanban: âmbar em andamento, verde entregue. */

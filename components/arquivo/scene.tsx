@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import {
   CanvasTexture,
   RepeatWrapping,
@@ -11,7 +11,7 @@ import {
   type Object3D,
 } from "three";
 import type { TaskStatus } from "@/lib/log";
-import { Avatar, type AvatarHandle } from "./avatar";
+import { Avatar, type AvatarAction, type AvatarHandle } from "./avatar";
 import {
   BOARD,
   BOARD_KEY,
@@ -43,6 +43,8 @@ type SceneProps = {
    * os reposiciona a cada quadro; o conteúdo é do HUD.
    */
   labels: RefObject<HTMLDivElement | null>;
+  /** Modelo .glb do boneco escolhido. */
+  avatarUrl: string;
   reducedMotion: boolean;
 };
 
@@ -51,12 +53,12 @@ const OFFSET = new Vector3(7, 9.5, 9);
 const FORWARD = new Vector3(-OFFSET.x, 0, -OFFSET.z).normalize();
 const RIGHT = { x: -FORWARD.z, z: FORWARD.x };
 const FACE_CAMERA = Math.atan2(OFFSET.x, OFFSET.z);
-const SPEED = 3;
+const SPEED = 2.6;
+/** Acelera o ciclo de passos do modelo para o pé não escorregar no chão. */
+const WALK_ANIM = 1.5;
 const ZOOM = { min: 28, max: 140 };
-/** Quanto o braço sobe para cada prateleira (de cima para baixo) e no quadro. */
-const REACH = [-2.5, -1.75, -0.95];
-const REACH_BOARD = -2.1;
-const REACH_TIME = 0.45;
+/** Duração do gesto de pegar antes de abrir a pasta. */
+const REACH_TIME = 0.6;
 
 export default function Scene(props: SceneProps) {
   return (
@@ -94,12 +96,9 @@ type PlayerState = {
   rot: number;
   phase: Phase;
   path: { x: number; z: number }[];
-  goal: (Target & { face: number; reach: number }) | null;
+  /** `low`: pasta na prateleira de baixo, o boneco se abaixa para pegar. */
+  goal: (Target & { face: number; low: boolean }) | null;
   t: number;
-  walk: number;
-  step: number;
-  leftArm: number;
-  rightArm: number;
 };
 
 const turn = (from: number, to: number, k: number) =>
@@ -117,6 +116,7 @@ function World({
   onClose,
   onHover,
   labels,
+  avatarUrl,
   reducedMotion,
 }: SceneProps) {
   const grid = useMemo(() => buildGrid(layout), [layout]);
@@ -136,10 +136,6 @@ function World({
     path: [],
     goal: null,
     t: 0,
-    walk: 0,
-    step: 0,
-    leftArm: 0,
-    rightArm: 0,
   });
   const focus = useRef(new Vector3());
 
@@ -251,11 +247,11 @@ function World({
       if (!slot) return;
       walkTo(
         { x: slot.standX, z: slot.standZ },
-        { ...target, face: Math.PI, reach: REACH[slot.shelf] },
+        { ...target, face: Math.PI, low: slot.shelf === SHELVES.length - 1 },
       );
     } else {
       const { board } = layout;
-      walkTo({ x: board.standX, z: board.standZ }, { ...target, face: -Math.PI / 2, reach: REACH_BOARD });
+      walkTo({ x: board.standX, z: board.standZ }, { ...target, face: -Math.PI / 2, low: false });
     }
   }
 
@@ -313,12 +309,11 @@ function World({
       p.t = 0;
     }
 
-    let left = 0;
-    let right = 0;
+    let action: AvatarAction = moving ? "walk" : "idle";
     if (p.phase === "reach" && p.goal) {
       p.t += dt;
       heading = p.goal.face;
-      right = p.goal.reach;
+      action = p.goal.low ? "reach-low" : "reach-high";
       if (p.t >= REACH_TIME) {
         const goal = p.goal;
         p.phase = "read";
@@ -333,26 +328,16 @@ function World({
       }
     } else if (p.phase === "read") {
       heading = FACE_CAMERA;
-      if (reading) left = right = -1.05;
+      if (reading) action = "hold";
     }
 
     p.rot = turn(p.rot, heading, ease(dt, p.phase === "reach" ? 14 : 10));
-    p.walk += ((moving ? 1 : 0) - p.walk) * ease(dt, 10);
-    if (moving) p.step += dt * 11;
-    p.leftArm += (left - p.leftArm) * ease(dt, 10);
-    p.rightArm += (right - p.rightArm) * ease(dt, p.phase === "reach" ? 16 : 10);
 
     const a = avatar.current;
     if (a) {
       a.root.position.set(p.x, 0, p.z);
       a.root.rotation.y = p.rot;
-      a.apply({
-        walk: reducedMotion ? 0 : p.walk,
-        phase: p.step,
-        leftArm: p.leftArm,
-        rightArm: p.rightArm,
-        breath: reducedMotion ? 0 : Math.sin(state.clock.elapsedTime * 2),
-      });
+      a.play(action);
     }
 
     const camera = state.camera;
@@ -421,7 +406,9 @@ function World({
         onPick={() => act({ kind: "board" })}
       />
 
-      <Avatar ref={avatar} color={PALETTE.avatar} reading={reading} />
+      <Suspense fallback={null}>
+        <Avatar ref={avatar} url={avatarUrl} walkSpeed={WALK_ANIM} reading={reading} />
+      </Suspense>
 
     </>
   );
