@@ -29,9 +29,12 @@ Telas do menu:
   cada demanda é uma pasta (âmbar em andamento, verde entregue, post-it rosa quando falta o
   impacto) e o boneco anda até a pasta que você clicar para abri-la. WASD ou clique no chão para
   andar, scroll para zoom, e o seletor "Ir até" leva direto a qualquer pasta. O quadro de cortiça
-  na parede guarda as pendências que atravessam a semana. Os bonecos (12, trocáveis no canto da
-  tela) são do pacote [Mini Characters](https://kenney.nl/assets/mini-characters) do Kenney, CC0,
-  em `public/personagens/`. Código em `components/arquivo/`.
+  na parede guarda as pendências que atravessam a semana. Em **Personalizar boneco** dá para
+  escolher entre 12 modelos, trocar a cor da pele, do cabelo, da roupa e da calça, e pôr óculos,
+  boné ou fone — a escolha fica salva só no navegador. Os bonecos são do pacote
+  [Mini Characters](https://kenney.nl/assets/mini-characters) do Kenney (CC0), em
+  `public/personagens/`; a troca de cor está explicada em `components/arquivo/recolor.ts`.
+  Código em `components/arquivo/`.
 
 Fora do menu, mas no ar: `/atualizacoes` (prévia exata do que o cliente vê, só os 🟢) e
 `/email` (rascunho do email semanal, com botão de copiar).

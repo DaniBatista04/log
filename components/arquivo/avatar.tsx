@@ -1,37 +1,23 @@
 "use client";
 
 import { useFrame, useLoader } from "@react-three/fiber";
-import { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
-import { AnimationMixer, LoopOnce, type AnimationAction, type Group, type Mesh } from "three";
+import { forwardRef, Suspense, useEffect, useImperativeHandle, useMemo, useRef } from "react";
+import {
+  AnimationMixer,
+  LoopOnce,
+  Matrix4,
+  type AnimationAction,
+  type Group,
+  type Mesh,
+} from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { FOLDER } from "./layout";
+import { characterUrl, type Glasses, type Hat, type Look } from "./look";
 import { STATUS_COLOR } from "./palette";
+import { analyze, applyColors } from "./recolor";
 
-/**
- * Personagens do pacote Mini Characters, do Kenney (CC0), em
- * `public/personagens`. Cada .glb já traz as animações; aqui só escolhemos
- * qual tocar.
- */
-export const CHARACTERS = [
-  "character-male-d",
-  "character-female-d",
-  "character-female-e",
-  "character-male-e",
-  "character-female-b",
-  "character-male-a",
-  "character-female-f",
-  "character-male-f",
-  "character-female-c",
-  "character-male-b",
-  "character-female-a",
-  "character-male-c",
-] as const;
-
-export const characterUrl = (index: number) =>
-  `/personagens/${CHARACTERS[index % CHARACTERS.length]}.glb`;
-
-export type AvatarAction = "idle" | "walk" | "reach-high" | "reach-low" | "hold";
+export type AvatarAction = "idle" | "walk" | "reach-high" | "reach-low" | "hold" | "nod";
 
 const CLIPS: Record<AvatarAction, string> = {
   idle: "idle",
@@ -39,7 +25,10 @@ const CLIPS: Record<AvatarAction, string> = {
   "reach-high": "interact-right",
   "reach-low": "pick-up",
   hold: "holding-both",
+  nod: "emote-yes",
 };
+/** Gestos que acontecem uma vez e param na pose final. */
+const ONCE = new Set([CLIPS["reach-high"], CLIPS["reach-low"], CLIPS.nod]);
 
 /** O modelo tem 0,67 de altura; dobrado, fica da altura da estante. */
 const SCALE = 2;
@@ -52,13 +41,15 @@ export type AvatarHandle = {
 
 export const Avatar = forwardRef<
   AvatarHandle,
-  { url: string; walkSpeed: number; reading: { status: "entregue" | "andamento" } | null }
->(function Avatar({ url, walkSpeed, reading }, ref) {
-  const gltf = useLoader(GLTFLoader, url);
+  { look: Look; walkSpeed: number; reading: { status: "entregue" | "andamento" } | null }
+>(function Avatar({ look, walkSpeed, reading }, ref) {
+  const gltf = useLoader(GLTFLoader, characterUrl(look.base));
   const root = useRef<Group>(null!);
   const current = useRef<AnimationAction | null>(null);
+  const hat = useRef<Group>(null);
+  const inverse = useMemo(() => new Matrix4(), []);
 
-  const { model, mixer, actions } = useMemo(() => {
+  const { model, mixer, actions, recolor, head } = useMemo(() => {
     const model = clone(gltf.scene);
     model.traverse((object) => {
       if ((object as Mesh).isMesh) object.castShadow = true;
@@ -67,18 +58,37 @@ export const Avatar = forwardRef<
     const actions = new Map<string, AnimationAction>();
     for (const clip of gltf.animations) {
       const action = mixer.clipAction(clip);
-      // Pegar a pasta acontece uma vez e fica na pose final até virar leitura.
-      if (clip.name === CLIPS["reach-high"] || clip.name === CLIPS["reach-low"]) {
+      if (ONCE.has(clip.name)) {
         action.setLoop(LoopOnce, 1);
-        action.clampWhenFinished = true;
+        action.clampWhenFinished = clip.name !== CLIPS.nod;
       }
       if (clip.name === CLIPS.walk) action.setEffectiveTimeScale(walkSpeed);
       actions.set(clip.name, action);
     }
-    return { model, mixer, actions };
+    return {
+      model,
+      mixer,
+      actions,
+      recolor: analyze(model),
+      head: model.getObjectByName("head") ?? null,
+    };
   }, [gltf, walkSpeed]);
 
-  useFrame((_, dt) => mixer.update(dt));
+  useEffect(() => {
+    if (!recolor) return;
+    const texture = applyColors(recolor, look.colors);
+    return () => texture.dispose();
+  }, [recolor, look.colors]);
+
+  useFrame((_, dt) => {
+    mixer.update(dt);
+    // Acessórios seguem o osso da cabeça: copia a pose dele, relativa ao boneco.
+    const group = hat.current;
+    if (!group || !head) return;
+    root.current.updateWorldMatrix(true, false);
+    head.updateWorldMatrix(true, false);
+    group.matrix.copy(inverse.copy(root.current.matrixWorld).invert()).multiply(head.matrixWorld);
+  });
 
   useImperativeHandle(
     ref,
@@ -105,10 +115,93 @@ export const Avatar = forwardRef<
         <meshBasicMaterial color="#000" transparent opacity={0.12} />
       </mesh>
       <primitive object={model} scale={SCALE} />
+      <group ref={hat} matrixAutoUpdate={false}>
+        <Accessories glasses={look.glasses} hat={look.hat} hatColor={look.colors.shirt} />
+      </group>
       {reading && <OpenFolder status={reading.status} />}
     </group>
   );
 });
+
+/* ------------------------------------------------------------------ */
+/* Acessórios                                                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Desenhados no espaço do osso da cabeça, em unidades do modelo, com a origem
+ * no pescoço: a cabeça vai de y 0 a 0,33 e o rosto fica em z 0,17.
+ */
+function Accessories({
+  glasses,
+  hat,
+  hatColor,
+}: {
+  glasses: Glasses;
+  hat: Hat;
+  hatColor: string | null;
+}) {
+  return (
+    <>
+      {glasses !== "nenhum" && (
+        <Suspense fallback={null}>
+          <KenneyGlasses dark={glasses === "escuro"} />
+        </Suspense>
+      )}
+      {hat === "bone" && <Cap color={hatColor ?? "#3E6FA8"} />}
+      {hat === "fone" && <Headphones />}
+    </>
+  );
+}
+
+function KenneyGlasses({ dark }: { dark: boolean }) {
+  const gltf = useLoader(GLTFLoader, `/personagens/aid-${dark ? "sunglasses" : "glasses"}.glb`);
+  const object = useMemo(() => gltf.scene.clone(), [gltf]);
+  return <primitive object={object} position={[0, 0.082, 0.082]} />;
+}
+
+function Cap({ color }: { color: string }) {
+  return (
+    <group position={[0, 0.27, -0.005]}>
+      {/* Copa: meia esfera achatada, colada no alto da cabeça. */}
+      <mesh scale={[1, 0.6, 0.85]} castShadow>
+        <sphereGeometry args={[0.235, 20, 10, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <meshStandardMaterial color={color} roughness={0.8} flatShading />
+      </mesh>
+      {/* Aba curta: de cima, uma aba longa esconde o rosto. */}
+      <mesh position={[0, 0.005, 0.22]} rotation-x={0.08} castShadow>
+        <boxGeometry args={[0.34, 0.02, 0.12]} />
+        <meshStandardMaterial color={color} roughness={0.8} />
+      </mesh>
+      <mesh position-y={0.14}>
+        <sphereGeometry args={[0.025, 8, 6]} />
+        <meshStandardMaterial color="#F4F1EA" />
+      </mesh>
+    </group>
+  );
+}
+
+function Headphones() {
+  return (
+    <group position={[0, 0.15, 0]}>
+      <mesh>
+        <torusGeometry args={[0.255, 0.024, 8, 28, Math.PI]} />
+        <meshStandardMaterial color="#2E3440" roughness={0.5} />
+      </mesh>
+      {[-1, 1].map((side) => (
+        <group key={side} position={[side * 0.245, -0.02, 0]} rotation-z={Math.PI / 2}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.075, 0.075, 0.07, 18]} />
+            <meshStandardMaterial color="#2E3440" roughness={0.5} />
+          </mesh>
+          <mesh position-y={side * 0.04}>
+            <cylinderGeometry args={[0.055, 0.055, 0.02, 18]} />
+            <meshStandardMaterial color="#E0A43A" roughness={0.6} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
 
 /** A pasta aberta nas mãos, inclinada para quem está olhando de cima. */
 function OpenFolder({ status }: { status: "entregue" | "andamento" }) {

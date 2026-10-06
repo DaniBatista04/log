@@ -6,8 +6,9 @@ import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore
 import { AudienceBadge } from "@/components/badge";
 import { WeekSwitcher, type WeekOption } from "@/components/week-switcher";
 import type { HubItem } from "@/lib/hub";
-import { CHARACTERS, characterUrl } from "./avatar";
+import { Customizer } from "./customizer";
 import { BOARD_KEY, buildLayout, type Command } from "./layout";
+import { readLook, saveLook, serverLook, subscribeLook } from "./look";
 
 // O three.js só existe no navegador; no servidor fica o aviso de carregando.
 const Scene = dynamic(() => import("./scene"), {
@@ -47,11 +48,15 @@ export function Arquivo({
   const [reducedMotion, setReducedMotion] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const labels = useRef<HTMLDivElement>(null);
-  const character = useSyncExternalStore(subscribeCharacter, readCharacter, () => 0);
-  const pickCharacter = (step: number) =>
-    saveCharacter((character + step + CHARACTERS.length) % CHARACTERS.length);
+  const look = useSyncExternalStore(subscribeLook, readLook, serverLook);
+  const [customizing, setCustomizing] = useState(false);
 
   const close = useCallback(() => setOpenKey(null), []);
+  // Abrir uma pasta tira o painel de personalização do caminho.
+  const openPanel = useCallback((key: string) => {
+    setCustomizing(false);
+    setOpenKey(key);
+  }, []);
 
   // A cena ocupa a tela toda abaixo do menu, que muda de altura quando quebra linha.
   useEffect(() => {
@@ -73,13 +78,15 @@ export function Arquivo({
   }, []);
 
   useEffect(() => {
-    if (!openKey) return;
+    if (!openKey && !customizing) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenKey(null);
+      if (event.key !== "Escape") return;
+      setOpenKey(null);
+      setCustomizing(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [openKey]);
+  }, [openKey, customizing]);
 
   const delivered = items.filter((item) => item.status === "entregue").length;
   const open = openKey && openKey !== BOARD_KEY ? byId.get(openKey) : undefined;
@@ -97,11 +104,12 @@ export function Arquivo({
           pendingCount={pending.length}
           openKey={openKey}
           command={command}
-          onOpen={setOpenKey}
+          onOpen={openPanel}
           onClose={close}
           onHover={setHovered}
           labels={labels}
-          avatarUrl={characterUrl(character)}
+          look={look}
+          customizing={customizing}
           reducedMotion={reducedMotion}
         />
       ) : (
@@ -217,32 +225,24 @@ export function Arquivo({
               ver em lista
             </Link>
           </p>
-          {items.length > 0 && (
-            <div className="pointer-events-auto ml-auto flex items-stretch divide-x divide-line overflow-hidden rounded-lg border border-line bg-surface/95 text-xs shadow-sm backdrop-blur">
-              <button
-                type="button"
-                onClick={() => pickCharacter(-1)}
-                aria-label="Boneco anterior"
-                className="w-8 text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
-              >
-                ‹
-              </button>
-              <span className="px-3 py-1.5 text-ink-2">
-                Boneco <span className="font-medium text-ink">{character + 1}</span>
-                <span className="text-ink-3">/{CHARACTERS.length}</span>
-              </span>
-              <button
-                type="button"
-                onClick={() => pickCharacter(1)}
-                aria-label="Próximo boneco"
-                className="w-8 text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
-              >
-                ›
-              </button>
-            </div>
+          {items.length > 0 && !customizing && (
+            <button
+              type="button"
+              onClick={() => {
+                setOpenKey(null);
+                setCustomizing(true);
+              }}
+              className="pointer-events-auto ml-auto rounded-lg border border-line bg-surface/95 px-3 py-1.5 text-xs font-medium text-ink shadow-sm backdrop-blur transition-colors hover:bg-surface-2"
+            >
+              <span aria-hidden>✨</span> Personalizar boneco
+            </button>
           )}
         </div>
       </div>
+
+      {customizing && (
+        <Customizer look={look} onChange={saveLook} onClose={() => setCustomizing(false)} />
+      )}
 
       {openKey && (
         <aside
@@ -261,38 +261,6 @@ export function Arquivo({
       )}
     </div>
   );
-}
-
-/** O boneco escolhido fica só neste navegador. */
-const CHARACTER_KEY = "arquivo:boneco";
-const CHARACTER_EVENT = "arquivo:boneco";
-/** Para quando o navegador bloqueia o localStorage: vale até recarregar. */
-let characterFallback = 0;
-
-function readCharacter() {
-  try {
-    const saved = Number(localStorage.getItem(CHARACTER_KEY));
-    return Number.isInteger(saved) && saved >= 0 ? saved % CHARACTERS.length : 0;
-  } catch {
-    return characterFallback;
-  }
-}
-
-function saveCharacter(index: number) {
-  characterFallback = index;
-  try {
-    localStorage.setItem(CHARACTER_KEY, String(index));
-  } catch {}
-  window.dispatchEvent(new Event(CHARACTER_EVENT));
-}
-
-function subscribeCharacter(onChange: () => void) {
-  window.addEventListener(CHARACTER_EVENT, onChange);
-  window.addEventListener("storage", onChange);
-  return () => {
-    window.removeEventListener(CHARACTER_EVENT, onChange);
-    window.removeEventListener("storage", onChange);
-  };
 }
 
 /** Fora da tela até a cena calcular a posição no primeiro quadro. */

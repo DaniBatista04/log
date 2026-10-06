@@ -12,6 +12,7 @@ import {
 } from "three";
 import type { TaskStatus } from "@/lib/log";
 import { Avatar, type AvatarAction, type AvatarHandle } from "./avatar";
+import type { Look } from "./look";
 import {
   BOARD,
   BOARD_KEY,
@@ -43,8 +44,10 @@ type SceneProps = {
    * os reposiciona a cada quadro; o conteúdo é do HUD.
    */
   labels: RefObject<HTMLDivElement | null>;
-  /** Modelo .glb do boneco escolhido. */
-  avatarUrl: string;
+  /** Aparência escolhida no painel de personalização. */
+  look: Look;
+  /** Painel aberto: a câmera chega perto e o boneco vira de frente. */
+  customizing: boolean;
   reducedMotion: boolean;
 };
 
@@ -116,7 +119,8 @@ function World({
   onClose,
   onHover,
   labels,
-  avatarUrl,
+  look,
+  customizing,
   reducedMotion,
 }: SceneProps) {
   const grid = useMemo(() => buildGrid(layout), [layout]);
@@ -215,6 +219,16 @@ function World({
   }, [layout]);
   const projected = useMemo(() => new Vector3(), []);
 
+  // Cada troca no visual ganha um aceno de "gostei".
+  const nodUntil = useRef(0);
+  const clock = useThree((state) => state.clock);
+  const lastLook = useRef(look);
+  useEffect(() => {
+    if (lastLook.current === look) return;
+    lastLook.current = look;
+    nodUntil.current = clock.elapsedTime + 0.75;
+  }, [look, clock]);
+
   // Painel fechado por fora (botão, Esc): o boneco devolve a pasta.
   useEffect(() => {
     const p = player.current;
@@ -310,6 +324,10 @@ function World({
     }
 
     let action: AvatarAction = moving ? "walk" : "idle";
+    if (!moving && p.phase === "idle") {
+      if (customizing) heading = FACE_CAMERA;
+      if (state.clock.elapsedTime < nodUntil.current) action = "nod";
+    }
     if (p.phase === "reach" && p.goal) {
       p.t += dt;
       heading = p.goal.face;
@@ -343,13 +361,14 @@ function World({
     const camera = state.camera;
     // Com a sala inteira na tela, a câmera fica no centro; quanto mais zoom,
     // mais ela acompanha o boneco.
-    const follow = Math.min(1, Math.max(0, (zoom.current - fit) / fit));
+    const wanted = customizing ? Math.max(zoom.current, Math.min(ZOOM.max, fit * 3)) : zoom.current;
+    const follow = Math.min(1, Math.max(0, (wanted - fit) / fit));
     const target = new Vector3(p.x * follow, 0, p.z * follow);
     if (reducedMotion) focus.current.copy(target);
     else focus.current.lerp(target, ease(dt, 4));
     camera.position.copy(focus.current).add(OFFSET);
     camera.lookAt(focus.current);
-    const z = reducedMotion ? zoom.current : camera.zoom + (zoom.current - camera.zoom) * ease(dt, 8);
+    const z = reducedMotion ? wanted : camera.zoom + (wanted - camera.zoom) * ease(dt, 8);
     if (Math.abs(z - camera.zoom) > 0.001) {
       camera.zoom = z;
       camera.updateProjectionMatrix();
@@ -407,7 +426,7 @@ function World({
       />
 
       <Suspense fallback={null}>
-        <Avatar ref={avatar} url={avatarUrl} walkSpeed={WALK_ANIM} reading={reading} />
+        <Avatar ref={avatar} look={look} walkSpeed={WALK_ANIM} reading={reading} />
       </Suspense>
 
     </>
