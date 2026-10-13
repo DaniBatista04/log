@@ -965,8 +965,117 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [crm] ✅ No Agendamento, preencher uma data agendada vazia abre data e hora juntas. Antes a hora
   ficava 9h e, para acertar depois, era preciso reagendar com motivo.
 
+- [crm] ✅ **Mapa por Proximidade: a lista de endereços do cliente contra os prédios da Focus.**
+  O comercial sobe a planilha de lojas do cliente (ou cola a lista), o CRM localiza cada endereço
+  e mede a distância até os prédios à venda, com raio de 500 m a 5 km, filtro por rede, mapa e
+  PDF com uma página por região; a planilha volta com a localização e o prédio mais próximo de
+  cada loja. Testado com 3.632 farmácias: localizadas em 30 segundos, 3.552 a menos de 100 m da
+  localização feita à mão. Os pontos ficam salvos no CRM ligados ao cliente e à agência, e a
+  tela virou o modo Proximidade do Planejador, com uma aba só para devolver a planilha com as
+  coordenadas. Coordenada que o Excel em português estraga (-23.5651173 vira -235.651.173)
+  volta para o lugar certo em vez de cair em outra cidade.
+- [crm] ✅ A campanha do Controle Comercial passou a nascer só da proposta autorizada no
+  Planejador, com cliente, agência, valores, período e PI dela — o Controle virou
+  acompanhamento, e na campanha só o pós-venda muda (situação, nota, Faturar). As 153 campanhas
+  que vieram da planilha seguem editáveis. Escolher o cliente no Planejador preenche a proposta
+  pelo histórico dele (agência, comissão do PI mais recente, categoria e desconto), mostrando de
+  onde veio cada valor; o PI anexado grava valores e comissão (conferido contra 91 PIs lidos à
+  mão). O Planejador também ficou com o mapa sempre à vista e só a tabela rolando.
+- [crm] ✅ Pipeline de Operações mais fácil de ler: o selo de "parado" só aparece a partir de 7
+  dias (amarelo) e 15 (vermelho), card agendado não conta como parado, duas colunas que saíram
+  do fluxo só aparecem enquanto tiverem card antigo, e o botão Ordenar escolhe a ordem (data
+  agendada, prevista, última interação ou nome). Dois furos fechados: contrato que volta de
+  Assinado agora pausa o card em Operações (o Les Palais Botafogo estava em Instalação Agendada
+  com o contrato em negociação), e uma fase escolhida e desfeita no formulário não joga mais o
+  card para Operações (o One Offices entrou assim em 08/09).
+- [crm] ✅ Logística e Agendamento contam cada obra: a entrega de aditivo, troca e retirada não
+  aparecia como trabalho na Logística (o prédio já instalado chegava como Entregue e travado);
+  agora cada obra é uma linha, com as suas telas e a data. Tela nova pedida depois da entrega
+  abre outra obra em vez de entrar numa já entregue, sem ninguém para separar. A obra de retorno
+  mostra só o que falta bipar (o Sidney Gasparini aparecia para separar 3 telas que já estavam
+  no prédio), e as 43 obras de retorno que nunca tinham fechado foram fechadas.
+- [crm] ✅ Agendamento, ajustes pedidos no uso: a busca mostra em que outra aba está o prédio
+  procurado ("arboville" achava o Floradas e escondia o Alvoradas, que estava em Retornos); o
+  turno sai da hora agendada (até 12h manhã, 13h às 17h tarde, 18h em diante noturno, e manhã
+  e dia todo começam às 8h); e o histórico de operação passou a registrar também as correções
+  automáticas (o Domo Alto da Mooca mudou para 14h e o histórico seguia dizendo 10h).
+- [crm] ✅ Repasse: o comprovante de cada baixa aparece nos anexos do prédio, só para quem pode
+  ver o Repasse (o comprovante traz CPF e conta), e o Mapa de parcelas ganhou a bolinha verde de
+  "contrato revisado por uma pessoa", com quem marcou e quando.
+- [crm] ✅ Assinatura de contrato: o pop-up do registro mostra o link de assinatura, para copiar e
+  mandar, e abre o contrato antes da última assinatura. Os contratos de 12 e de 60 meses
+  passaram a sair pelo modelo do fornecedor, que começou a aceitar esses prazos sem avisar.
+- [crm] ✅ Telas de 32" trocadas por 25": o prédio já instalado pode ser revertido, nos casos
+  retroativos autorizados pelo Pavan, com permissão própria que nasce só para o Fabio Csipak.
+- [crm] ✅ Em 06/10, uma sincronização da ferramenta que o time usa para editar o CRM levou o
+  sistema para a base antiga por uns 10 minutos. Voltou no mesmo dia, e agora uma versão que
+  aponte para a base errada é barrada antes de ir para o ar.
+- [crm] ✅ Em 09/10, a Logística e o Agendamento abriram zerados para todo mundo depois da troca
+  de permissões. Corrigido no mesmo dia, sem mudar quem vê o quê: a leitura de mil obras caiu de 2,4 s
+  para 0,14 s.
+- [crm] ✅ Do time, na mesma semana: as permissões foram refeitas — o perfil passa a dizer só o
+  departamento, e o que cada pessoa pode fazer vem das caixas, com a aba Matriz de permissões
+  (uma tabela com todos os usuários, editável direto); o Mapa BD mostra os prédios assinados e
+  instalados com mapa de calor das áreas frias e controla as 32 cidades de captação, com
+  captador exclusivo e aprovação de prédio fora da lista; o Acompanhamento Mensal compara metas,
+  novos registros e tempo até a assinatura; dá para duplicar um registro e ajustar o pino do
+  prédio no mapa; o Pipeline BD ganhou os filtros Canal e Assinaturas; o perfil Marketing foi
+  criado; e os avisos de novidade arquivam em 7 dias e somem em 15.
+
 - [telas] ✅ A notícia da manhã voltou a sair. Em 05/10, como em 02/10, a publicação da manhã saiu
   sem notícia: o portal travou entre a aprovação e o pedido de exibição. Agora o pedido nasce
   antes da aprovação, dez minutos antes de a notícia ir para análise, e as aprovadas entram
   juntas segundos depois. No mesmo dia, uma notícia do pack 4 foi ao ar no horário do pack 1;
   agora só o pack da hora, ou um anterior, pode estar no ar.
+- [telas] ✅ As notícias passaram a 480 exibições por dia, com quatro notícias por pack, como a
+  operação pediu em 07/10. Mais notícias no dia viram mais packs. No mesmo dia, com o sistema das
+  telas lento, os packs 1 e 2 ficaram para o minuto seguinte, quando o portal já recusava o
+  pedido; agora a rotina começa pelo pack da manhã e trata os packs ao mesmo tempo.
+
+- [nfc] ✅ A etiqueta da tela pode levar a um mural de cupons: todos os comunicados no ar naquela
+  tela, num carrossel, e a pessoa pega qualquer um, não só o que estava passando no toque. O
+  clique continua contado para o anunciante certo.
+- [nfc] ✅ Simulação de campanha da 99 com a etiqueta: quem tem o app cai direto nele, no iPhone
+  e no Android; quem não tem vê uma tela de boas-vindas com o cupom de 10% e o botão da loja
+  certa para o aparelho. Há também a versão compartilhada, com 99, Shopee e GAC (ofertas de
+  demonstração), em português, inglês e chinês. Em 08/10, o app da 99 abria e fechava sozinho no
+  Android e o botão da GAC levava ao site de outra empresa; os dois foram corrigidos. *(falta
+  dizer para quem é a demonstração e em que conversa ela vai ser usada — completar antes do
+  email.)*
+
+- [whatsapp] ✅ Desde 09/10, quem chama no WhatsApp querendo anunciar também gera um aviso no
+  Teams para a Mariana Rosseto, do comercial, com nome, celular e resumo do pedido — um aviso
+  por contato a cada 24 horas. Antes o cliente recebia o WhatsApp do comercial, mas o time só
+  sabia dele se o cliente chamasse lá.
+
+**Pendências que atravessam pra semana 10:**
+
+- Escolher quais avisos de novidade do CRM vão para o pop-up — os que ficaram em rascunho nas
+  semanas 7 e 8 e os desta semana (Mapa por Proximidade, Planejador, Mapa BD, Matriz de
+  permissões, Repasse, Assinatura).
+- Decidir entre pontos e agrupado no mapa do Planejador — fica um dos dois.
+- Levar ao fornecedor de assinatura a linha "Total de Monitores Instalados" corrompida, e decidir
+  o que fazer com os 25 contratos já assinados assim. Confirmar com ele o nome do campo da multa
+  de exclusividade e liberar 44" e 70" depois de conferir a linha de total.
+- Tratar os dois contratos que foram para assinatura sem a cláusula do repasse antecipado.
+- Mandar à Eliex o pacote de casos e acompanhar a correção.
+- Financeiro decidir as 166 divergências da base de contratos e conferir no contrato as 9 linhas
+  sem CNPJ confirmado.
+- Trazer para o Repasse as baixas antigas da planilha de controle — falta a versão atual dela.
+- Decidir quando ligar o "Acelera Síndico" no bot do WhatsApp.
+- Trocar a arte de 32" das artes prontas do Mural, provisória até o designer entregar a versão
+  vertical.
+
+**Aprendizados / contexto que não pode se perder:**
+
+- **Conferência que roda em cada linha cobra caro em tela grande.** A regra nova de permissões
+  estava certa, mas era consultada várias vezes por obra; na Logística, que lê milhares de uma
+  vez, isso passou do tempo limite e a tela abriu vazia. Ler as permissões uma vez só resolveu.
+- **A ferramenta de edição do CRM ainda está ligada à base antiga.** Ao sincronizar, ela pode
+  trocar a base sem ninguém mexer. Por isso a publicação agora confere a base antes de ir ao ar.
+
+---
+
+## Semana 10 — 12 a 16 de outubro de 2026
+
+*(12 de outubro foi feriado; a semana começou no dia 13.)*

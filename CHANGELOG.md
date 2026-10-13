@@ -272,3 +272,16 @@ eles vão para o email do time, que também não é técnico.
 ---
 
 ## [Semana 9] — 5 a 9 de outubro de 2026
+
+### Adicionado
+
+- 🟢 **Marcar todos os condomínios de uma vez** — quem cuida de vários prédios marcava um por um na hora de escolher onde o comunicado aparece. Agora uma linha no topo da lista marca todos; com a busca, marca só os encontrados. Some para quem tem um prédio só.
+- 🟢 **Artes prontas de datas comemorativas e de academia** — modelos novos sem texto para preencher (Dia das Crianças, Consciência Negra e Academia), nas abas "Datas comemorativas" e "Academia". Como a arte já sai aprovada por nós, o comunicado segue sem esperar revisão.
+- 🟢 **Chamado de "Problema com a Tela" e de "Retorno de Instalação"** — dois motivos novos na abertura do chamado, que vão direto para o Relacionamento, em vez de cair em "outros".
+- ⚙️ **Aprovar ou devolver para revisão um comunicado recusado** — na aba "Rejeitados", quem administra passou a poder aprovar, editar ou devolver o comunicado para a revisão.
+- ⚙️ **Quem aprovou ou recusou cada comunicado** — a lista de comunicados mostra "Aprovado por…" ou "Rejeitado por…", e o detalhe traz o nome com data e hora. A informação já era guardada, mas só aparecia escondida no histórico. O síndico continua sem ver o nome de quem revisou.
+- ⚙️ **Setor também abre chamado** — quem é de um setor, como a Operação, recebia recusa ao tentar abrir chamado; só síndico e administrador conseguiam. Agora abre pela mesma tela do administrador, e fica como responsável pelo chamado que abriu.
+
+---
+
+## [Semana 10] — 12 a 16 de outubro de 2026
