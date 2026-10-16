@@ -1079,3 +1079,132 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 ## Semana 10 — 12 a 16 de outubro de 2026
 
 *(12 de outubro foi feriado; a semana começou no dia 13.)*
+
+- [crm] ✅ **Cadastro no TUK feito pelo CRM.** Todo prédio assinado precisa ser cadastrado no TUK,
+  o sistema da matriz, com empresa, síndico, prédio, torres, elevadores, telas, cotação e
+  contrato. Agora o CRM monta esse cadastro a partir da ficha e do contrato assinado anexado, a
+  pessoa confere numa tela só — contrato e CRM lado a lado, campo a campo, com o que diverge em
+  destaque — e, com um clique, o CRM cria tudo no TUK e faz as aprovações. No fim, o ID do TUK
+  fica gravado no prédio, que é o elo com o Mural. Nada é criado duas vezes, e duas pessoas não
+  rodam o mesmo prédio.
+- [crm] ✅ A Fila do TUK organiza esse trabalho no mesmo desenho da fila de revisão do Mural: os
+  prédios assinados sem cadastro no TUK, "Pegar o próximo" reserva um para a pessoa, o formulário
+  fica salvo como rascunho e, ao terminar, o próximo já vem. Mostra quem está online e com qual
+  prédio, deixa liberar um prédio preso com quem saiu da tela, filtra pelo dia da instalação e
+  procura antes se o prédio já existe no TUK, para só vincular em vez de criar de novo. As
+  Métricas do TUK contam quanto falta, quanto cada pessoa cadastrou e os tempos médios — sempre
+  pelo nome no CRM, mesmo com todos usando a mesma conta no TUK.
+- [crm] ✅ Cadastro no TUK pelo celular, sem VPN: quem não está na VPN confere o cadastro e manda
+  para um robô, que roda num computador ligado à VPN e faz o mesmo cadastro. Se o prédio parece
+  já existir no TUK, o robô para e devolve a lista para a pessoa escolher. A tela mostra se o robô
+  está ligado e, se não estiver, volta a pedir o login no TUK.
+- [crm] ✅ Ajustes do Cadastro no TUK pedidos no uso: o distrito (SP) e a região administrativa
+  (RJ), que o TUK usa no lugar do bairro, saem do pino do prédio no mapa; o nome do prédio nas
+  torres e telas pode ser abreviado, porque o TUK recusa nome comprido; o cadastro retoma do ponto
+  em que a operação terminou à mão no próprio TUK, sem criar de novo; o contrato vai com as telas
+  que estão no TUK na hora (no Park Village a operação refez as telas no meio e o TUK recusava o
+  contrato); a tela de 55" é reconhecida sozinha; o tipo do prédio vem da ficha (Residencial,
+  Comercial ou Misto); e dois botões abrem a busca de fotos do prédio no Google.
+
+- [crm] ✅ Alterações Bancárias: o síndico pede a troca da conta do repasse por um link do prédio,
+  confirmando o CPF do registro (cinco erros travam o link por meia hora), e o Financeiro aprova
+  ou recusa vendo a conta anterior e a nova lado a lado, com o contrato anexado. É o caminho para
+  trocar a conta, já que o formulário público do cadastro não mexe numa conta que o Financeiro já
+  paga. No Repasse, o Mapa de parcelas também passou a marcar os contratos revisados de uma vez,
+  pela planilha, mostrando antes quais ficam de fora e por quê.
+- [crm] ✅ O aditivo só passa a Assinado com o aditivo assinado anexado e uma confirmação. Marcar
+  Assinado aplica as telas e os valores ao prédio e não tem volta pela tela, e dois aditivos
+  tinham sido marcados por engano antes de voltarem assinados.
+- [crm] ✅ Agendamento: a Programação mostra a folha de obras do dia de cada fornecedor, com
+  instalações e retornos por equipe e turno, para imprimir, mandar no WhatsApp ou por e-mail. O
+  envio automático na véspera, às 17h, está pronto, mas nasce desligado. A pedido da operação em
+  16/10, o card em Pendente sai da fila e da Programação e não ocupa mais o turno da equipe, e o
+  aviso ao síndico da volta para terminar a instalação fala em "visita de retorno" em vez de
+  "instalação das novas telas". O prédio com o retorno já feito também sai da fila (o Palais
+  D'Elysee seguia em "Telas pendentes" com as telas já instaladas).
+- [crm] ✅ O NFC das telas virou item do Inventário: a planilha de seriais da fábrica entra do
+  jeito que chega, o NFC é bipado junto com a tela no cadastro do prédio ou incluído depois numa
+  tela já instalada ou com um executivo, e a busca acha a tela pelo número do NFC. Quando a tela
+  sai do prédio, o NFC volta ao estoque. A importação também passou a aceitar, sem retrabalho, a
+  planilha de seriais de telas da fábrica (com cabeçalho em chinês) e a de SIM cards da Arqia.
+- [crm] ✅ Cadastro do edifício: entram as caixas de Sindicância e de Administradora (empresa,
+  responsável, telefone e e-mail) ao lado do gerente predial e do zelador, e o Relacionamento
+  passa a guardar os síndicos anteriores, com o botão "Trocar síndico". O link público não vê nem
+  mexe nessa lista.
+- [crm] ✅ Restrição: o botão Exportar baixa em Excel os edifícios com restrição, com as
+  categorias bloqueadas e os clientes liberados. O Planejador só esconde esses prédios, então não
+  havia como ter a relação. No Planejador, a meta de telas também pode somar à seleção atual (por
+  exemplo, 250 residenciais mais 250 comerciais).
+- [crm] ✅ O CRM passou a responder perguntas pelo Claude: a pessoa liga o Claude ao CRM com o
+  próprio login e pergunta sobre prédios, Pipeline BD, pendências, relatórios de telas,
+  Operações, Agendamento, Inventário, restrições e contratos sem anexo. Ele só vê o que a pessoa
+  pode ver, não recebe dados pessoais e faz as contas igual às telas — conferido em produção:
+  2.512 prédios e 13.263 telas instaladas, como em Operações. Para IA que não usa esse login
+  (Doubao), há uma chave pessoal, por enquanto só para o Super Admin. *(falta dizer quem vai usar
+  e para quê — completar antes do email.)*
+- [crm] ✅ Para fazer as mesmas contas, os Relatórios e o Dashboard de Operações passaram a contar
+  pelo dia de São Paulo, e três erros saíram junto: em "Telas instaladas por mês", o contrato do
+  dia 1º caía no mês anterior; na Evolução de Instaladas, a instalação no fim da noite do último
+  dia do mês caía no mês seguinte; e no Dashboard o agendamento feito depois das 21h voltou ao
+  próprio dia.
+- [crm] ✅ Alertas de possível vazamento de dados: o CRM avisa por e-mail, a cada 10 minutos, de
+  exportação grande, muitas exportações seguidas, uso fora do expediente ou de fora do país,
+  acesso de lugar novo, logins recusados e leitura em volume fora do normal. Vai só para mim e
+  para o Alysson, e os limites foram ajustados depois do primeiro dia, que deu alarmes falsos.
+- [crm] ✅ Em 15/10, o serviço de consulta de CEP saiu do ar e ninguém conseguia mover card para
+  "Aprovado - Confecção de Contrato". Agora, se ele não responde em 6 segundos, o CRM tenta outras
+  três fontes.
+
+- [scan] ✅ Vincular o NFC à tela pelo celular, no Focus Scan: o técnico lê a etiqueta da tela,
+  depois o NFC, confere o condomínio e toca Vincular. Tela fora do inventário, sem prédio ou que
+  já tem NFC é recusada na hora, com o motivo em português, inglês ou chinês. Como a etiqueta
+  atrás da tela instalada quase nunca dá para ler com a câmera, o campo de digitar já vem aberto.
+  O Scan está indo para um endereço só dele; o pedido já foi feito à agência.
+
+- [nfc] ✅ Campanha compartilhada: a Amazon entrou na roleta com 99, Shopee e GAC, e Shopee, GAC
+  e Amazon ganharam campanha exclusiva como a da 99, nas cores de cada marca e nos três idiomas.
+  O "Pegar cupom" da roleta leva à exclusiva de cada parceiro; o da 99, para quem não tem o app,
+  caía na página da 99 em vez da nossa. *(falta dizer para quem é a demonstração e em que
+  conversa ela vai ser usada — completar antes do email.)*
+
+- [ambiente] ⏳ Preparando uma máquina na nuvem, com a VPN, para os robôs do TUK e do KUMA
+  ficarem ligados o tempo todo. Hoje eles rodam no meu notebook, então só trabalham com ele
+  ligado. Os dois robôs já rodam direto no Windows, como vão rodar lá.
+
+**Pendências que atravessam pra semana 11:**
+
+- Escolher quais avisos de novidade do CRM vão para o pop-up — os que vêm das semanas 7 a 9 e os
+  desta semana (Cadastro e Fila do TUK, robô do TUK, Alterações Bancárias, aditivo assinado,
+  Programação, Pendente fora da agenda, NFC no Inventário, cadastro do edifício, Restrição e
+  Claude no CRM).
+- Ligar o envio da Programação aos fornecedores na véspera e cadastrar os e-mails deles.
+- Subir a máquina na nuvem dos robôs: falta a conta do Lark só do robô e avisar a TI que cuida
+  da VPN.
+- Agência apontar o endereço próprio do Focus Scan.
+- Decidir entre pontos e agrupado no mapa do Planejador — fica um dos dois.
+- Levar ao fornecedor de assinatura a linha "Total de Monitores Instalados" corrompida, e decidir
+  o que fazer com os 25 contratos já assinados assim. Confirmar com ele o nome do campo da multa
+  de exclusividade e liberar 44" e 70" depois de conferir a linha de total.
+- Tratar os dois contratos que foram para assinatura sem a cláusula do repasse antecipado.
+- Mandar à Eliex o pacote de casos e acompanhar a correção.
+- Financeiro decidir as 166 divergências da base de contratos e conferir no contrato as 9 linhas
+  sem CNPJ confirmado.
+- Trazer para o Repasse as baixas antigas da planilha de controle — falta a versão atual dela.
+- Decidir quando ligar o "Acelera Síndico" no bot do WhatsApp.
+- Trocar a arte de 32" das artes prontas do Mural, provisória até o designer entregar a versão
+  vertical.
+
+**Aprendizados / contexto que não pode se perder:**
+
+- **O sistema das telas não aguenta duas conferências ao mesmo tempo.** Em 16/10, a conferência
+  do robô e a automática de 5 em 5 minutos rodaram juntas, 45 consultas foram recusadas e 12
+  comunicados aprovados ficaram fora da janela. Agora é uma por vez.
+- **Duas publicações seguidas no KUMA deixam a segunda bem mais lenta.** Em 15/10, às 18h41, a
+  segunda passou de uma hora publicando, e a Brato pediu um intervalo maior. Na segunda
+  publicação da semana o KUMA também pula a etapa de verificar.
+- **O TUK não tem bairro.** Usa distrito em SP e região administrativa no RJ, e alguns distritos
+  (Pinheiros, Jaguara) nem existem nele. Por isso quem decide é o pino do prédio, com aviso quando
+  não bate com a ficha.
+- **Data sem hora vira o dia anterior no navegador.** O CRM guarda o início do contrato só com a
+  data; lida como meia-noite em outro fuso, ela cai às 21h do dia anterior em São Paulo — foi
+  assim que o contrato do dia 1º ia para o mês anterior nos Relatórios.

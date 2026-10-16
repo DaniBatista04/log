@@ -285,3 +285,25 @@ eles vão para o email do time, que também não é técnico.
 ---
 
 ## [Semana 10] — 12 a 16 de outubro de 2026
+
+### Adicionado
+
+- 🟢 **Visual novo do Mural** — mais claro e com letra maior: o botão de criar comunicado fica em destaque, o painel responde logo se há comunicado no ar agora e a situação de cada comunicado aparece em palavras simples. No celular, o menu fica numa barra embaixo, ao alcance do polegar.
+- 🟢 **O comunicado já nasce com nome** — ao criar um comunicado, o editor pergunta o nome dele. Dá para pular e preencher depois, no topo do editor.
+- 🟢 **Foto de cada apresentador no vídeo com avatar** — dá para escolher o modelo vendo o rosto dele.
+- 🟢 **Vídeo pronto de Academia** — o nome do condomínio já vem preenchido e há uma caixa para escrever as regras do espaço. Como já sai aprovado por nós, vai direto para a tela, sem esperar revisão.
+- ⚙️ **Publicar no KUMA pelo Mural** — a publicação semanal das telas de São Paulo e do Rio, feita passo a passo no painel do KUMA, agora roda por uma tela do Mural: aprova os comunicados que estão esperando, trava as duas cidades, confere, espera publicar e destrava. Dá para simular antes, sem mudar nada; quem iniciou recebe um resumo por e-mail; e, se a publicação parar no meio, o Mural avisa em vermelho e por e-mail.
+- ⚙️ **Robô do KUMA** — a mesma publicação feita por um robô, sem ninguém precisar entrar no KUMA: a pessoa clica em "Rodar KUMA" e acompanha o andamento por cidade. Dá para parar no meio e, na sexta, depois da janela das 18h, o botão "Semana seguinte" já deixa a segunda pronta (o KUMA não publica no domingo). O Mural avisa quando a última publicação terminou há menos de uma hora, porque duas seguidas deixam a segunda bem mais lenta, e mostra quantos comunicados aprovados ainda estão a caminho.
+- ⚙️ **Mudar quem vê um comentário do chamado** — a equipe pode abrir ao solicitante um comentário que ficou interno por engano, ou esconder dele um que saiu aberto.
+
+### Melhorado
+
+- 🟢 **Artes prontas com o nome do condomínio e um aviso** — as artes de Dia das Crianças, Consciência Negra e Academia ganharam, como os vídeos prontos, o nome do condomínio no topo e um espaço para escrever um aviso na base.
+- 🟢 **Remover comunicado é na hora** — remover um comunicado em revisão ou no ar tira ele da tela na hora, sem esperar a nossa aprovação.
+- ⚙️ **Visual novo também no painel da equipe** — o menu ficou agrupado por tarefa, com a fila de revisão em destaque; Aprovar, Ver e Rejeitar ficam à vista e as ações menos usadas vão para "Mais". No celular, todos os perfis usam a barra embaixo.
+- ⚙️ **Ícone da aba redesenhado** — uma telinha com a letra de cada versão do Mural.
+
+### Corrigido
+
+- ⚙️ **Comunicados fora da janela de 16/10** — duas conferências rodaram ao mesmo tempo, o sistema das telas recusou parte das consultas e 12 comunicados aprovados ficaram fora da janela. Agora roda uma conferência por vez.
+- ⚙️ **Robô do KUMA na segunda publicação da semana** — na segunda janela de 15/10, o robô ficava 45 minutos esperando uma etapa que o KUMA não faz nessa publicação, e no Rio parava com a cidade travada quando o KUMA ainda estava ocupado. Agora segue o caminho certo e tenta de novo.
