@@ -302,8 +302,23 @@ eles vão para o email do time, que também não é técnico.
 - 🟢 **Remover comunicado é na hora** — remover um comunicado em revisão ou no ar tira ele da tela na hora, sem esperar a nossa aprovação.
 - ⚙️ **Visual novo também no painel da equipe** — o menu ficou agrupado por tarefa, com a fila de revisão em destaque; Aprovar, Ver e Rejeitar ficam à vista e as ações menos usadas vão para "Mais". No celular, todos os perfis usam a barra embaixo.
 - ⚙️ **Ícone da aba redesenhado** — uma telinha com a letra de cada versão do Mural.
+- ⚙️ **Publicar no KUMA põe o robô na frente** — com o robô ligado, a tela diz que ninguém precisa entrar no KUMA, e o caminho pelo navegador fica recolhido; com o robô desligado, esse caminho volta para cima, com o aviso de que é preciso entrar no KUMA. O botão que se arrasta para o navegador passou a se chamar "Sincronizar KUMA", para não ter o mesmo nome da tela.
 
 ### Corrigido
 
 - ⚙️ **Comunicados fora da janela de 16/10** — duas conferências rodaram ao mesmo tempo, o sistema das telas recusou parte das consultas e 12 comunicados aprovados ficaram fora da janela. Agora roda uma conferência por vez.
 - ⚙️ **Robô do KUMA na segunda publicação da semana** — na segunda janela de 15/10, o robô ficava 45 minutos esperando uma etapa que o KUMA não faz nessa publicação, e no Rio parava com a cidade travada quando o KUMA ainda estava ocupado. Agora segue o caminho certo e tenta de novo.
+
+---
+
+## [Semana 11] — 19 a 23 de outubro de 2026
+
+### Adicionado
+
+- ⚙️ **Tirar ou abaixar o som das telas pelo Mural** — mudar o volume ou o brilho das telas de um prédio exigia entrar no painel do KUMA. Agora qualquer pessoa da nossa equipe faz isso pelo Mural, na tela de comandos: o volume vai de sem som (0) a 40, o brilho fica no padrão ou zerado (tela escura), e dá para mandar para até 50 prédios de uma vez. Também dá para reiniciar as telas de um prédio — um prédio por vez, porque elas ficam apagadas por alguns minutos. O reinício precisa da aprovação de um segundo usuário, como o KUMA exige, e o próprio Mural cuida disso; o primeiro reinício de verdade, em 19/10, terminou certo. Mandar o comando para uma tela só, em vez do prédio inteiro, já está pronto e entra depois do primeiro teste. "Desligar a tela" ficou de fora de propósito. O síndico não vê essa tela.
+
+### Melhorado
+
+- 🟢 **Editor no celular mais fácil de usar com o dedo** — imagem e forma voltaram a ter as alças nas laterais, para esticar só a largura ou só a altura; "Replicar" saiu do topo e foi para a barra de baixo, ao lado de "Telas"; e "Duplicar" saiu da barra do item selecionado.
+- ⚙️ **A equipe parou de receber os avisos de cada comunicado** — os e-mails de comunicado removido, pedido de remoção, mudança de situação e desfecho da remoção não vão mais para os endereços da Focus Media. O gestor do prédio continua recebendo os dele, e o relatório diário, os chamados, os alertas e o resumo do KUMA seguem iguais.
+- ⚙️ **Tela de demonstração dos comerciais fica no prédio próprio** — as telas de demonstração dos comerciais ficam todas num prédio só no sistema das telas, e o Mural publica em todas as telas de um prédio. Para cada comercial mostrar o comunicado só na própria tela, ela precisa de um prédio só dela no Mural, e a atualização diária a puxava de volta. Agora a tela separada à mão fica onde foi colocada.

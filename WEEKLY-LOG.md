@@ -1154,6 +1154,35 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [crm] ✅ Em 15/10, o serviço de consulta de CEP saiu do ar e ninguém conseguia mover card para
   "Aprovado - Confecção de Contrato". Agora, se ele não responde em 6 segundos, o CRM tenta outras
   três fontes.
+- [crm] ✅ Relatórios do Pipeline BD: três gráficos novos — pipeline em aberto por executivo
+  (prédios ou telas por fase), ciclo de fechamento (dias da criação à assinatura, média e mediana,
+  geral e por executivo com três ou mais assinados) e idade do pipeline em aberto. "Prédios por
+  Origem" passa a alternar entre prédios e telas e mostra a taxa de assinatura de cada origem.
+- [crm] ✅ Relatórios do Pipeline Operações: "Telas Instaladas por Mês" e "Tempo Médio de
+  Instalação" nunca mostravam nada, porque contavam uma situação que nenhum prédio tem; agora contam
+  pelo dia da instalação, como o Dashboard de Operações. Entram Assinadas × Instaladas mês a mês,
+  o tempo da assinatura à instalação (média e mediana), a fila de Operações por tempo desde a
+  assinatura, as pendências por motivo e as telas bipadas por analista, por dia e condomínio,
+  separando 25" e 32", com planilha em Excel. O Claude no CRM devolve os mesmos números.
+- [crm] ✅ Comissões: as faixas de bônus por volume viraram uma tabela que diz de quantas a quantas
+  telas no mês vai cada faixa e quanto ela paga por tela, com um exemplo montado dos valores da
+  tela; são três faixas, sem a faixa zerada. As metas por executivo foram para Comissões >
+  Configurações.
+- [crm] ✅ O "Novo Prédio" do Pipeline BD faz as mesmas perguntas do link de cadastro: telefone e
+  e-mail do prédio, síndico completo, gerente predial, zelador, sindicância, administradora, dados
+  bancários, do edifício, das unidades e dos elevadores. As perguntas novas são opcionais; o
+  telefone ou o e-mail do síndico passa a ser obrigatório.
+- [crm] ✅ O CRM passou a mandar ao Mural a administradora e a sindicância de cada prédio, que é o
+  que vai permitir dar acesso ao Mural por empresa.
+- [crm] ✅ As telas contratadas de um prédio já instalado só mudam com a permissão "Editar depois
+  do contrato" — havia um caminho que passava por fora dela.
+- [crm] ✅ Ajustes miúdos: as seções do menu da esquerda recolhem clicando no título; a novidade
+  arquivada aos 7 dias sai do pop-up; o Agendamento novo acompanha o tema grafite; o Inventário
+  ganhou um botão para ver todos os vínculos manuais; e a janela do aditivo não rola mais para o
+  lado com nome de anexo comprido.
+- [crm] ⏳ Fazendo o Gemini usar o CRM como o Claude usa: ele conectava e listava as consultas,
+  mas não chamava nenhuma. O CRM passou a descrevê-las no formato que o Gemini aceita e a anotar
+  por que ele recusa cada pedido.
 
 - [scan] ✅ Vincular o NFC à tela pelo celular, no Focus Scan: o técnico lê a etiqueta da tela,
   depois o NFC, confere o condomínio e toca Vincular. Tela fora do inventário, sem prédio ou que
@@ -1208,3 +1237,36 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - **Data sem hora vira o dia anterior no navegador.** O CRM guarda o início do contrato só com a
   data; lida como meia-noite em outro fuso, ela cai às 21h do dia anterior em São Paulo — foi
   assim que o contrato do dia 1º ia para o mês anterior nos Relatórios.
+
+---
+
+## Semana 11 — 19 a 23 de outubro de 2026
+
+- [crm] ✅ **Aditivo assinado vai ao TUK pelo CRM.** A Fila do TUK ganhou a aba Aditivos, e cada
+  aditivo assinado ganhou o botão "Enviar ao TUK" na ficha do prédio. O CRM repete o que a
+  operação faz à mão no TUK — conferido em 206 alterações de contrato já feitas: cria as telas
+  novas, apaga as não instaladas que saem, aprova, anexa o PDF do aditivo e altera o contrato.
+  Torre do TUK sem par no CRM pede a escolha da pessoa em vez de apagar telas, e o robô não apaga
+  tela nem cria torre sem que alguém tenha visto o plano. A fila começa pelos assinados a partir
+  de 13/10.
+- [crm] ✅ A ficha do prédio diz o que falta no TUK e de qual time é: sem cadastro, "Cadastro no
+  TUK pendente · depende da TI"; com cadastro e telas ainda sem instalar, quantas já estão
+  instaladas e que a pendência é da Operação. O robô do TUK lê essa situação de hora em hora.
+- [crm] ✅ Quando o TUK recusa o cadastro logo na primeira etapa (caso real: nome de empresa
+  repetido), "Descartar andamento" fica liberado para recomeçar com a ficha corrigida.
+- [crm] ✅ Agendamento: a regra de uma obra por turno ganhou as três exceções pedidas pela
+  operação — prédios no mesmo endereço não contam um contra o outro, e obra rápida (até um número
+  de telas que dá para configurar) ou marcada "Mesma equipe técnica do elevador" divide o turno
+  com mais uma. Obra de dia todo nunca divide.
+- [crm] ✅ O aviso de retorno ao síndico deixou de prometer entrega de telas: às vezes as telas já
+  estão no prédio e a equipe só volta para instalar. Agora diz "Se houver telas a entregar, elas
+  chegarão ao condomínio nos próximos dias, antes da visita".
+
+- [whatsapp] ✅ Quando a conversa do WhatsApp cai para o Suporte, o aviso vai numa mensagem só no
+  grupo do Relacionamento no Teams, em vez de um chat separado com cada pessoa. Quem recebe passa a
+  ser quem está no grupo.
+
+- [marketing] ⏳ Convites do Happy Hour Focus Media de 29/10: convite pessoal por e-mail,
+  confirmação com código, ingresso com QR, lista para a portaria e painel por executivo. Há também
+  um link único para repassar pelo WhatsApp: a pessoa digita o e-mail em que foi convidada e o
+  código vai só para esse e-mail. Falta colocar no ar e disparar.
