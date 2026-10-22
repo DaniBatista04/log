@@ -1261,12 +1261,140 @@ Status: `✅` entregue · `⏳` em andamento. Sem marcador, conta como entregue.
 - [crm] ✅ O aviso de retorno ao síndico deixou de prometer entrega de telas: às vezes as telas já
   estão no prédio e a equipe só volta para instalar. Agora diz "Se houver telas a entregar, elas
   chegarão ao condomínio nos próximos dias, antes da visita".
+- [crm] ✅ **Mapa do parque.** Em Operações, um ponto por prédio com tela, colorido pela situação
+  dos chips de internet das telas na Arqia (todos online, parte offline, todos offline, sem
+  dado), com o total de telas, de telas exibindo nas últimas 72 h e de chips, filtros e a lista
+  de telas e chips de cada prédio. Dá para atualizar o parque inteiro ou só um prédio e reiniciar
+  um chip pelo painel, com confirmação e limite (um reinício a cada 10 minutos por chip, 30 por
+  pessoa por hora). Ao lado, o Consumo de rede ordena condomínios e chips pelo consumo de dados.
+  O modo Exibição, em tela cheia, voa pelo mapa de cidade em cidade, com uma coluna de luz por
+  prédio e os números de cada cidade e do parque. Por enquanto só Super Admin vê; a ideia é
+  liberar depois para Operações.
+- [crm] ✅ Inventário: consulta, por prédio, a situação e o consumo de cada chip na Arqia e
+  registra o pedido de troca de chip, com a lista dos pendentes. O fornecedor não vê.
+- [crm] ✅ **Conciliação das telas com o que elas exibem.** Cruza as telas do inventário com o
+  registro de exibição que as telas mandam a cada 15 minutos e mostra tela instalada sem exibir há
+  72 h, aparelho exibindo que não está no inventário e tela fora de prédio que continua exibindo.
+  No primeiro cruzamento, das 2.880 telas sem registro, 2.763 nunca tinham registrado (bipadas e
+  ainda não instaladas) e 123 pararam — essas 123 são a lista de manutenção, que ficava escondida
+  no meio das outras e agora vem separada. Fica na seção TI do menu.
+- [crm] ✅ Veiculação, na seção TI: as campanhas do período e, em cada uma, as exibições por dia
+  ou por hora, por prédio, por tela e uma a uma. Mostra cliente, marca, contrato e endereço da
+  rede toda, por isso tem acesso próprio e, por enquanto, só Super Admin vê.
+- [crm] ✅ **Desmembramento no TUK pela ficha.** A Operação pede na própria ficha em quantos
+  cadastros separados o condomínio vira no TUK, com o nome e as telas de cada parte; antes era por
+  e-mail. Cada parte passa pelo mesmo Cadastro no TUK, o prédio continua um só no CRM e o cadastro
+  antigo no TUK não é mexido. Prédio com pedido sai da fila de cadastro e não recebe aditivo pelo
+  CRM.
+- [crm] ✅ Cadastro no TUK: quando o TUK recusa o prédio por endereço ou pino iguais aos de outro
+  (toda torre do mesmo condomínio cai nisso), o CRM tenta de novo como a operação fazia à mão no
+  Rudge Ramos III — nome da torre no fim do endereço e o pino 12 m ao lado, até seis vezes — e, se
+  não passar, diz em qual cliente criar o prédio à mão. Também reconhece as torres e telas que a
+  operação já enviou à mão no TUK, em vez de tentar mandar de novo.
+- [crm] ✅ Fila do TUK: filtro "Só agendadas"; quando acabam os prédios do dia, um aviso com a
+  próxima data que tem prédio livre (ir para ela, esperar novos ou parar); e "esperar novos"
+  reserva e abre sozinho o próximo prédio que entrar. A fila voltou a seguir a ordem, que vinha
+  embaralhada.
+- [crm] ✅ Ficha do prédio: logo depois do cadastro no TUK já mostra "0 de N instalados · depende
+  da Operação", sem esperar a leitura de hora em hora do robô, e depois diz quando os pontos foram
+  instalados ("Pontos instalados em 19/10/2026, das 14:58 às 15:10") ou quantos faltam ("3 de 6
+  pontos instalados").
+- [crm] ✅ **Instalações agendadas no sistema de OS do fornecedor.** O sistema de ordens de
+  serviço do fornecedor consulta sozinho as instalações das obras dele, de 30 dias atrás a 120 dias
+  à frente: endereço, telas e locais de instalação, contato do prédio (só primeiro nome e
+  telefone, como pediu o Jurídico), número da OS, visita e empresa do elevador. O próprio
+  fornecedor gera e revoga a chave de acesso no CRM, e cada consulta fica registrada.
+- [crm] ✅ LGPD: o usuário de fornecedor passou a ver só o que precisa para instalar (agendamento,
+  locais de tela, histórico de instalação, chamados e telas instaladas). Antes via a ficha
+  inteira — CPF, e-mail e nascimento dos contatos, zelador, banco e PIX —, além de contratos,
+  aditivos e anexos, e podia até mandar contrato para assinatura.
+- [crm] ✅ Agendamento: "Mesmo técnico do elevador" virou um ícone ao lado do turno em cada linha
+  da Planilha. Antes ficava no fim da ficha do prédio, e a operação não achava.
+- [crm] ✅ **Arquivo de pagamento do HSBC pelo Repasse.** A aba "Arquivo do banco" lê a planilha do
+  Lark, liga cada linha ao prédio do CRM, confere o total e gera o arquivo do HSBC e um relatório
+  de controle com "o que fazer" em cada linha. Com outubro: 1.398 de 1.405 linhas ligadas, total
+  fechando com o Lark e 1.038 linhas iguais às que o banco aceitou. Ninguém recebe duas vezes no
+  mês: o reenvio vai só para a linha recusada e gerar de novo manda só o que faltou. Segura titular
+  estranho (ex.: "JOSE" na conta do Cond. São José) e avisa chave Pix que não é o CNPJ do
+  condomínio e conta trocada desde o último arquivo. Segue a especificação do Financeiro de 20/10;
+  usa quem já dá baixa em pagamento.
+- [crm] ✅ Repasse: um aditivo mais novo sem valor lido não deixa mais o valor do contrato antigo
+  passar como certo (caso do Frei Gaspar, contrato de R$ 1.100 e aditivo de agosto com outro
+  valor) — aparece "conferir aditivo". E o anual passa a ser pago adiantado, no mês do ciclo do
+  contrato, como o Financeiro faz: o Gran, assinado em setembro de 2026, recebe R$ 600 em
+  20/10/2026, 20/10/2027 e assim por diante.
+- [crm] ✅ **Pendências de Cadastro.** Em BD, os contratos assinados e instalados com o que falta na
+  ficha — 17 itens, de CNPJ e telas a dados do síndico, do Repasse e do contrato —, com filtros
+  por fase, responsável e item, exportação e cobrança do responsável pelo Teams, uma mensagem por
+  pessoa.
+- [crm] ⏳ **Pasta e torres.** Condomínio com várias torres vira uma pasta (cadastro, contrato,
+  repasse, anexos) com as torres dentro, cada uma um prédio de verdade: telas e locais divididos
+  entre elas, a pasta avança de etapa quando todas as torres chegam, contrato e aditivo listam as
+  telas de todas, a comissão é paga uma vez pela pasta e os relatórios não contam tela duas
+  vezes. Está pronto, mas ninguém tem acesso ainda; agrupar os condomínios já divididos à mão
+  fica para depois.
+- [crm] ⏳ **Leads de BD.** A base de condomínios para o robô do WhatsApp entra pela planilha padrão
+  sem duplicar e é conferida com o CRM: fica de fora, com o motivo à vista, quem já fechou, está
+  no Pipeline, foi arquivado, já foi contatado na Prospecção, divide telefone com outro condomínio
+  ou não tem celular. O disparo pela Helena tem liga/pausa, limite diário (200 por padrão; o número
+  aguenta 250 conversas novas por dia), revezamento das mensagens aprovadas, lista de quem pediu
+  para sair e o caminho de cada lead até virar card. Quem responde com interesse vira card na
+  roleta uma vez só; quem já tem card ganha um comentário nele. Hoje só Super Admin vê, e o disparo
+  está desligado: falta publicar o bot que entende as respostas e ligar o disparo.
+- [crm] ⏳ Redistribuição no Pipeline BD: card em Contato Realizado sem nenhuma atividade há 30 dias
+  passa para outro BD, num revezamento que não gasta a vez da roleta de lead novo. O dono é avisado
+  7 dias antes, qualquer atividade zera o prazo, e o síndico pode receber pelo WhatsApp o nome do
+  novo executivo. Pronto, mas ainda não entrou no CRM, e nasce desligado.
+- [crm] ✅ Proximidade: raio livre até 50 km, além dos atalhos, para chegar ao número de telas
+  pedido, e "Salvar plano" com pontos, raio e opções do mapa, sem precisar de cliente. Os planos
+  ficam numa aba que todo o Planejador vê.
+- [crm] ✅ Comissões mostram a meta cadastrada em Metas por executivo: uma executiva tinha meta de
+  440 em outubro e a tela mostrava 600. Só a exibição muda; o cálculo da comissão não.
+- [crm] ✅ Usuários: "Copiar permissões" de uma pessoa para uma ou várias, deixando igual ou só
+  acrescentando, com o resultado em amarelo até salvar.
+- [crm] ✅ Os e-mails de usuário criado e de senha redefinida trazem o botão e o endereço do CRM —
+  não diziam por onde entrar —, e o de senha redefinida deixou de dizer "conta criada".
+- [crm] ✅ Passei a Super Admin para entrar como outro usuário pelo meu próprio login, em vez da
+  conta compartilhada do admin; cada vez fica registrada no meu nome.
+- [crm] ✅ As telas aparecem pelo número de série, o que se bipa na instalação, em vez do código
+  AY32, no Consumo de rede, no Mapa do parque, no Duplicar Registro e no Publicar por torre.
+- [crm] ✅ Planilha do Planejador: a aba de inventário ganhou a coluna Status (Instalado ou
+  Assinado). *(falta o impacto: quem pediu e para quê)*
+- [crm] ✅ Correções: o Duplicar Registro falhava em toda duplicação desde 13/10 e voltou a
+  funcionar; a ficha parou de salvar em 21/10, com a mudança de pasta e torres, e voltou no mesmo
+  dia, agora dizendo o motivo quando o salvar é recusado, em vez de "sem permissão"; a Base
+  completa da Prospecção dava erro para quem não é gestor desde 21/10 às 17h e voltou, de 17–30 s
+  para menos de um décimo de segundo; e os Números da sorte respondem mais rápido.
 
 - [whatsapp] ✅ Quando a conversa do WhatsApp cai para o Suporte, o aviso vai numa mensagem só no
   grupo do Relacionamento no Teams, em vez de um chat separado com cada pessoa. Quem recebe passa a
   ser quem está no grupo.
+- [whatsapp] ⏳ Respostas do disparo de BD no bot: uma IA separa interessado, sem interesse, pedido
+  para sair e outro assunto. Interessado vira card no Pipeline BD e ouve que o contato foi passado
+  ao executivo e que a instalação não custa nada ao condomínio; quem pede para sair vai para a
+  lista de não contatar; outro assunto segue a triagem normal. Pronto, não publicado.
+
+- [telas] ✅ **Leitor das exibições das telas.** Guarda cada exibição registrada pelas telas e a
+  programação de cada uma, que a Kuma entrega uma vez por dia, por volta das 23h45. É daqui que
+  vêm a Conciliação e a Veiculação do CRM e as telas de exibições e "Ao vivo do condomínio" do
+  Mural.
+- [telas] ⏳ Envio ao IVC: cadastro das campanhas auditadas e envio das exibições delas ao IVC, com
+  nova tentativa quando falha, reenvio ou descarte do lote com erro e histórico do que foi
+  enviado. Falta configurar o nosso acesso no IVC para ligar. *(falta dizer o que a auditoria do
+  IVC dá ao comercial)*
+- [telas] ⏳ Gravando o uso do painel do KUMA para mapear como a programação das telas funciona por
+  dentro e automatizar essas ações depois.
+
+- [nfc] ⏳ **Painel próprio do go.focusmediabr.** Marcas, campanhas, cupons, artes e telas passam a
+  ser cadastrados num painel com login (admin, editor e leitor), e a roleta de ofertas, as páginas
+  exclusivas e a da 99 leem desse cadastro em vez de ficarem fixas no código. O toque na etiqueta
+  abre a roleta e conta cada passo, do toque ao uso do cupom, por dia, tela e cupom, com
+  exportação para planilha. Toda alteração fica registrada, excluir só desativa, e cupom vencido
+  ou desativado sai da roleta. Falta confirmar a passagem dos dados de produção para a base nova.
 
 - [marketing] ⏳ Convites do Happy Hour Focus Media de 29/10: convite pessoal por e-mail,
   confirmação com código, ingresso com QR, lista para a portaria e painel por executivo. Há também
   um link único para repassar pelo WhatsApp: a pessoa digita o e-mail em que foi convidada e o
-  código vai só para esse e-mail. Falta colocar no ar e disparar.
+  código vai só para esse e-mail. Falta colocar no ar e disparar. Em andamento: a lista passa a vir da
+  planilha dos comerciais — o sistema manda só para quem está como "A enviar", marca "Enviado" na
+  linha e usa a arte escolhida na coluna Convite.
